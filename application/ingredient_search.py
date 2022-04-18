@@ -3,4 +3,4 @@ from wtforms import StringField, SubmitField
 
 class IngredientsForm(FlaskForm):
     ingredients = StringField("Enter ingredients")
-    submit = SubmitField("Search")
+    submit = SubmitField("Search Recipes")

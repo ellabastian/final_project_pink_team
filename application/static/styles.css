@@ -1,0 +1,40 @@
+* {
+    padding: 0px;
+    margin: 0px;
+}
+
+h1, h2, h3 {
+   padding: 20px;
+}
+
+body {
+    font-family: 'Josefin Slab', serif;
+    background-color: #DEDBD2;
+    color: #795C5F;
+    text-align: center;
+}
+
+nav {
+    display: flex;
+    justify-content: space-evenly;
+    padding: 20px;
+    background-color: #795C5F;
+}
+
+a {
+    color: #DEDBD2;
+}
+
+a:link, a:visited {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+img {
+   max-width: auto;
+   max-height: 40%;
+   padding: 10px;
+}

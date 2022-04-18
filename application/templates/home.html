@@ -1,11 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
+{% extends "layout.html" %}
+{% block body_content %}
+    <h2>Reduce your waste and make tasty meals</h2>
+    <h3>Enter up to 3 ingredients to find recipes</h3>
     <form action="" method="post">
             {{ form.hidden_tag() }}
             {{ form.ingredients.label }} {{ form.ingredients }}
@@ -13,6 +9,8 @@
             {{ form.submit }}
         {{ message }}
     </form>
-
+    <img src="{{url_for('static', filename='images/salad.jpg')}}" alt="Salad">
+    <img src="{{url_for('static', filename='images/french_toast.jpg')}}" alt="French Toast">
+    <img src="{{url_for('static', filename='images/tacos.jpg')}}" alt="Tacos">
 </body>
-</html>
+{% endblock %}
