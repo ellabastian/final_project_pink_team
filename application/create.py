@@ -1,9 +1,8 @@
 from application import db
 from application.models import Recipe, Ingredient, IngredientRecipe, Instruction, Difficulty
 
-
-db.create_all()
 db.drop_all()
+db.create_all()
 
 easy = Difficulty(difficulty_name='Easy')
 medium = Difficulty(difficulty_name='Medium')
