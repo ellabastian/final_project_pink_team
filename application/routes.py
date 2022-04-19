@@ -26,3 +26,8 @@ def home():
             # return query
 
     return render_template('home.html', form=form, message=error)
+
+
+@app.route("/recipe", methods=["GET", "POST"])
+def recipe():
+    return render_template('recipe.html')

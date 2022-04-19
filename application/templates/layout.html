@@ -1,10 +1,22 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Empty Fridge Full Plate</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Josefin+Slab&display=swap" rel="stylesheet">
 </head>
 <body>
-
+    <nav>
+        <a href="">Home</a>
+        <a href="">About</a>
+        <a href="">Recipes</a>
+        <a href="">Resources</a>
+        <a href="">Blog</a>
+        <a href="">Register/Log In</a>
+    </nav>
+    <h1>Empty Fridge Full Plate</h1>
+    {% block body_content %}{% endblock %}
 </body>
 </html>
