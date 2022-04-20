@@ -1,6 +1,14 @@
 {% extends "layout.html" %}
 {% block body_content %}
-<body>
+
     <h2>Your Selected Recipe...</h2>
-</body>
+
+    <ul>
+        {% for recipe in ingredient.ingredient_recipes %}
+            <li> {{ recipe }} </li>
+         {% endfor %}
+    </ul>
+
+
+
 {% endblock %}

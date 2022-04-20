@@ -16,12 +16,18 @@ def home():
         if len(ingredient_result) == 0:
             error = "Please supply an ingredient"
         else:
-            return ingredient_result
+            # return ingredient_result
+            # stuff = Ingredient.query.first()
+            # stuff = Ingredient.query.filter_by(ingredient_name=ingredient_result).first()
+            stuff = Ingredient.query.filter_by(ingredient_name=ingredient_result).join(IngredientRecipe).join(Recipe).first()
+
+            return render_template('recipe.html', ingredient=stuff)
+            # return stuff.ingredient_name
             # trialling out queries below
             # query_result = db.execute("SELECT ingredient_name FROM ingredient WHERE ingredient_name = :ingredient_result", {"ingredient_result": ingredient_result})
             # return query_result
             # Ingredient.query.filter_by(ingredient_name=ingredient_result).first()
-            # ingredient_id = Ingredient.query.get(ingredient_name)
+            # ingredient_id = Ingredient.query.filter_by(ingredient_name=ingredient_result)
             # query = Ingredient.query.get(ingredient_id)
             # return query
 
