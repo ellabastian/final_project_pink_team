@@ -9,14 +9,17 @@
 </head>
 <body>
     <nav>
-        <a href="">Home</a>
-        <a href="">About</a>
-        <a href="">Recipes</a>
-        <a href="">Resources</a>
-        <a href="">Blog</a>
-        <a href="">Register/Log In</a>
+        <a href="{{url_for('home')}}">Home</a>
+        <a href="{{url_for('about')}}">About</a>
+        <a href="{{url_for('recipe')}}">Recipes</a>
+        <a href="{{url_for('resources')}}">Resources</a>
+        <a href="{{url_for('blog')}}">Blog</a>
+        <a href="{{url_for('account')}}">Register/Log In</a>
     </nav>
     <h1>Empty Fridge Full Plate</h1>
     {% block body_content %}{% endblock %}
 </body>
+<footer>
+    <a href="{{url_for('contact')}}">Contact Us</a>
+</footer>
 </html>
