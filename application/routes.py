@@ -1,6 +1,6 @@
 from flask import render_template, request, url_for
 from application import app, db
-from application.forms import IngredientsForm, UserAccountForm
+from application.forms import IngredientsForm, UserAccountForm, UserLoginForm
 from application.models import Ingredient, IngredientRecipe, Recipe, Instruction, Difficulty, User
 
 
@@ -72,6 +72,26 @@ def account():
             db.session.add(person)
             db.session.commit()
             return 'Thank you!'
+
+    return render_template('account.html', title="Register", form=form, message=error)
+
+
+@app.route("/accountlogin", methods=["GET", "POST"])
+def account_log_in():
+    error = ""
+    form = UserLoginForm()
+
+    if request.method == 'POST':
+        email = form.email.data
+        password = form.password.data
+
+        if len(email) == 0 or len(password) == 0:
+            error = "Please supply requested log in details"
+        #   password validation needed here!
+        #   filter user table by password to allow user to log in
+        else:
+            # link to user's account page
+            return 'Access granted!'
 
     return render_template('account.html', title="Register", form=form, message=error)
 

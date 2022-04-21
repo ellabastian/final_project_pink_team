@@ -14,3 +14,9 @@ class UserAccountForm(FlaskForm):
     password = StringField("Create a Password for your account. This must be 8 characters long")
     submit = SubmitField("Register")
 
+
+class UserLoginForm(FlaskForm):
+    email = StringField("Enter your e-mail address")
+    password = StringField("Enter your Password")
+    submit = SubmitField("Log In")
+

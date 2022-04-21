@@ -16,4 +16,14 @@
             {{ form.submit(class="btn") }}
         {{ message }}
     </form>
+    <form action="" method="post">
+            {{ form.hidden_tag() }}
+            {{ form.email.label }} {{ form.email(class="field") }}
+            <br>
+            {{ form.password.label }} {{ form.password(class="field") }}
+            <br>
+            {{ form.submit(class="btn") }}
+        {{ message }}
+    </form>
+
 {% endblock %}
