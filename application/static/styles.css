@@ -38,3 +38,8 @@ img {
    max-height: 40%;
    padding: 10px;
 }
+
+.btn, .field {
+    font-family: 'Josefin Slab', serif;
+    padding: 3px 15px;
+}
