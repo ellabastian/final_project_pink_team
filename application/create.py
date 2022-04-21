@@ -103,10 +103,10 @@ ingredients_in_recipe_list = [ingredients_in_recipe_1, ingredients_in_recipe_2, 
 db.session.add_all(ingredients_in_recipe_list)
 
 
-person1 = User(first_name = 'Jane', last_name='Smith', username='JSmith1977', email='jane1977@gmail.com', password='1234abcd')
+person1 = User(first_name='Jane', last_name='Smith', username='JSmith1977', email='jane1977@gmail.com', password='1234abcd')
 person2 = User(first_name='Kanye', username='Westicles', email='kwest@gmail.com', password='abcd9876')
 
-db.session.add (person1)
-db.session.add (person2)
+db.session.add(person1)
+db.session.add(person2)
 
 db.session.commit()

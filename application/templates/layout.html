@@ -1,6 +1,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Empty Fridge Full Plate</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -9,14 +10,29 @@
 </head>
 <body>
     <nav>
-        <a href="{{url_for('home')}}">Home</a>
-        <a href="{{url_for('about')}}">About</a>
-        <a href="{{url_for('recipe')}}">Recipes</a>
-        <a href="{{url_for('resources')}}">Resources</a>
-        <a href="{{url_for('blog')}}">Blog</a>
-        <a href="{{url_for('account')}}">Register/Log In</a>
+        {% if current_user.is_authenticated %}
+            <a href="{{url_for('user_account')}}">Account</a>
+            <a href="{{url_for('logout')}}">Logout</a>
+        {% else %}
+            <a href="{{url_for('home')}}">Home</a>
+            <a href="{{url_for('about')}}">About</a>
+            <a href="{{url_for('recipe')}}">Recipes</a>
+            <a href="{{url_for('resources')}}">Resources</a>
+            <a href="{{url_for('blog')}}">Blog</a>
+            <a href="{{url_for('register')}}">Register</a>
+            <a href="{{url_for('login')}}">Log In</a>
+        {% endif %}
     </nav>
     <h1>Empty Fridge Full Plate</h1>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith%}
     {% block body_content %}{% endblock %}
 </body>
 <footer>
