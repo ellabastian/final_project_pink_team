@@ -1,8 +1,19 @@
 {% extends "layout.html" %}
 {% block body_content %}
 <h1>Sign in or Register Here</h1>
-<body>
-
-</body>
-</html>
+    <form action="" method="post">
+            {{ form.hidden_tag() }}
+            {{ form.first_name.label }} {{ form.first_name(class="field") }}
+            <br>
+            {{ form.last_name.label }} {{ form.last_name(class="field") }}
+            <br>
+            {{ form.username.label }} {{ form.username(class="field") }}
+            <br>
+            {{ form.email.label }} {{ form.email(class="field") }}
+            <br>
+            {{ form.password.label }} {{ form.password(class="field") }}
+            <br>
+            {{ form.submit(class="btn") }}
+        {{ message }}
+    </form>
 {% endblock %}

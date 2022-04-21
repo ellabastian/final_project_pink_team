@@ -38,3 +38,12 @@ class IngredientRecipe(db.Model):
     ingredient_recipe_measurement = db.Column(db.String(50), nullable=False)
     ingredient_id = db.Column(db.Integer, db.ForeignKey('ingredient.ingredient_id'), nullable=False)
     recipe_id = db.Column(db.Integer, db.ForeignKey('recipe.recipe_id'), nullable=False)
+
+
+class User(db.Model):
+    user_id = db.Column(db.Integer, primary_key=True)
+    first_name = db.Column(db.String(50), nullable=False)
+    last_name = db.Column(db.String(50), nullable=True)
+    username = db.Column(db.String(50), nullable=False)
+    email = db.Column(db.String(200), nullable=False)
+    password = db.Column(db.String(50), nullable=False)

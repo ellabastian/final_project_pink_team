@@ -1,7 +1,7 @@
 from flask import render_template, request, url_for
 from application import app, db
-from application.ingredient_search import IngredientsForm
-from application.models import Ingredient, IngredientRecipe, Recipe, Instruction, Difficulty
+from application.forms import IngredientsForm, UserAccountForm
+from application.models import Ingredient, IngredientRecipe, Recipe, Instruction, Difficulty, User
 
 
 @app.route("/home", methods=["GET", "POST"])
@@ -55,7 +55,25 @@ def blog():
 
 @app.route("/account", methods=["GET", "POST"])
 def account():
-    return render_template('account.html')
+    error = ""
+    form = UserAccountForm()
+
+    if request.method == 'POST':
+        first_name = form.first_name.data
+        last_name = form.last_name.data
+        username = form.username.data
+        email = form.email.data
+        password = form.password.data
+
+        if len(first_name) == 0 or len(last_name) == 0 or len(username) == 0 or len(email) == 0 or len(password) == 0:
+            error = "Please supply requested contact information"
+        else:
+            person = User(first_name=first_name, last_name=last_name, username=username, email=email, password=password)
+            db.session.add(person)
+            db.session.commit()
+            return 'Thank you!'
+
+    return render_template('account.html', title="Register", form=form, message=error)
 
 
 @app.route("/contact", methods=["GET", "POST"])
