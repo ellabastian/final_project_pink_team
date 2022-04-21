@@ -76,8 +76,8 @@ def account():
     return render_template('account.html', title="Register", form=form, message=error)
 
 
-@app.route("/accountlogin", methods=["GET", "POST"])
-def account_log_in():
+@app.route("/login", methods=["GET", "POST"])
+def login():
     error = ""
     form = UserLoginForm()
 
@@ -93,7 +93,7 @@ def account_log_in():
             # link to user's account page
             return 'Access granted!'
 
-    return render_template('account.html', title="Register", form=form, message=error)
+    return render_template('login.html', title="Register", form=form, message=error)
 
 
 @app.route("/contact", methods=["GET", "POST"])

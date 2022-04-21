@@ -42,4 +42,7 @@ img {
 .btn, .field {
     font-family: 'Josefin Slab', serif;
     padding: 3px 15px;
+    color: #795C5F;
+    padding: 3px 15px;
+    margin: 5px;
 }

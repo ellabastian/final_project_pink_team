@@ -1,6 +1,8 @@
 {% extends "layout.html" %}
 {% block body_content %}
-<h1>Sign in or Register Here</h1>
+
+<h1>Register for an account here</h1>
+
     <form action="" method="post">
             {{ form.hidden_tag() }}
             {{ form.first_name.label }} {{ form.first_name(class="field") }}
@@ -16,14 +18,8 @@
             {{ form.submit(class="btn") }}
         {{ message }}
     </form>
-    <form action="" method="post">
-            {{ form.hidden_tag() }}
-            {{ form.email.label }} {{ form.email(class="field") }}
-            <br>
-            {{ form.password.label }} {{ form.password(class="field") }}
-            <br>
-            {{ form.submit(class="btn") }}
-        {{ message }}
-    </form>
+
+<h2>Already have an account?</h2>
+<button class="btn"><a href="{{url_for('login')}}">Log In Here</a></button>
 
 {% endblock %}
