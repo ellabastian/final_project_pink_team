@@ -8,7 +8,13 @@
             {{ form.submit(class="btn") }}
         {{ message }}
     </form>
-    <img src="{{url_for('static', filename='images/salad.jpg')}}" alt="Salad">
+
+<div class="images">
     <img src="{{url_for('static', filename='images/french_toast.jpg')}}" alt="French Toast">
     <img src="{{url_for('static', filename='images/tacos.jpg')}}" alt="Tacos">
+    <img src="{{url_for('static', filename='images/kebabs.jpg')}}" alt="Kebabs">
+    <img src="{{url_for('static', filename='images/cake.jpg')}}" alt="Cake">
+    <img src="{{url_for('static', filename='images/salad.jpg')}}" alt="Salad">
+    <img src="{{url_for('static', filename='images/meatballs.jpg')}}" alt="Meatballs">
+</div>
 {% endblock %}
