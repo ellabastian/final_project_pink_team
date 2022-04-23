@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+{% block body_content %}
+    <h2>Here is the recipe</h2>
+    <h2> {{ recipe_name }} </h2>
+    <br>
+    <b>Recipe Description:</b> {{ recipe.recipe_description }}
+    <br>
+    <br>
+    <br>
+    <br>
+    <b>Recipe Difficulty:</b> {{ recipe.difficulty.difficulty_name }}
+    <br>
+    <br>
+    <b>Recipe Prep Time:</b> {{ recipe.recipe_prep_time }}
+    <br>
+    <br>
+    <b>Recipe Cooking Time:</b> {{ recipe.recipe_cook_time }}
+    <br>
+    <br>
+    <b>Recipe Category:</b> {{ recipe.recipe_category }}
+    <br>
+    <br>
+    <ol>
+        {% for instruction in instructions %}
+        <li>
+            {{ instruction.instruction_number }} {{ instruction.instruction_description }}
+            <br>
+            <br>
+        </li>
+        {% endfor %}
+   </ol>
+    <br>
+    <br>
+   <img src="{{ recipe.recipe_img }}">
+
+    <br>
+    <br>
+{% endblock %}

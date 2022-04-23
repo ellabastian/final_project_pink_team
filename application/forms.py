@@ -5,7 +5,7 @@ from application.models import User
 
 
 class IngredientsForm(FlaskForm):
-    ingredients = StringField("Enter ingredients")
+    ingredients = StringField("Enter an ingredient:")
     submit = SubmitField("Search Recipes")
 
 

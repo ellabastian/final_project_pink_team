@@ -23,7 +23,8 @@ nav {
 }
 
 a {
-    color: #DEDBD2;
+    /** color: #DEDBD2; **/
+    color: black;
 }
 
 a:link, a:visited {
@@ -67,4 +68,45 @@ img {
   height: 200px;
   width: 200px;
   object-fit: cover;
+}
+.recipe_box {
+   display: flex;
+  justify-content: center;
+
+}
+
+
+.recipe_info {
+    float: left
+    /** height: 500px;
+    width: 200px; **/
+    padding: 100px
+    /** inline-size: 150px **/
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    hyphens: auto;
+     align: center
+
+}
+
+.recipe_page_images {
+    /** height: 500px;
+    width: 200px; **/
+    float: right
+    padding: 100px
+    padding-top: 100px
+    justify-content: center
+}
+
+.recipe_description {
+    height: 100px;
+    margin: 0 auto;
+    max-width: 300px;
+    border: solid 2px #ccc;
+    padding: 12px;
+
+}
+
+li {
+  display: flex
 }
