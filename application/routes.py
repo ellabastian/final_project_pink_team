@@ -16,6 +16,7 @@ def home():
 
         if len(ingredient_result) == 0:
             error = "Please supply an ingredient"
+<<<<<<< HEAD
         else:
 
             # stuff = Ingredient.query.filter_by(ingredient_name="Avocado").all()
@@ -25,21 +26,34 @@ def home():
             stuff = Ingredient.query.all()
             # stuff = Ingredient.query.filter_by(ingredient_name=ingredient_result)
             return str(stuff)
+=======
+>>>>>>> a34bb25961117763c986c491a6b28e728920bc86
 
-            # trialling out queries below
-            # query_result = db.execute("SELECT ingredient_name FROM ingredient WHERE ingredient_name = :ingredient_result", {"ingredient_result": ingredient_result})
-            # return query_result
-            # Ingredient.query.filter_by(ingredient_name=ingredient_result).first()
-            # ingredient_id = Ingredient.query.get(ingredient_name)
-            # query = Ingredient.query.get(ingredient_id)
-            # return query
+        elif Ingredient.query.filter_by(ingredient_name=ingredient_result).first() == None:
+            error = "Try another ingredient"
+        else:
+            ingredient_id = (Ingredient.query.filter_by(ingredient_name=ingredient_result).first()).ingredient_id
+            recipe_ids = (IngredientRecipe.query.filter_by(ingredient_id=ingredient_id).all())
+            recipes = []
+            for ingredient_id in recipe_ids:
+                recipe_id = ingredient_id.recipe_id
+                recipes.extend(Recipe.query.filter_by(recipe_id=recipe_id).all())
+            return render_template('recipe.html', ingredient_id=ingredient_id, recipes=recipes)
 
     return render_template('home.html', form=form, message=error)
 
 
-@app.route("/recipe", methods=["GET", "POST"])
+@app.route("/recipes/<recipe_name>")
+def specific_recipe(recipe_name):
+    recipe = (Recipe.query.filter_by(recipe_name=recipe_name).first())
+    instructions = Instruction.query.filter_by(recipe_id=recipe.recipe_id).all()
+    return render_template('specific_recipe.html', recipe_name=recipe_name, recipe=recipe, instructions=instructions)
+
+
+@app.route("/recipes", methods=["GET", "POST"])
 def recipe():
-    return render_template('recipe.html')
+    recipes = Recipe.query.all()
+    return render_template('recipe.html', recipes=recipes)
 
 
 @app.route("/about", methods=["GET"])
