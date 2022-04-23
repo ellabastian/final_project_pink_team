@@ -4,3 +4,4 @@ secret_key.py
 __pycache__/
 *.py[cod]
 __pycache__
+application/__pycache__
