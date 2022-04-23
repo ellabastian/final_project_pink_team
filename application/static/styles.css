@@ -23,7 +23,8 @@ nav {
 }
 
 a {
-    color: #DEDBD2;
+    /** color: #DEDBD2; **/
+    color: black;
 }
 
 a:link, a:visited {
