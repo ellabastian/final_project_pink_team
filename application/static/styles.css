@@ -34,12 +34,22 @@ a:hover {
   opacity: 0.50;
 }
 
-.btn, .field {
+.btn, .field, #email, #password, #remember, .login_button, button {
     font-family: 'Josefin Slab', serif;
-    padding: 3px 15px;
+    padding: 5px 15px;
     color: #795C5F;
     margin: 5px;
 }
+
+fieldset {
+    border: 0;
+}
+
+/*label {
+    display: inline-block;
+    width: 250px;
+    text-align: right;
+}*/
 
 .images {
   display: flex;
