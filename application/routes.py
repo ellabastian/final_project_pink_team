@@ -16,7 +16,8 @@ def home():
         if len(ingredient_result) == 0:
             error = "Please supply an ingredient"
         else:
-            return ingredient_result
+            stuff = Ingredient.query.filter_by(ingredient_name="Avocado").all()
+            return str(stuff)
             # trialling out queries below
             # query_result = db.execute("SELECT ingredient_name FROM ingredient WHERE ingredient_name = :ingredient_result", {"ingredient_result": ingredient_result})
             # return query_result
