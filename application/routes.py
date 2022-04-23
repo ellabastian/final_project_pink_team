@@ -16,18 +16,6 @@ def home():
 
         if len(ingredient_result) == 0:
             error = "Please supply an ingredient"
-<<<<<<< HEAD
-        else:
-
-            # stuff = Ingredient.query.filter_by(ingredient_name="Avocado").all()
-            # return str(stuff)
-
-            # return ingredient_result
-            stuff = Ingredient.query.all()
-            # stuff = Ingredient.query.filter_by(ingredient_name=ingredient_result)
-            return str(stuff)
-=======
->>>>>>> a34bb25961117763c986c491a6b28e728920bc86
 
         elif Ingredient.query.filter_by(ingredient_name=ingredient_result).first() == None:
             error = "Try another ingredient"
