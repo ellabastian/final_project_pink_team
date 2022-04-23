@@ -24,9 +24,13 @@
         <b>Recipe Description:</b> {{ recipe.recipe_description }}
         <br>
         <br>
-        <b>Full Recipe:</b>
-
+        <a href="/recipes/{{ recipe.recipe_name }}"><b>Full Recipe Here</b></a>
+        <br>
+        <br>
         <img src="{{ recipe.recipe_img }}">
+        <br>
+        <br>
+        -------------------------------
     </li>
 {% endfor %}
 
