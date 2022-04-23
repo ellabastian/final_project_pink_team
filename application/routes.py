@@ -20,9 +20,17 @@ def home():
             # return ingredient_result
             # stuff = Ingredient.query.first()
             # stuff = Ingredient.query.filter_by(ingredient_name=ingredient_result).first()
-            stuff = Ingredient.query.filter_by(ingredient_name=ingredient_result).join(IngredientRecipe).join(Recipe).first()
+            ingredient_id = (Ingredient.query.filter_by(ingredient_name=ingredient_result).first()).ingredient_id
+            recipe_id = (IngredientRecipe.query.filter_by(ingredient_id=ingredient_id).first()).recipe_id
+            recipes = Recipe.query.filter_by(recipe_id=recipe_id).all()
 
-            return render_template('recipe.html', ingredient=stuff)
+            # stuff = Recipe.query.get(recipe_name)all()
+            # Person.query.get(person_id)
+            # return stuff
+            # stuff = Ingredient.query.filter_by(ingredient_name=ingredient_result).join(IngredientRecipe).join(Recipe).first()
+
+            return render_template('recipe.html', ingredient_id=ingredient_id, recipe_id=recipe_id, recipes=recipes)
+            # return render_template('recipe.html', ingredient_id=ingredient_id, recipes=stuff)
 
             # merged from main
             # return stuff.ingredient_name
