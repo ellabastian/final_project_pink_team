@@ -3,3 +3,4 @@ secret_key.py
 .DS_Store
 __pycache__/
 *.py[cod]
+__pycache__
