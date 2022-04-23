@@ -1,3 +1,5 @@
 sql_key.py
 secret_key.py
 .DS_Store
+__pycache__/
+*.py[cod]

@@ -1,6 +1,7 @@
 * {
     padding: 0px;
     margin: 0px;
+    box-sizing: border-box;
 }
 
 h1, h2, h3 {
@@ -30,11 +31,30 @@ a:link, a:visited {
 }
 
 a:hover {
-  text-decoration: underline;
+  opacity: 0.50;
+}
+
+.btn, .field {
+    font-family: 'Josefin Slab', serif;
+    padding: 3px 15px;
+    color: #795C5F;
+    margin: 5px;
+}
+
+.images {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2px;
+  padding-top: 20px;
 }
 
 img {
-   max-width: auto;
-   max-height: 40%;
-   padding: 10px;
+  position: relative;
+  border: 1px solid #795C5F;
+  border-radius: 5px;
+  height: 200px;
+  width: 200px;
+  object-fit: cover;
 }
