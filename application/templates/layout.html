@@ -1,22 +1,42 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Empty Fridge Full Plate</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Josefin+Slab&display=swap" rel="stylesheet">
+<script src="https://kit.fontawesome.com/2b34df0078.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <nav>
-        <a href="">Home</a>
-        <a href="">About</a>
-        <a href="">Recipes</a>
-        <a href="">Resources</a>
-        <a href="">Blog</a>
-        <a href="">Register/Log In</a>
+        {% if current_user.is_authenticated %}
+            <a href="{{url_for('user_account')}}">Account</a>
+            <a href="{{url_for('logout')}}">Logout</a>
+        {% else %}
+            <a href="{{url_for('home')}}"><i class="fa-solid fa-bowl-food"></i> Home</a>
+            <a href="{{url_for('about')}}">About</a>
+            <a href="{{url_for('recipe')}}">Recipes</a>
+            <a href="{{url_for('resources')}}">Resources</a>
+            <a href="{{url_for('blog')}}">Blog</a>
+            <a href="{{url_for('register')}}">Register</a>
+            <a href="{{url_for('login')}}">Log In</a>
+        {% endif %}
     </nav>
-    <h1>Empty Fridge Full Plate</h1>
+    <h1>Empty Fridge Full Plate <i class="fa-solid fa-bowl-food"></i> </h1>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith%}
     {% block body_content %}{% endblock %}
 </body>
+<footer>
+    <a href="{{url_for('contact')}}">Contact Us</a>
+</footer>
 </html>
