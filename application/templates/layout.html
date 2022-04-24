@@ -3,32 +3,107 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Empty Fridge Full Plate</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Josefin+Slab&display=swap" rel="stylesheet">
 <script src="https://kit.fontawesome.com/2b34df0078.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <nav>
-        {% if current_user.is_authenticated %}
-            <a href="{{url_for('home')}}"><i class="fa-solid fa-bowl-food"></i> Home</a>
-            <a href="{{url_for('about')}}">About</a>
-            <a href="{{url_for('recipe')}}">Recipes</a>
-            <a href="{{url_for('resources')}}">Resources</a>
-            <a href="{{url_for('blog')}}">Blog</a>
-            <a href="{{url_for('user_account')}}">Account</a>
-            <a href="{{url_for('logout')}}">Logout</a>
-        {% else %}
-            <a href="{{url_for('home')}}"><i class="fa-solid fa-bowl-food"></i> Home</a>
-            <a href="{{url_for('about')}}">About</a>
-            <a href="{{url_for('recipe')}}">Recipes</a>
-            <a href="{{url_for('resources')}}">Resources</a>
-            <a href="{{url_for('blog')}}">Blog</a>
-            <a href="{{url_for('register')}}">Register/Log In</a>
-        {% endif %}
-    </nav>
-    <h1>Empty Fridge Full Plate <i class="fa-solid fa-bowl-food"></i> </h1>
+
+    <!--            <a href="{{url_for('home')}}"><i class="fa-solid fa-bowl-food"></i> Home</a>-->
+    <!--            <a href="{{url_for('about')}}">About</a>-->
+    <!--            <a href="{{url_for('recipe')}}">Recipes</a>-->
+<!--                <a href="{{url_for('sustainability')}}">Resources</a>&ndash;&gt;-->
+    <!--                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">-->
+    <!--                    <a class="dropdown-item" href="#">Action</a>-->
+    <!--                    <a class="dropdown-item" href="#">Another action</a>-->
+    <!--                    <a class="dropdown-item" href="#">Something else here</a>-->
+    <!--                </div>-->
+    <!--            </div>-->
+    <!--            <a href="{{url_for('blog')}}">Blog</a>-->
+    <!--            <a href="{{url_for('user_account')}}">Account</a>-->
+    <!--            <a href="{{url_for('logout')}}">Logout</a>-->
+<nav>
+    {% if current_user.is_authenticated %}
+<nav class="navbar navbar-expand-lg navbar-dark">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+            <li class="nav-item active px-5">
+                <a class="nav-link" href="{{url_for('home')}}"><i class="fa-solid fa-bowl-food"></i> Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item px-5">
+                <a class="nav-link" href="{{url_for('about')}}">About</a>
+            </li>
+            <li class="nav-item px-5">
+                <a class="nav-link" href="{{url_for('recipe')}}">Recipes</a>
+            </li>
+            <li class="nav-item dropdown px-5">
+                <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Resources
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="{{url_for('ZeroWaste')}}">Zero Waste</a>
+                    <a class="dropdown-item" href="{{url_for('sustainability')}}">Sustainability</a>
+                    <a class="dropdown-item" href="{{url_for('FoodBanks')}}">Food Banks</a>
+                </div>
+            </li>
+            <li class="nav-item px-5">
+                <a class="nav-link" href="{{url_for('blog')}}">Blog</a>
+            </li>
+            <li class="nav-item px-5">
+                <a class="nav-link" href="{{url_for('user_account')}}">Account</a>
+            </li>
+            <li class="nav-item px-5">
+                <a class="nav-link" href="{{url_for('logout')}}">Log Out</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+{% else %}
+<nav class="navbar navbar-expand-lg navbar-dark">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+            <li class="nav-item active px-5">
+                <a class="nav-link" href="{{url_for('home')}}"><i class="fa-solid fa-bowl-food"></i> Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item px-5">
+                <a class="nav-link" href="{{url_for('about')}}">About</a>
+            </li>
+            <li class="nav-item px-5">
+                <a class="nav-link" href="{{url_for('recipe')}}">Recipes</a>
+            </li>
+            <li class="nav-item dropdown px-5">
+                <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Resources
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="{{url_for('ZeroWaste')}}">Zero Waste</a>
+                    <a class="dropdown-item" href="{{url_for('sustainability')}}">Sustainability</a>
+                    <a class="dropdown-item" href="{{url_for('FoodBanks')}}">Food Banks</a>
+                </div>
+            </li>
+            <li class="nav-item px-5">
+                <a class="nav-link" href="{{url_for('blog')}}">Blog</a>
+            </li>
+            <li class="nav-item px-5">
+                <a class="nav-link" href="{{url_for('register')}}">Register/Log In</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+{% endif %}
+</nav>
+
+    <h2 class="font-weight-bold">Empty Fridge Full Plate <i class="fa-solid fa-bowl-food"></i></h2>
     {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
             {% for category, message in messages %}
@@ -39,8 +114,21 @@
         {% endif %}
     {% endwith%}
     {% block body_content %}{% endblock %}
+<script src=" bootstrap.bundle.min.js / bootstrap.bundle.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>
 <footer>
+    <br>
+    <br>
     <a href="{{url_for('contact')}}">Contact Us</a>
+        <br>
+    <a href="#" class="fa fa-facebook"></a>
+    <a href="#" class="fa fa-twitter"></a>
+    <a href="#" class="fa fa-linkedin"> </a>
+    <a href="#" class="fa fa-instagram"> </a>
+    <a href="#" class="fa fa-youtube"> </a>
+    <a href="#" class="fa fa-google"> </a>
 </footer>
 </html>
