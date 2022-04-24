@@ -1,8 +1,0 @@
-flask
-wtforms
-flask_wtf
-pymysql
-flask-sqlalchemy
-markupsafe==2.0.1
-py-edamam==0.2
-cryptography
