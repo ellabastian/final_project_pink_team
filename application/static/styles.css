@@ -61,6 +61,24 @@ fieldset {
   padding-top: 20px;
 }
 
+
+.container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  gap: 0px 0px;
+  grid-template-areas:
+    "image text-and-link text-and-link"
+    ". . ."
+    ". . .";
+}
+.image { grid-area: image; }
+.text-and-link { grid-area: text-and-link;
+   height: 200px;
+  width: 700px;}
+
+.grow1 { flex-grow: 1; }
+
 img {
   position: relative;
   border: 1px solid #795C5F;
