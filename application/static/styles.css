@@ -22,16 +22,19 @@ nav {
     background-color: #795C5F;
 }
 
-a {
-    /** color: #DEDBD2; **/
-    color: black;
-}
+.footer_link {
+   color: #114B5F;
+ }
 
-a:link, a:visited {
+.navbar_link {
+   color: #DEDBD2;
+  }
+
+.navbar_link:link, .navbar_link:visited, .footer_link:link, .footer_link:visited {
   text-decoration: none;
 }
 
-a:hover {
+.navbar_link:hover, .footer_link:hover {
   opacity: 0.50;
 }
 
@@ -127,4 +130,16 @@ img {
 
 li {
   display: flex
+}
+
+footer {
+   display: flex;
+   flex-direction: column;
+   align-items: flex-start;
+   position: fixed;
+   padding: 20px;
+   bottom:0;
+   width: 100%;
+   height: 90px;   /* Height of the footer */
+   background-color: #91C7B1;
 }

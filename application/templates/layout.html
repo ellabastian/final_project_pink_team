@@ -12,20 +12,20 @@
 <body>
     <nav>
         {% if current_user.is_authenticated %}
-            <a href="{{url_for('home')}}"><i class="fa-solid fa-bowl-food"></i> Home</a>
-            <a href="{{url_for('about')}}">About</a>
-            <a href="{{url_for('recipe')}}">Recipes</a>
-            <a href="{{url_for('resources')}}">Resources</a>
-            <a href="{{url_for('blog')}}">Blog</a>
-            <a href="{{url_for('user_account')}}">Account</a>
-            <a href="{{url_for('logout')}}">Logout</a>
+            <a href="{{url_for('home')}}" class="navbar_link"><i class="fa-solid fa-bowl-food"></i> Home</a>
+            <a href="{{url_for('about')}}" class="navbar_link">About</a>
+            <a href="{{url_for('recipe')}}" class="navbar_link">Recipes</a>
+            <a href="{{url_for('resources')}}" class="navbar_link">Resources</a>
+            <a href="{{url_for('blog')}}" class="navbar_link">Blog</a>
+            <a href="{{url_for('user_account')}}" class="navbar_link">Account</a>
+            <a href="{{url_for('logout')}}" class="navbar_link">Logout</a>
         {% else %}
-            <a href="{{url_for('home')}}"><i class="fa-solid fa-bowl-food"></i> Home</a>
-            <a href="{{url_for('about')}}">About</a>
-            <a href="{{url_for('recipe')}}">Recipes</a>
-            <a href="{{url_for('resources')}}">Resources</a>
-            <a href="{{url_for('blog')}}">Blog</a>
-            <a href="{{url_for('register')}}">Register/Log In</a>
+            <a href="{{url_for('home')}}" class="navbar_link"><i class="fa-solid fa-bowl-food"></i> Home</a>
+            <a href="{{url_for('about')}}" class="navbar_link">About</a>
+            <a href="{{url_for('recipe')}}" class="navbar_link">Recipes</a>
+            <a href="{{url_for('resources')}}" class="navbar_link">Resources</a>
+            <a href="{{url_for('blog')}}" class="navbar_link">Blog</a>
+            <a href="{{url_for('register')}}" class="navbar_link">Register/Log In</a>
         {% endif %}
     </nav>
     <h1>Empty Fridge Full Plate <i class="fa-solid fa-bowl-food"></i> </h1>
@@ -41,6 +41,8 @@
     {% block body_content %}{% endblock %}
 </body>
 <footer>
-    <a href="{{url_for('contact')}}">Contact Us</a>
+    <a href="{{url_for('contact')}}" class="footer_link">Contact Us</a>
+    <a href="#" class="footer_link">Link to Information Here</a>
+    <a href="#" class="footer_link">Link to Information Here</a>
 </footer>
 </html>
