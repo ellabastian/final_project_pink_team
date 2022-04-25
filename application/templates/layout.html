@@ -104,6 +104,27 @@
 </nav>
 
     <h2 class="font-weight-bold">Empty Fridge Full Plate <i class="fa-solid fa-bowl-food"></i></h2>
+
+<!--     <nav>
+        {% if current_user.is_authenticated %}
+            <a href="{{url_for('home')}}" class="navbar_link"><i class="fa-solid fa-bowl-food"></i> Home</a>
+            <a href="{{url_for('about')}}" class="navbar_link">About</a>
+            <a href="{{url_for('recipe')}}" class="navbar_link">Recipes</a>
+            <a href="{{url_for('resources')}}" class="navbar_link">Resources</a>
+            <a href="{{url_for('blog')}}" class="navbar_link">Blog</a>
+            <a href="{{url_for('user_account')}}" class="navbar_link">Account</a>
+            <a href="{{url_for('logout')}}" class="navbar_link">Logout</a>
+        {% else %}
+            <a href="{{url_for('home')}}" class="navbar_link"><i class="fa-solid fa-bowl-food"></i> Home</a>
+            <a href="{{url_for('about')}}" class="navbar_link">About</a>
+            <a href="{{url_for('recipe')}}" class="navbar_link">Recipes</a>
+            <a href="{{url_for('resources')}}" class="navbar_link">Resources</a>
+            <a href="{{url_for('blog')}}" class="navbar_link">Blog</a>
+            <a href="{{url_for('register')}}" class="navbar_link">Register/Log In</a>
+        {% endif %}
+    </nav> -->
+    <h1>Empty Fridge Full Plate <i class="fa-solid fa-bowl-food"></i> </h1>
+
     {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
             {% for category, message in messages %}
@@ -120,9 +141,12 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>
 <footer>
+
     <br>
     <br>
-    <a href="{{url_for('contact')}}">Contact Us</a>
+    <a href="{{url_for('contact')}}" class="footer_link">Contact Us</a>
+    <a href="#" class="footer_link">Link to Information Here</a>
+    <a href="#" class="footer_link">Link to Information Here</a>
         <br>
     <a href="#" class="fa fa-facebook"></a>
     <a href="#" class="fa fa-twitter"></a>
@@ -130,5 +154,7 @@
     <a href="#" class="fa fa-instagram"> </a>
     <a href="#" class="fa fa-youtube"> </a>
     <a href="#" class="fa fa-google"> </a>
+
+
 </footer>
 </html>
