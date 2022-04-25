@@ -274,11 +274,11 @@ db.session.add_all(ingredients_in_recipe_list)
 
 
 # Inserting values into the User table
-person1 = User(first_name='Jane', last_name='Smith', username='JSmith1977', email='jane1977@gmail.com', password='1234abcd')
-person2 = User(first_name='Kanye', username='Westicles', email='kwest@gmail.com', password='abcd9876')
-
-db.session.add(person1)
-db.session.add(person2)
+# person1 = User(first_name='Jane', last_name='Smith', username='JSmith1977', email='jane1977@gmail.com', password='1234abcd')
+# person2 = User(first_name='Kanye', username='Westicles', email='kwest@gmail.com', password='abcd9876')
+#
+# db.session.add(person1)
+# db.session.add(person2)
 
 
 # Committing all the values into the database
