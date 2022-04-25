@@ -91,7 +91,6 @@ img {
     word-wrap: break-word;
     hyphens: auto;
      align: center
-
 }
 
 .recipe_page_images {
@@ -111,7 +110,6 @@ img {
     max-width: 300px;
     border: solid 2px #ccc;
     padding: 12px;
-
 }
 . dropdown show {
 background-color: #795C5F
@@ -143,15 +141,11 @@ color = #795C5F
   opacity: 0.7;
 }
 
-/* Set a specific color for each brand */
-
-/* Facebook */
 .fa-facebook {
   background: #3B5998;
   color: white;
 }
 
-/* Twitter */
 .fa-twitter {
   background: #55ACEE;
   color: white;
@@ -166,10 +160,12 @@ color: white;
 color: white;
 background: #db4a39;
 }
+
 .fa-instagram {
 background: #3f729b;
 color: white;
 }
+
 .fa-youtube {
 color: white;
 background: #c4302b;
