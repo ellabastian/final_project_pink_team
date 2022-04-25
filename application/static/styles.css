@@ -4,7 +4,7 @@
     box-sizing: border-box;
 }
 
-h1, h2, h3 {
+h1, h2, h3, h4 {
    padding: 20px;
 }
 
@@ -18,7 +18,6 @@ body {
 nav {
     display: flex;
     justify-content: space-evenly;
-    padding: 20px;
     background-color: #795C5F;
 }
 
@@ -38,11 +37,19 @@ nav {
   opacity: 0.50;
 }
 
-.btn, .field, #email, #password, #remember, .login_button, button {
+.#email, #password, #remember, .login_button, button {
+    font-family: 'Josefin Slab', serif;
+    padding: 10px 15px;
+    color: #795C5F;
+    margin: 10px;
+}
+
+.btn, .field{
     font-family: 'Josefin Slab', serif;
     padding: 5px 15px;
     color: #795C5F;
     margin: 5px;
+    border: 1px solid #795C5F;
 }
 
 fieldset {
@@ -93,9 +100,7 @@ img {
 .recipe_box {
    display: flex;
   justify-content: center;
-
 }
-
 
 .recipe_info {
     float: left
@@ -107,30 +112,83 @@ img {
     word-wrap: break-word;
     hyphens: auto;
      align: center
-
 }
 
 .recipe_page_images {
-    /** height: 500px;
-    width: 200px; **/
-    float: right
-    padding: 100px
-    padding-top: 100px
+    height: 500px;
+    width: 200px;
+    float: right;
+    padding: 50px;
+    margin: 2px;
+    border: 2px;
+    padding-top: 100px;
     justify-content: center
 }
 
 .recipe_description {
-    height: 100px;
+    height: 150px;
     margin: 0 auto;
     max-width: 300px;
     border: solid 2px #ccc;
     padding: 12px;
+}
+. dropdown show {
+background-color: #795C5F
+}
 
+.btn btn-secondary dropdown-toggle {
+background-color: #795C5F
 }
 
 li {
   display: flex
 }
+
+.fa-solid fa-bowl-food{
+color = #795C5F
+}
+
+.fa {
+  padding: 5px;
+  font-size: 30px;
+  width: 50px;
+  text-align: center;
+  text-decoration: none;
+}
+
+
+.fa:hover {
+  opacity: 0.7;
+}
+
+.fa-facebook {
+  background: #3B5998;
+  color: white;
+}
+
+.fa-twitter {
+  background: #55ACEE;
+  color: white;
+}
+
+.fa-linkedin {
+background: #0e76a8;
+color: white;
+}
+
+.fa-google {
+color: white;
+background: #db4a39;
+}
+
+.fa-instagram {
+background: #3f729b;
+color: white;
+}
+
+.fa-youtube {
+color: white;
+background: #c4302b;
 
 footer {
    display: flex;

@@ -50,9 +50,17 @@ def about():
     return render_template('about.html', title='about', page_title=url)
 
 
-@app.route("/resources", methods=["GET"])
-def resources():
-    return render_template('resources.html')
+@app.route("/zero_waste", methods=["GET"])
+def ZeroWaste():
+    return render_template('zero_waste.html')
+
+@app.route("/sustainability", methods=["GET"])
+def sustainability():
+    return render_template('sustainability.html')
+
+@app.route("/food_banks", methods=["GET"])
+def FoodBanks():
+    return render_template('food_banks.html')
 
 
 @app.route("/blog", methods=["GET", "POST"])
