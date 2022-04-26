@@ -20,6 +20,7 @@ chilli_con_carne = Recipe(recipe_name="Chilli Con Carne", recipe_img="http://www
 orange_almond_vegan_cake = Recipe(recipe_name="Orange Almond Vegan Cake", recipe_img="https://i.pinimg.com/originals/50/18/f9/5018f9d32382b19a54fbc3d20ac19076.jpg", recipe_difficulty=1, recipe_prep_time="20 minutes", recipe_cook_time="1 hour", recipe_category="Dessert", recipe_description="Make this no fuss vegan cake. Perfect for any day and for sharing with the people you love and hate.")
 vegan_apple_tarts = Recipe(recipe_name="Vegan Apple Tarts", recipe_img="https://www.jusrol.co.uk/wp-content/uploads/2018/08/168_Image_Hero-Image_2018_7_6_19_38_17.jpg", recipe_difficulty=1, recipe_prep_time="15 minutes", recipe_cook_time="30 minutes", recipe_category="Breakfast", recipe_description="It is said that an apple a day keeps the doctor away, and this recipe will have you eating several apples every day, hopefully your doctor won't mind!")
 prawn_tikka_masala = Recipe(recipe_name="Prawn Tikka Masala", recipe_img="https://images.immediate.co.uk/production/volatile/sites/30/2020/08/prawn-tikka-masala-a4a86f9.jpg?quality=90&webp=true&resize=300,272", recipe_difficulty=1, recipe_prep_time="10 minutes", recipe_cook_time="30 minutes", recipe_category="Dinner", recipe_description="Forget a takeaway and tuck into a midweek meal that will please the whole family with our easy, low calorie prawn tikka masala. Serve with naan!")
+jerk_chicken_with_rice_and_peas = Recipe(recipe_name="Jerk Chicken with Rice and Peas", recipe_img="https://images.immediate.co.uk/production/volatile/sites/30/2020/08/recipe-image-legacy-id-1047528_11-62a849b.jpg?quality=90&webp=true&resize=300,272", recipe_difficulty=2, recipe_prep_time="25 minutes", recipe_cook_time="40 minutes", recipe_category="Dinner", recipe_description="Jerk refers to a style of cooking in which the main ingredient—which most often is chicken but may also be beef, pork, goat, boar, seafood, or vegetables—is coated in spices and slow-cooked over a fire or grill traditionally composed of green pimento wood positioned over burning coals.")
 
 # db.session.add()
 db.session.add(breakfast_burrito)
@@ -28,6 +29,7 @@ db.session.add(chilli_con_carne)
 db.session.add(orange_almond_vegan_cake)
 db.session.add(vegan_apple_tarts)
 db.session.add(prawn_tikka_masala)
+db.session.add(jerk_chicken_with_rice_and_peas)
 
 # Inserting values into the Instruction table
 # template = Instruction(instruction_number=, instruction_description="", recipe_id=)
@@ -118,6 +120,19 @@ prawn_tikka_masala_step_list = [prawn_tikka_masala_step_one, prawn_tikka_masala_
                                 prawn_tikka_masala_step_four, prawn_tikka_masala_step_five]
 db.session.add_all(prawn_tikka_masala_step_list)
 
+#jerk_chicken_with_rice_and_peas
+jerk_chicken_with_rice_and_peas_step_one = Instruction(instruction_number=1,instruction_description="To make the jerk marinade, combine the spring onions, ginger, garlic, onion, scotch bonnet chillies, dried thyme, lime juice, soy sauce, vegetable oil, brown sugar and ground allspice in a food processor along with 1 tsp salt, and blend to a purée. If you’re having trouble getting it to blend, just keep turning off the blender, stirring the mixture, and trying again. Eventually it will start to blend up – don’t be tempted to add water, as you want a thick paste.", recipe_id= 7)
+jerk_chicken_with_rice_and_peas_step_two = Instruction(instruction_number=2,instruction_description="Taste the jerk mixture for seasoning – it should taste pretty salty, but not unpleasantly, puckering salty. You can now throw in more chillies if it’s not spicy enough for you. If it tastes too salty and sour, try adding in a bit more brown sugar until the mixture tastes well balanced.", recipe_id= 7)
+jerk_chicken_with_rice_and_peas_step_three = Instruction(instruction_number=3,instruction_description="Make a few slashes in 12 chicken thighs and pour the marinade over the meat, rubbing it into all the crevices. Cover and leave to marinate overnight in the fridge", recipe_id= 7)
+jerk_chicken_with_rice_and_peas_step_four = Instruction(instruction_number=4,instruction_description="If you want to barbecue your chicken, get the coals burning 1 hr or so before you’re ready to cook. Authentic jerked meats are not exactly grilled as we think of grilling, but sort of smoke-grilled. To get a more authentic jerk experience, add some wood chips to your barbecue, and cook your chicken over slow, indirect heat for 30 mins.", recipe_id= 7)
+jerk_chicken_with_rice_and_peas_step_five = Instruction(instruction_number=5,instruction_description="To cook in the oven, heat to 180C/160C fan/gas 4. Put the chicken pieces in a roasting tin with the halved lime and cook for 45 mins until tender and cooked through", recipe_id= 7)
+jerk_chicken_with_rice_and_peas_step_six = Instruction(instruction_number=6,instruction_description="Season with salt, add 300ml cold water and set over a high heat. Once the rice begins to boil, turn it down to a medium heat, cover and cook for 10 mins. Add the kidney beans to the rice, then cover with a lid. Leave off the heat for 5 mins until all the liquid is absorbed.", recipe_id=7)
+jerk_chicken_with_rice_and_peas_step_seven = Instruction(instruction_number=7,instruction_description="Squeeze the roasted lime over the chicken and serve with the rice & peas, and some hot sauce if you like it really spicy.", recipe_id=7)
+
+jerk_chicken_with_rice_and_peas_step_list = [jerk_chicken_with_rice_and_peas_step_one, jerk_chicken_with_rice_and_peas_step_two, jerk_chicken_with_rice_and_peas_step_three, jerk_chicken_with_rice_and_peas_step_four,
+                                             jerk_chicken_with_rice_and_peas_step_five, jerk_chicken_with_rice_and_peas_step_six, jerk_chicken_with_rice_and_peas_step_seven]
+db.session.add_all(jerk_chicken_with_rice_and_peas_step_list)
+
 # Inserting values into Ingredient table
 onion = Ingredient(ingredient_name='Onion')
 red_pepper = Ingredient(ingredient_name='Red Pepper')
@@ -172,6 +187,16 @@ raw_king_prawns = Ingredient(ingredient_name='Raw King Prawns')
 double_cream = Ingredient(ingredient_name='Double cream')
 coriander = Ingredient(ingredient_name='Coriander')
 naan = Ingredient(ingredient_name='Naan')
+chicken_thighs = Ingredient(ingredient_name='Chicken Thighs')
+lime = Ingredient(ingredient_name='Lime')
+spring_onions = Ingredient(ingredient_name='Spring Onions')
+scotch_bonnet_chillies = Ingredient(ingredient_name='Scotch Bonnet Chillies')
+thyme = Ingredient(ingredient_name='Thyme')
+soy_sauce = Ingredient(ingredient_name='Soy Sauce')
+vegetable_oil = Ingredient(ingredient_name='Vegetable Oil')
+allspice = Ingredient(ingredient_name='Allspice')
+white_basmati_rice = Ingredient(ingredient_name='White Basmati Rice')
+coconut_milk = Ingredient(ingredient_name='Coconut Milk')
 
 ingredients_list = [onion, red_pepper, garlic, oil, hot_chilli_pepper, paprika, ground_cumin, lean_minced_beef,
                     beef_stock_cube, canned_tomatoes, dried_marjoram, sugar, dark_chocolate, tomato_puree,
@@ -180,7 +205,8 @@ ingredients_list = [onion, red_pepper, garlic, oil, hot_chilli_pepper, paprika, 
                     wholemeal_tortilla_wrap, plain_flour, ground_almonds, baking_soda, baking_powder, salt, almond_milk,
                     caster_sugar, orange, vinegar, puff_pastry_sheet, apple_sauce, apple, maple_syrup, plant_based_milk,
                     ginger, tikka_curry_paste, light_brown_soft_sugar, cardamom_pods, brown_basmati_rice, raw_king_prawns,
-                    double_cream, coriander, naan ]
+                    double_cream, coriander, naan, chicken_thighs, lime, spring_onions, scotch_bonnet_chillies, thyme,
+                    soy_sauce, vegetable_oil, allspice, white_basmati_rice, coconut_milk]
 db.session.add_all(ingredients_list)
 
 
@@ -248,6 +274,27 @@ ingredients_in_recipe_58 = IngredientRecipe(ingredient_recipe_measurement="300g"
 ingredients_in_recipe_59 = IngredientRecipe(ingredient_recipe_measurement="1 tbsp", ingredient_id=51, recipe_id=6)
 ingredients_in_recipe_60 = IngredientRecipe(ingredient_recipe_measurement="½ bunch, roughly chopped", ingredient_id=52, recipe_id=6)
 ingredients_in_recipe_61 = IngredientRecipe(ingredient_recipe_measurement="Warmed, to serve (optional)", ingredient_id=53, recipe_id=6)
+ingredients_in_recipe_62 = IngredientRecipe(ingredient_recipe_measurement="12", ingredient_id=54, recipe_id=7)
+ingredients_in_recipe_63 = IngredientRecipe(ingredient_recipe_measurement="1", ingredient_id=55, recipe_id=7)
+ingredients_in_recipe_64 = IngredientRecipe(ingredient_recipe_measurement="1 big bunch", ingredient_id=56, recipe_id=7)
+ingredients_in_recipe_65 = IngredientRecipe(ingredient_recipe_measurement="Thumb sized piece", ingredient_id=45, recipe_id=7)
+ingredients_in_recipe_66 = IngredientRecipe(ingredient_recipe_measurement="3", ingredient_id=3, recipe_id=7)
+ingredients_in_recipe_67 = IngredientRecipe(ingredient_recipe_measurement="0.5", ingredient_id=1, recipe_id=7)
+ingredients_in_recipe_68 = IngredientRecipe(ingredient_recipe_measurement="3", ingredient_id=57, recipe_id=7)
+ingredients_in_recipe_69 = IngredientRecipe(ingredient_recipe_measurement="0.5 dried bunch", ingredient_id=58, recipe_id=7)
+ingredients_in_recipe_70 = IngredientRecipe(ingredient_recipe_measurement="1", ingredient_id=55, recipe_id=7)
+ingredients_in_recipe_71 = IngredientRecipe(ingredient_recipe_measurement="2 tbsp", ingredient_id=59, recipe_id=7)
+ingredients_in_recipe_72 = IngredientRecipe(ingredient_recipe_measurement="2 tbsp", ingredient_id=60, recipe_id=7)
+ingredients_in_recipe_73 = IngredientRecipe(ingredient_recipe_measurement="3 tbsp", ingredient_id=47, recipe_id=7)
+ingredients_in_recipe_74 = IngredientRecipe(ingredient_recipe_measurement="1 tbsp", ingredient_id=61, recipe_id=7)
+ingredients_in_recipe_75 = IngredientRecipe(ingredient_recipe_measurement="200g", ingredient_id=62, recipe_id=7)
+ingredients_in_recipe_76 = IngredientRecipe(ingredient_recipe_measurement="400g can", ingredient_id=63, recipe_id=7)
+ingredients_in_recipe_77 = IngredientRecipe(ingredient_recipe_measurement="1 bunch", ingredient_id=56, recipe_id=7)
+ingredients_in_recipe_78 = IngredientRecipe(ingredient_recipe_measurement="2 large sprigs", ingredient_id=58, recipe_id=7)
+ingredients_in_recipe_79 = IngredientRecipe(ingredient_recipe_measurement="2 cloves", ingredient_id=3, recipe_id=7)
+ingredients_in_recipe_80 = IngredientRecipe(ingredient_recipe_measurement="1sp ground", ingredient_id=61, recipe_id=7)
+ingredients_in_recipe_81 = IngredientRecipe(ingredient_recipe_measurement="2 x 410g cans", ingredient_id=13, recipe_id=7)
+
 
 ingredients_in_recipe_list = [ingredients_in_recipe_1, ingredients_in_recipe_2, ingredients_in_recipe_3,
                               ingredients_in_recipe_4, ingredients_in_recipe_5, ingredients_in_recipe_6,
@@ -269,7 +316,13 @@ ingredients_in_recipe_list = [ingredients_in_recipe_1, ingredients_in_recipe_2, 
                               ingredients_in_recipe_52, ingredients_in_recipe_53, ingredients_in_recipe_54,
                               ingredients_in_recipe_55, ingredients_in_recipe_56, ingredients_in_recipe_57,
                               ingredients_in_recipe_58, ingredients_in_recipe_59, ingredients_in_recipe_60,
-                              ingredients_in_recipe_61]
+                              ingredients_in_recipe_61, ingredients_in_recipe_62, ingredients_in_recipe_63,
+                              ingredients_in_recipe_64,ingredients_in_recipe_65, ingredients_in_recipe_66,
+                              ingredients_in_recipe_67, ingredients_in_recipe_68, ingredients_in_recipe_69,
+                              ingredients_in_recipe_70, ingredients_in_recipe_71, ingredients_in_recipe_72,
+                              ingredients_in_recipe_73, ingredients_in_recipe_74, ingredients_in_recipe_75,
+                              ingredients_in_recipe_76, ingredients_in_recipe_77, ingredients_in_recipe_78,
+                              ingredients_in_recipe_79, ingredients_in_recipe_80, ingredients_in_recipe_81]
 db.session.add_all(ingredients_in_recipe_list)
 
 
