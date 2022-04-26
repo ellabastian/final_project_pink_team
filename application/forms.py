@@ -54,3 +54,11 @@ class UpdateAccountForm(FlaskForm):
             user = User.query.filter_by(email=email.data).first()
             if user:
                 raise ValidationError("That email is taken by another user. Please use a different one.")
+
+
+class UserFeedback(FlaskForm):
+    # username = populate automatically
+    positive_rating = FileField("Thumbs Up")
+    negative_rating = FileField("Thumbs Down")
+    comment = StringField("Enter your comments here", validators=[DataRequired()])
+    submit = SubmitField("Submit Rating")

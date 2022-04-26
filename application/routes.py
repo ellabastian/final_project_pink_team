@@ -3,8 +3,8 @@ import secrets
 from PIL import Image
 from flask import render_template, request, url_for, redirect, flash
 from application import app, db, bcrypt
-from application.forms import IngredientsForm, UserAccountForm, UserLoginForm, UpdateAccountForm
-from application.models import Ingredient, IngredientRecipe, Recipe, Instruction, Difficulty, User
+from application.forms import IngredientsForm, UserAccountForm, UserLoginForm, UpdateAccountForm, UserFeedback
+from application.models import Ingredient, IngredientRecipe, Recipe, Instruction, Difficulty, User, Comment
 from flask_login import login_user, current_user, logout_user, login_required
 
 
@@ -34,11 +34,31 @@ def home():
     return render_template('home.html', form=form, message=error)
 
 
-@app.route("/recipes/<recipe_name>")
+@app.route("/recipes/<recipe_name>", methods=["GET", "POST"])
 def specific_recipe(recipe_name):
+
     recipe = (Recipe.query.filter_by(recipe_name=recipe_name).first())
     instructions = Instruction.query.filter_by(recipe_id=recipe.recipe_id).all()
-    return render_template('specific_recipe.html', recipe_name=recipe_name, recipe=recipe, instructions=instructions)
+    # return render_template('specific_recipe.html', recipe_name=recipe_name, recipe=recipe, instructions=instructions, form=form)
+
+    form = UserFeedback()
+    if request.method == "POST":
+        # positive_rating = form.positive_rating.data
+        # negative_rating = form.negative_rating.data
+        usercomment = form.comment.data
+
+        if current_user.is_authenticated:
+            username = User.query.get("username")
+            recipe_id = Recipe.query.get("recipe_id")
+            commentquery = Comment.insert().values({"comment": usercomment}, recipe_id=recipe_id, username=username)
+            return render_template('specific_recipe.html', username=username, comment=usercomment, commentquery=commentquery, form=form)
+
+        else:
+            return redirect(url_for('useraccount'), form=form)
+
+    return render_template('specific_recipe.html', recipe_name=recipe_name, recipe=recipe, form=form)
+
+
 
 
 @app.route("/recipes", methods=["GET", "POST"])
