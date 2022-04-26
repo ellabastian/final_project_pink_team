@@ -53,3 +53,4 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(50), nullable=False)
     email = db.Column(db.String(200), nullable=False)
     password = db.Column(db.String(60), nullable=False)
+    image_file = db.Column(db.String(30), nullable=False, default='defaultprofilepic.png')
