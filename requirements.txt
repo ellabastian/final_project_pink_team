@@ -8,3 +8,4 @@ py-edamam==0.2
 cryptography
 flask_login
 flask_bcrypt
+Pillow

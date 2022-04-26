@@ -36,4 +36,14 @@
     <br>
     <br>
 
+<h2>Please rate or comment on this Recipe!</h2>
+<form action="" method="post">
+        {{ form.hidden_tag() }}
+        {{ form.positive_rating.label }} {{ form.positive_rating(class="field") }}
+        {{ form.negative_rating.label }} {{ form.negative_rating(class="field") }}
+        {{ form.comment.label }} {{ form.comment(class="field") }}
+        {{ form.submit(class="btn") }}
+        <br>
+</form>
+
 {% endblock %}

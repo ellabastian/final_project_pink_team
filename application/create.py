@@ -1,9 +1,9 @@
 from application import db
-from application.models import Recipe, Ingredient, IngredientRecipe, Instruction, Difficulty, User
+from application.models import Recipe, Ingredient, IngredientRecipe, Instruction, Difficulty, User, Comment, Rating
 
 db.drop_all()
 db.create_all()
-
+#
 # Inserting Values into the Difficulty table
 easy = Difficulty(difficulty_name='Easy')
 medium = Difficulty(difficulty_name='Medium')
@@ -332,6 +332,21 @@ person2 = User(first_name='Kanye', username='Westicles', email='kwest@gmail.com'
 
 db.session.add(person1)
 db.session.add(person2)
+
+
+# Inserting values into the Comment/Rating tables
+
+comment1 = Comment(comment="I really like this recipe. Delicious!", user_id=1, recipe_id=1)
+comment2 = Comment(comment="I didn't enjoy this recipe. Won't be making it again.", user_id=1, recipe_id=2)
+
+db.session.add(comment1)
+db.session.add(comment2)
+
+rating1 = Rating(rating="Good", user_id=1, recipe_id=1)
+rating2 = Rating(rating="Bad", user_id=1, recipe_id=2)
+
+db.session.add(rating1)
+db.session.add(rating2)
 
 
 # Committing all the values into the database

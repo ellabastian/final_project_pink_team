@@ -1,7 +1,10 @@
+import os
+import secrets
+from PIL import Image
 from flask import render_template, request, url_for, redirect, flash
 from application import app, db, bcrypt
-from application.forms import IngredientsForm, UserAccountForm, UserLoginForm
-from application.models import Ingredient, IngredientRecipe, Recipe, Instruction, Difficulty, User
+from application.forms import IngredientsForm, UserAccountForm, UserLoginForm, UpdateAccountForm, UserFeedback
+from application.models import Ingredient, IngredientRecipe, Recipe, Instruction, Difficulty, User, Comment
 from flask_login import login_user, current_user, logout_user, login_required
 
 
@@ -31,11 +34,31 @@ def home():
     return render_template('home.html', form=form, message=error)
 
 
-@app.route("/recipes/<recipe_name>")
+@app.route("/recipes/<recipe_name>", methods=["GET", "POST"])
 def specific_recipe(recipe_name):
+
     recipe = (Recipe.query.filter_by(recipe_name=recipe_name).first())
     instructions = Instruction.query.filter_by(recipe_id=recipe.recipe_id).all()
-    return render_template('specific_recipe.html', recipe_name=recipe_name, recipe=recipe, instructions=instructions)
+    # return render_template('specific_recipe.html', recipe_name=recipe_name, recipe=recipe, instructions=instructions, form=form)
+
+    form = UserFeedback()
+    if request.method == "POST":
+        # positive_rating = form.positive_rating.data
+        # negative_rating = form.negative_rating.data
+        usercomment = form.comment.data
+
+        if current_user.is_authenticated:
+            username = User.query.get("username")
+            recipe_id = Recipe.query.get("recipe_id")
+            commentquery = Comment.insert().values({"comment": usercomment}, recipe_id=recipe_id, username=username)
+            return render_template('specific_recipe.html', username=username, comment=usercomment, commentquery=commentquery, form=form)
+
+        else:
+            return redirect(url_for('useraccount'), form=form)
+
+    return render_template('specific_recipe.html', recipe_name=recipe_name, recipe=recipe, form=form)
+
+
 
 
 @app.route("/recipes", methods=["GET", "POST"])
@@ -99,10 +122,38 @@ def login():
     return render_template('login.html', title='Login', form=form)
 
 
-@app.route("/useraccount")
+def save_picture(form_picture):
+    random_hex = secrets.token_hex(8)
+    _, f_ext = os.path.splitext(form_picture.filename)
+    picture_fn = random_hex + f_ext
+    picture_path = os.path.join(app.root_path, 'static/profile_pictures', picture_fn)
+
+    output_size = (200, 200)
+    i = Image.open(form_picture)
+    i.thumbnail(output_size)
+    i.save(picture_path)
+
+    return picture_fn
+
+
+@app.route("/useraccount", methods=['GET', 'POST'])
 @login_required
 def user_account():
-    return render_template('useraccount.html', title='Account')
+    form = UpdateAccountForm()
+    if form.validate_on_submit():
+        if form.picture.data:
+            picture_file = save_picture(form.picture.data)
+            current_user.image_file = picture_file
+        current_user.username = form.username.data
+        current_user.email = form.email.data
+        db.session.commit()
+        flash('your account has been updated!', 'success')
+        return redirect(url_for('user_account'))
+    elif request.method == 'GET':
+        form.username.data = current_user.username
+        form.email.data = current_user.email
+    image_file = url_for('static', filename='profile_pictures/' + current_user.image_file)
+    return render_template('useraccount.html', title='Account', image_file=image_file, form=form)
 
 
 @app.route("/logout")
