@@ -2,6 +2,20 @@ from application import db, login_manager
 from flask_login import UserMixin
 
 
+class Comment(UserMixin, db.Model):
+    comment_id = db.Column(db.Integer, primary_key=True)
+    comment = db.Column(db.Text, nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.user_id'), nullable=False)
+    recipe_id = db.Column(db.Integer, db.ForeignKey('recipe.recipe_id'), nullable=False)
+
+
+class Rating(UserMixin, db.Model):
+    rating_id = db.Column(db.Integer, primary_key=True)
+    rating = db.Column(db.Text, nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.user_id'), nullable=False)
+    recipe_id = db.Column(db.Integer, db.ForeignKey('recipe.recipe_id'), nullable=False)
+
+
 class Difficulty(db.Model):
     difficulty_id = db.Column(db.Integer, primary_key=True)
     difficulty_name = db.Column(db.String(50), nullable=False)
@@ -19,6 +33,8 @@ class Recipe(db.Model):
     recipe_description = db.Column(db.String(500), nullable=False)
     instructions = db.relationship('Instruction', backref='recipe')
     ingredient_recipes = db.relationship('IngredientRecipe', backref='recipe')
+    comments = db.relationship('Comment', backref='recipe')
+    ratings = db.relationship('Rating', backref='recipe')
 
 
 class Ingredient(db.Model):
@@ -47,10 +63,14 @@ def load_user(user_id):
 
 
 class User(db.Model, UserMixin):
-    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, primary_key=True)
     first_name = db.Column(db.String(50), nullable=False)
     last_name = db.Column(db.String(50), nullable=True)
     username = db.Column(db.String(50), nullable=False)
     email = db.Column(db.String(200), nullable=False)
     password = db.Column(db.String(60), nullable=False)
     image_file = db.Column(db.String(30), nullable=False, default='defaultprofilepic.png')
+    comments = db.relationship('Comment', backref='user')
+    ratings = db.relationship('Rating', backref='user')
+
+
