@@ -1,9 +1,9 @@
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed
 from flask_login import current_user
-from wtforms import StringField, SubmitField, PasswordField, BooleanField
+from wtforms import StringField, SubmitField, PasswordField, BooleanField, TextAreaField
 from wtforms.validators import DataRequired, Length, Email, ValidationError
-from application.models import User
+from application.models import User, Comment, Rating
 
 
 class IngredientsForm(FlaskForm):
@@ -57,8 +57,8 @@ class UpdateAccountForm(FlaskForm):
 
 
 class UserFeedback(FlaskForm):
-    # username = populate automatically
-    positive_rating = FileField("Thumbs Up")
-    negative_rating = FileField("Thumbs Down")
-    comment = StringField("Enter your comments here", validators=[DataRequired()])
-    submit = SubmitField("Submit Rating")
+    # username = User.username
+    # positive_rating = StringField("Thumbs Up")
+    # negative_rating = StringField("Thumbs Down")
+    comment = TextAreaField("Enter your comments here", validators=[DataRequired(), Length(min=1, max=140)])
+    submit = SubmitField("Submit Comment")
