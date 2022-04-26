@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed
 from flask_login import current_user
-from wtforms import StringField, SubmitField, PasswordField, BooleanField
+from wtforms import StringField, SubmitField, PasswordField, BooleanField, IntegerField, HiddenField
 from wtforms.validators import DataRequired, Length, Email, ValidationError
 from application.models import User
 
@@ -58,7 +58,14 @@ class UpdateAccountForm(FlaskForm):
 
 class UserFeedback(FlaskForm):
     # username = populate automatically
+    # rating = IntegerField("Rate this recipe")
     positive_rating = FileField("Thumbs Up")
     negative_rating = FileField("Thumbs Down")
     comment = StringField("Enter your comments here", validators=[DataRequired()])
     submit = SubmitField("Submit Rating")
+
+
+class SaveRecipe(FlaskForm):
+    user_id = HiddenField("user_id")
+    recipe_id = HiddenField("recipe_id")
+    submit = SubmitField("Save Recipe")

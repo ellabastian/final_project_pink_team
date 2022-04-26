@@ -46,4 +46,13 @@
         <br>
 </form>
 
+<h2>Save Recipe!</h2>
+<form action="/save-recipe" method="post">
+        {{ save_form.hidden_tag() }}
+        {{ save_form.submit(class="btn") }}
+        <br>
+</form>
+
+
+
 {% endblock %}

@@ -1,10 +1,10 @@
 import os
 import secrets
 from PIL import Image
-from flask import render_template, request, url_for, redirect, flash
+from flask import render_template, request, url_for, redirect, flash, session
 from application import app, db, bcrypt
-from application.forms import IngredientsForm, UserAccountForm, UserLoginForm, UpdateAccountForm, UserFeedback
-from application.models import Ingredient, IngredientRecipe, Recipe, Instruction, Difficulty, User, Comment
+from application.forms import IngredientsForm, UserAccountForm, UserLoginForm, UpdateAccountForm, UserFeedback, SaveRecipe
+from application.models import Ingredient, IngredientRecipe, Recipe, Instruction, Difficulty, User, Comment, SavedRecipe
 from flask_login import login_user, current_user, logout_user, login_required
 
 
@@ -42,10 +42,13 @@ def specific_recipe(recipe_name):
     # return render_template('specific_recipe.html', recipe_name=recipe_name, recipe=recipe, instructions=instructions, form=form)
 
     form = UserFeedback()
+    save_form = SaveRecipe(user_id=current_user.id, recipe_id=recipe.recipe_id)
+
     if request.method == "POST":
         # positive_rating = form.positive_rating.data
         # negative_rating = form.negative_rating.data
         usercomment = form.comment.data
+
 
         if current_user.is_authenticated:
             username = User.query.get("username")
@@ -54,9 +57,16 @@ def specific_recipe(recipe_name):
             return render_template('specific_recipe.html', username=username, comment=usercomment, commentquery=commentquery, form=form)
 
         else:
-            return redirect(url_for('useraccount'), form=form)
+            return redirect(url_for('useraccount'), form=form, save_form=save_form)
 
-    return render_template('specific_recipe.html', recipe_name=recipe_name, recipe=recipe, form=form)
+    return render_template('specific_recipe.html', recipe_name=recipe_name, recipe=recipe, form=form, save_form=save_form, user=current_user)
+
+
+@app.route("/save-recipe", methods=["POST"])
+def save_recipe():
+    db.session.add(SavedRecipe(user_id=request.form['user_id'], recipe_id=request.form['recipe_id']))
+    db.session.commit()
+    return redirect(url_for('recipe'))
 
 
 
@@ -140,6 +150,15 @@ def save_picture(form_picture):
 @login_required
 def user_account():
     form = UpdateAccountForm()
+
+    user = User.query.filter_by(id=current_user.id).first()
+    saved_ids = (SavedRecipe.query.filter_by(user_id=user.id).all())
+    saved_recipes = []
+    for saved_id in saved_ids:
+        recipe_id = saved_id.recipe_id
+        saved_recipes.extend(Recipe.query.filter_by(recipe_id=recipe_id).all())
+
+
     if form.validate_on_submit():
         if form.picture.data:
             picture_file = save_picture(form.picture.data)
@@ -153,7 +172,7 @@ def user_account():
         form.username.data = current_user.username
         form.email.data = current_user.email
     image_file = url_for('static', filename='profile_pictures/' + current_user.image_file)
-    return render_template('useraccount.html', title='Account', image_file=image_file, form=form)
+    return render_template('useraccount.html', title='Account', image_file=image_file, form=form, user=user, saved_recipes=saved_recipes, saved_ids=saved_ids)
 
 
 @app.route("/logout")
@@ -165,6 +184,20 @@ def logout():
 @app.route("/contact", methods=["GET", "POST"])
 def contact():
     return render_template('contact.html')
+
+
+@app.route("/saved-recipes")
+def saved():
+    user = User.query.filter_by(username="orlane").first()
+    saved_ids = (SavedRecipe.query.filter_by(user_id=user.id).all())
+    saved_recipes = []
+    for saved_id in saved_ids:
+        recipe_id = saved_id.recipe_id
+        saved_recipes.extend(Recipe.query.filter_by(recipe_id=recipe_id).all())
+    return render_template('saved_recipe.html', user=user, saved_recipes=saved_recipes)
+
+
+
 
 
 # # PREVIOUS CODE BEFORE CHARLOTTE COMMIT IS COMMENTED BELOW

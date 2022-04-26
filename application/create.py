@@ -1,5 +1,5 @@
 from application import db
-from application.models import Recipe, Ingredient, IngredientRecipe, Instruction, Difficulty, User, Comment, Rating
+from application.models import Recipe, Ingredient, IngredientRecipe, Instruction, Difficulty, User, Comment, Rating, SavedRecipe
 
 db.drop_all()
 db.create_all()
@@ -348,6 +348,14 @@ rating2 = Rating(rating="Bad", user_id=1, recipe_id=2)
 db.session.add(rating1)
 db.session.add(rating2)
 
+
+# Inserting values into the Saved table
+
+saved1 = SavedRecipe(user_id=1, recipe_id=1)
+saved2 = SavedRecipe(user_id=1, recipe_id=5)
+
+db.session.add(saved1)
+db.session.add(saved2)
 
 # Committing all the values into the database
 db.session.commit()
