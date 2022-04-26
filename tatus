@@ -1,0 +1,346 @@
+[33mcommit 5d41eddafd8e639af5f3fd4477384a43c6214d58[m[33m ([m[1;36mHEAD -> [m[1;32mElla[m[33m)[m
+Author: Ella Bastian <ellabastian@hotmail.co.uk>
+Date:   Mon Apr 25 20:32:58 2022 +0100
+
+    Started adding recipe
+
+[33mcommit 5b58982cd78807307777c50e93edd1525890addf[m[33m ([m[1;31morigin/Ella[m[33m)[m
+Author: Ella Bastian <ellabastian@hotmail.co.uk>
+Date:   Mon Apr 25 10:44:28 2022 +0100
+
+    Fixed merge conflicts
+
+[33mcommit b74a72361f7b3993cf4d730fa1e3fcdd24ecad5b[m
+Merge: 7436081 f8d9a96
+Author: Ella Bastian <ellabastian@hotmail.co.uk>
+Date:   Mon Apr 25 10:38:40 2022 +0100
+
+    Merge branch 'Ella' of github.com:ellabastian/final_project_pink_team into Ella
+
+[33mcommit 7436081c357dae706b5e6bd2ffdccd63b8a92cb4[m
+Author: Ella Bastian <ellabastian@hotmail.co.uk>
+Date:   Mon Apr 25 10:38:24 2022 +0100
+
+    More styling changes
+
+[33mcommit f8d9a96b58338e0120e9b50cef316bfee3d0f0ba[m
+Merge: c30d723 a93c790
+Author: Ella B <51512829+ellabastian@users.noreply.github.com>
+Date:   Mon Apr 25 10:36:26 2022 +0100
+
+    Merge branch 'main' into Ella
+
+[33mcommit a93c7900105a63a9733c24b7c1266da3878aae78[m
+Author: Mel <meljaynethomas@gmail.com>
+Date:   Mon Apr 25 10:23:33 2022 +0100
+
+    styled navbar and footer links. trialled new colour on footer
+
+[33mcommit f7f836e44966dc7cd43c4027bd525a4afbdacaf9[m
+Author: Adom <pri.adom1@gmail.com>
+Date:   Sun Apr 24 23:52:07 2022 +0100
+
+    update
+
+[33mcommit c30d7236bc53d109db1f65a2ec7145c45e054824[m
+Author: Ella Bastian <ellabastian@hotmail.co.uk>
+Date:   Sun Apr 24 17:35:09 2022 +0100
+
+    Added Bootstrap. Added dropdown to NavBar and social tags in footer. Started working on resources page
+
+[33mcommit 7a12b9af9e58fa155b6458f893cde7288ad63e49[m[33m ([m[1;32mmain[m[33m)[m
+Merge: 5385c5f e55c5b1
+Author: Ella Bastian <ellabastian@hotmail.co.uk>
+Date:   Sun Apr 24 11:30:05 2022 +0100
+
+    Merge conflicts resolved
+
+[33mcommit 5385c5f267813983bfcddb3c7f35f08ab48bfce2[m
+Author: Ella Bastian <ellabastian@hotmail.co.uk>
+Date:   Sun Apr 24 11:27:58 2022 +0100
+
+    Local changes
+
+[33mcommit e55c5b1d06d3d22fe876b3676cdbf7a4c66acfd2[m
+Merge: 09e43cc c39d4a8
+Author: orlanerosette <74679394+orlanerosette@users.noreply.github.com>
+Date:   Sat Apr 23 22:28:03 2022 +0100
+
+    Merge pull request #7 from ellabastian/more_data_input
+    
+    More data input
+
+[33mcommit c39d4a858465b0d0dae0ff6a3058dec5723da124[m
+Author: Orlane <orlanedoumbe@gmail.com>
+Date:   Sat Apr 23 22:27:11 2022 +0100
+
+    Fixed a mistake
+
+[33mcommit 9919312e1a51b06c471ec0f9a42f52d61649bca8[m
+Merge: 103c367 09e43cc
+Author: Orlane <orlanedoumbe@gmail.com>
+Date:   Sat Apr 23 22:19:19 2022 +0100
+
+    Deleted more pycache files
+
+[33mcommit 103c36767fd2329c29d020a69dac0640702840c9[m
+Author: Orlane <orlanedoumbe@gmail.com>
+Date:   Sat Apr 23 22:15:51 2022 +0100
+
+    Deleted pycache so that I can merge main
+
+[33mcommit 4a8b329cde0a5622363582854c0c28f1b495d03e[m
+Author: Orlane <orlanedoumbe@gmail.com>
+Date:   Sat Apr 23 22:06:51 2022 +0100
+
+    Added more recipes to the database
+
+[33mcommit 09e43cca845957443110371e914477c39bb932c2[m
+Merge: 945efee d691dda
+Author: Mel <meljaynethomas@gmail.com>
+Date:   Sat Apr 23 17:56:58 2022 +0100
+
+    Merging changes to Register and Login pages into main branch.
+
+[33mcommit 945efeeb5d1c7dcec3af29fe86968dce48cd1519[m
+Author: Mel <meljaynethomas@gmail.com>
+Date:   Sat Apr 23 17:56:10 2022 +0100
+
+    combined register and login link. made full navbar appear when user is logged in. added some styling to the forms
+
+[33mcommit d691dda754001b24d84cdba901b9e752e53db5c0[m
+Merge: a34bb25 d012a61
+Author: Ella B <51512829+ellabastian@users.noreply.github.com>
+Date:   Sat Apr 23 17:46:50 2022 +0100
+
+    Merge pull request #6 from ellabastian/styling
+    
+    Styling
+
+[33mcommit d012a61768fdd6b653dc9ef4fb5bdf0bf4076b9b[m[33m ([m[1;31morigin/styling[m[33m, [m[1;32mstyling[m[33m)[m
+Author: Ella Bastian <ellabastian@hotmail.co.uk>
+Date:   Sat Apr 23 17:45:38 2022 +0100
+
+    Styling of recipe page
+
+[33mcommit 59204af0fc9f68de49a1459c59a23a57ef6f7e1b[m
+Merge: c96c98f a34bb25
+Author: Ella Bastian <ellabastian@hotmail.co.uk>
+Date:   Sat Apr 23 16:13:17 2022 +0100
+
+    Merge conflicts resolved
+
+[33mcommit c96c98f7d0117780cae5494d40981e437d95b658[m
+Author: Ella Bastian <ellabastian@hotmail.co.uk>
+Date:   Sat Apr 23 16:10:13 2022 +0100
+
+    Requirements file updated
+
+[33mcommit a34bb25961117763c986c491a6b28e728920bc86[m
+Merge: c967b9b bd7447d
+Author: orlanerosette <74679394+orlanerosette@users.noreply.github.com>
+Date:   Sat Apr 23 16:08:25 2022 +0100
+
+    Merge pull request #5 from ellabastian/query
+    
+    Query
+
+[33mcommit bd7447da49bd5df735186f51668062bfdd57a19b[m
+Author: Orlane <orlanedoumbe@gmail.com>
+Date:   Sat Apr 23 16:07:35 2022 +0100
+
+    Set up recipes route and created dynamic instruction pages
+
+[33mcommit 2448ea222ffa6bd71c42ec991186db2727311fc2[m
+Author: Orlane <orlanedoumbe@gmail.com>
+Date:   Sat Apr 23 12:46:34 2022 +0100
+
+    Can search for existing ingredients and will return recipes with that ingredient
+
+[33mcommit 580008ae41f5f1540af0c1c98048008a40b31971[m
+Merge: df3c1c8 c967b9b
+Author: Ella Bastian <ellabastian@hotmail.co.uk>
+Date:   Sat Apr 23 11:48:02 2022 +0100
+
+    Merge branch 'main' of github.com:ellabastian/final_project_pink_team
+
+[33mcommit df3c1c8ccfdd4cb6bf1caf88631c1b2121a33d1d[m
+Author: Ella Bastian <ellabastian@hotmail.co.uk>
+Date:   Sat Apr 23 10:22:28 2022 +0100
+
+    Local changes - secret keys
+
+[33mcommit ecba1499f054c4c9b51c258d58365201d3a967a9[m
+Merge: fd0d0a8 c967b9b
+Author: Orlane <orlanedoumbe@gmail.com>
+Date:   Sat Apr 23 09:19:07 2022 +0100
+
+    merged main into branch
+
+[33mcommit c967b9b28d8545d8eaab90638114d7c338564a15[m
+Author: Mel <meljaynethomas@gmail.com>
+Date:   Fri Apr 22 19:11:20 2022 +0100
+
+    added new images and associated styles to landing page - made responsive with flexbox
+
+[33mcommit b349f661f0e0ef89f5519e392efa2ff893defaf2[m
+Author: cabbotts <91378202+cabbotts@users.noreply.github.com>
+Date:   Thu Apr 21 22:39:45 2022 +0100
+
+    added useraccount html file, user can register for an account & login, redirecting to their useraccount page. changed name of account.html to register.html, added modules to import at top of each file. Will need to pip install a couple of things too beforehand- flask-bcrypt and flask-login
+
+[33mcommit c4bc3cd10cef76f9295af2a92f30871e49aaa2a1[m
+Author: Mel <meljaynethomas@gmail.com>
+Date:   Thu Apr 21 21:20:26 2022 +0100
+
+    split login and registration screens and removed pycache
+
+[33mcommit 3a97b46c1e112321503d3a004dc38309a90699d3[m
+Author: Mel <meljaynethomas@gmail.com>
+Date:   Thu Apr 21 19:03:23 2022 +0100
+
+    added cache files to gitignore
+
+[33mcommit d40af9ac3d0509217240048aab2a6a2f8a7c61a0[m
+Author: Mel <meljaynethomas@gmail.com>
+Date:   Thu Apr 21 12:16:35 2022 +0100
+
+    started work on the login form - not yet functional
+
+[33mcommit 5e2c7acb485ccbebc23233e4ee45c85fb1711381[m
+Author: Mel <meljaynethomas@gmail.com>
+Date:   Thu Apr 21 11:41:40 2022 +0100
+
+    added user database and values
+
+[33mcommit 97a2376dfd8c38d73c8852f496af08b80dd7a072[m
+Author: Mel <meljaynethomas@gmail.com>
+Date:   Thu Apr 21 10:06:20 2022 +0100
+
+    added styling to form button and ingredients field
+
+[33mcommit fd0d0a8139ff435b8b22137c581cce9080dde51e[m[33m ([m[1;31morigin/query[m[33m)[m
+Author: Orlane <orlanedoumbe@gmail.com>
+Date:   Wed Apr 20 21:33:22 2022 +0100
+
+    Initial return recipe search query update
+
+[33mcommit fe1a6bd09af514152cd8cb0a641b3d2359d8f8ea[m
+Author: Mel <meljaynethomas@gmail.com>
+Date:   Wed Apr 20 20:51:29 2022 +0100
+
+    created routes for other pages
+
+[33mcommit 99b7c98fdf1e882ad0e5b085d9375291cfd3715e[m
+Author: Orlane <orlanedoumbe@gmail.com>
+Date:   Tue Apr 19 20:23:41 2022 +0100
+
+    Added sql_key to .gitignore
+
+[33mcommit 354f3840b32a8b181dae19c3e36244afa633574f[m
+Merge: 5e4a4de d779608
+Author: orlanerosette <74679394+orlanerosette@users.noreply.github.com>
+Date:   Tue Apr 19 20:19:51 2022 +0100
+
+    Merge pull request #4 from ellabastian/mel
+    
+    Mel
+
+[33mcommit d77960858881431bdc9f3a1de98b3aca79b3d5da[m
+Author: Mel <meljaynethomas@gmail.com>
+Date:   Tue Apr 19 00:21:12 2022 +0100
+
+    added basic styling to home page; created recipe.html to practice using jinja
+
+[33mcommit 5e4a4de684ef4406c3eed985754edb373ec3e0bb[m
+Author: chabbotts <98055406+chabbotts@users.noreply.github.com>
+Date:   Mon Apr 18 22:31:59 2022 +0100
+
+    Delete sql_key.py
+
+[33mcommit 02ac4d2c8d2d7157299dbbd3de263c7123bfcd9d[m
+Author: Mel <meljaynethomas@gmail.com>
+Date:   Mon Apr 18 22:07:36 2022 +0100
+
+    added structure for styling
+
+[33mcommit 2bacd49b923107de3b592b205fb5d491342b0fff[m
+Merge: f6593a7 5bd4a75
+Author: Mel Thomas <79028606+meljaynethomas@users.noreply.github.com>
+Date:   Mon Apr 18 22:04:54 2022 +0100
+
+    Merge pull request #3 from ellabastian/mel
+    
+    I tried to populate the database but it didn't work
+
+[33mcommit 5bd4a7532fbb82bd9c8050d3f0c234dc22725d43[m
+Author: Mel <meljaynethomas@gmail.com>
+Date:   Mon Apr 18 22:00:34 2022 +0100
+
+    made sql file executable
+
+[33mcommit af9d8a24c564522938bcbe2d9429e18777fe4eed[m
+Author: Mel <meljaynethomas@gmail.com>
+Date:   Mon Apr 18 20:04:16 2022 +0100
+
+    amended port number and created database - unable to get code working
+
+[33mcommit 6a22df18b29baa72c57541354af3f8839f0500e1[m
+Author: Mel <meljaynethomas@gmail.com>
+Date:   Mon Apr 18 19:33:42 2022 +0100
+
+    secret key and sql key files created
+
+[33mcommit f6593a79050e3994bba4795ae58f8a109d9e851d[m
+Merge: 9709843 060cdf8
+Author: orlanerosette <74679394+orlanerosette@users.noreply.github.com>
+Date:   Mon Apr 18 18:08:40 2022 +0100
+
+    Merge pull request #2 from ellabastian/database
+    
+    Database
+
+[33mcommit 060cdf851db951d8c499e9f2143adca11e7926b4[m[33m ([m[1;31morigin/database[m[33m)[m
+Author: cabbotts <91378202+cabbotts@users.noreply.github.com>
+Date:   Mon Apr 18 17:51:36 2022 +0100
+
+    trialled queries in routes.py & added import routes in app.py
+
+[33mcommit c6fad3eef1243541211d83be8d3c0038759f799d[m
+Author: cabbotts <91378202+cabbotts@users.noreply.github.com>
+Date:   Mon Apr 18 16:55:16 2022 +0100
+
+    added data values for breakfast burrito
+
+[33mcommit 6627ce6cebd4fbe44b9909f1e3ff0591bf736a3e[m
+Author: cabbotts <91378202+cabbotts@users.noreply.github.com>
+Date:   Mon Apr 18 15:46:23 2022 +0100
+
+    created DB tables
+
+[33mcommit 970984320c6b0543d5ec898b2d874844fab388f4[m
+Author: cabbotts <91378202+cabbotts@users.noreply.github.com>
+Date:   Mon Apr 18 12:18:26 2022 +0100
+
+    created secret key
+
+[33mcommit 4593b90a82401c042dfd0283f00a88db09ce6195[m
+Merge: 94330af 0b7c0f8
+Author: Ella B <51512829+ellabastian@users.noreply.github.com>
+Date:   Mon Apr 18 12:03:27 2022 +0100
+
+    Merge pull request #1 from ellabastian/search
+    
+    Initial commit
+
+[33mcommit 0b7c0f86b4ba0b7ca76f19565ad335872a217f27[m[33m ([m[1;31morigin/search[m[33m, [m[1;31mella/search[m[33m, [m[1;32msearch[m[33m)[m
+Author: Ella Bastian <ellabastian@hotmail.co.uk>
+Date:   Mon Apr 18 12:01:32 2022 +0100
+
+    Initial commit
+
+[33mcommit 94330aff8035123361b8f2efa3371d7cec776829[m
+Author: Ella Bastian <ellabastian@hotmail.co.uk>
+Date:   Sun Apr 17 15:54:44 2022 +0100
+
+    File structure created
