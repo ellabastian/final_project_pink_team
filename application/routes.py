@@ -47,8 +47,8 @@ def specific_recipe(recipe_name):
         db.session.add(comment_query)
         db.session.commit()
         list_of_comments = Comment.query.all()
-        return render_template('specific_recipe.html', form=form, comment=form.comment.data, recipe=recipe, list_of_comments=list_of_comments)
-    return render_template('specific_recipe.html', recipe_name=recipe_name, recipe=recipe, instructions=instructions, form=form)
+        return render_template('specific_recipe.html', form=form, comment=form.comment.data, recipe=recipe, list_of_comments=list_of_comments, current_user=current_user.id)
+    return render_template('specific_recipe.html', recipe_name=recipe_name, recipe=recipe, instructions=instructions, form=form, current_user=current_user.username)
 
     # # form = UserFeedback()
     # # if request.method == "POST":
@@ -95,7 +95,6 @@ def specific_recipe(recipe_name):
     #
     #     else:
     #         return redirect(url_for('user_account'), form=form)
-cd repo
 # @login_required
 # def post_comments(recipe_name):
 #     form1 = CommentForm()
