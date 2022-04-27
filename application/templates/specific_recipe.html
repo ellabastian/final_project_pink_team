@@ -39,9 +39,12 @@
 <h2>Please rate or comment on this Recipe!</h2>
 <form action="" method="post">
         {{ form.hidden_tag() }}
-        {{ form.comment.label }}
+<!--    <h4>{{ form.comment.label }}</h4>-->
+    <button style="font-size:24px"><i class="fa fa-thumbs-up"></i></button>
+    <button style="font-size:24px"><i class="fa fa-thumbs-down"></i></button>
     <br>
-        {{ form.comment(class="Field") }}
+    <br>
+        {{ form.comment(class="Field",cols="60", rows="5") }}
     <br>
         {{ form.submit(class="btn") }}
         <br>

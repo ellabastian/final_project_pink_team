@@ -57,7 +57,6 @@ class UpdateAccountForm(FlaskForm):
 
 
 class UserFeedback(FlaskForm):
-    # username = User.username
     # positive_rating = StringField("Thumbs Up")
     # negative_rating = StringField("Thumbs Down")
     comment = TextAreaField("Enter your comments here", validators=[DataRequired(), Length(min=1, max=140)])
