@@ -48,9 +48,10 @@
 </form>
 
 <h3>Comments:</h3>
+{{recipe}}
 <ul>
     {%for comment in list_of_comments%}
-    <li>User {{current_user}} says: {{comment.comment}}</li>
+    <li><h4>User {{current_user}} says: {{comment.comment}}</h4></li>
     {%endfor%}
 </ul>
 

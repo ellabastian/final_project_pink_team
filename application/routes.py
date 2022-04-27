@@ -43,12 +43,16 @@ def specific_recipe(recipe_name):
 
     form = UserFeedback()
     if form.validate_on_submit():
-        comment_query = Comment(comment=form.comment.data)
-        db.session.add(comment_query)
-        db.session.commit()
-        list_of_comments = Comment.query.all()
-        return render_template('specific_recipe.html', form=form, comment=form.comment.data, recipe=recipe, list_of_comments=list_of_comments, current_user=current_user.id)
-    return render_template('specific_recipe.html', recipe_name=recipe_name, recipe=recipe, instructions=instructions, form=form, current_user=current_user.username)
+        if current_user.is_authenticated:
+            comment_query = Comment(comment=form.comment.data, id=current_user.id, recipe=recipe)
+            db.session.add(comment_query)
+            db.session.commit()
+            list_of_comments = Comment.query.all()
+            return render_template('specific_recipe.html', form=form, comment=form.comment.data, recipe=recipe,
+                                   list_of_comments=list_of_comments, current_user=current_user.id)
+        else:
+            return redirect(url_for('register'))
+    return render_template('specific_recipe.html', recipe_name=recipe_name, recipe=recipe, instructions=instructions, form=form)
 
     # # form = UserFeedback()
     # # if request.method == "POST":
