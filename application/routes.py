@@ -6,6 +6,7 @@ from application import app, db, bcrypt
 from application.forms import IngredientsForm, UserAccountForm, UserLoginForm, UpdateAccountForm, UserFeedback
 from application.models import Ingredient, IngredientRecipe, Recipe, Instruction, Difficulty, User, Comment
 from flask_login import login_user, current_user, logout_user, login_required
+from datetime import datetime
 
 
 @app.route("/home", methods=["GET", "POST"])
@@ -47,9 +48,10 @@ def specific_recipe(recipe_name):
             comment_query = Comment(comment=form.comment.data, id=current_user.id, recipe=recipe)
             db.session.add(comment_query)
             db.session.commit()
+            username = current_user.username
             list_of_comments = Comment.query.all()
             return render_template('specific_recipe.html', form=form, comment=form.comment.data, recipe=recipe,
-                                   list_of_comments=list_of_comments, current_user=current_user.id)
+                                   list_of_comments=list_of_comments, current_user=current_user.id, username=username, datetime=datetime.now())
         else:
             return redirect(url_for('register'))
     return render_template('specific_recipe.html', recipe_name=recipe_name, recipe=recipe, instructions=instructions, form=form)
