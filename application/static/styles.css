@@ -202,7 +202,7 @@ footer {
    background-color: #91C7B1;
 }
 
-.user_comments {
-padding: 50px;
-border: solid 10px #ccc;
+. star_buttons {
+  input.radio {width: auto;}
 }
+
