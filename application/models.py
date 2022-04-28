@@ -2,14 +2,16 @@ from application import db, login_manager
 from flask_login import UserMixin
 
 
-class Comment(UserMixin, db.Model):
+class Comment(db.Model):
+    # class Comment(UserMixin, db.Model):
     comment_id = db.Column(db.Integer, primary_key=True)
     comment = db.Column(db.String(1000), nullable=False)
     id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
     recipe_id = db.Column(db.Integer, db.ForeignKey('recipe.recipe_id'))
 
 
-class Rating(UserMixin, db.Model):
+class Rating(db.Model):
+    # class Rating(UserMixin, db.Model):
     rating_id = db.Column(db.Integer, primary_key=True)
     rating = db.Column(db.String(100), nullable=True)
     id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
@@ -35,6 +37,7 @@ class Recipe(db.Model):
     ingredient_recipes = db.relationship('IngredientRecipe', backref='recipe')
     comments = db.relationship('Comment', backref='recipe')
     ratings = db.relationship('Rating', backref='recipe')
+    saved_recipes = db.relationship('SavedRecipe', backref='recipe')
 
 
 class Ingredient(db.Model):
@@ -72,5 +75,12 @@ class User(db.Model, UserMixin):
     image_file = db.Column(db.String(30), nullable=False, default='defaultprofilepic.png')
     comments = db.relationship('Comment', backref='user')
     ratings = db.relationship('Rating', backref='user')
+    saved_recipes = db.relationship('SavedRecipe', backref='user')
+
+
+class SavedRecipe(db.Model):
+    saved_id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    recipe_id = db.Column(db.Integer, db.ForeignKey('recipe.recipe_id'), nullable=False)
 
 

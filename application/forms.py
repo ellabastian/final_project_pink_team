@@ -56,12 +56,20 @@ class UpdateAccountForm(FlaskForm):
                 raise ValidationError("That email is taken by another user. Please use a different one.")
 
 
-class UserFeedback(FlaskForm):
+class UserFeedback(FlaskForm):  
     # positive_rating = RadioField("Thumbs Up")
     # negative_rating = StringField("Thumbs Down")
     recipe_rating = RadioField("Please choose a rating:", choices=[(1, '1 Star'), (2, '2 Star'), (3, '3 Star'), (4, '4 Star'), (5, '5 Star')])
     comment = TextAreaField("Enter your comments here", validators=[DataRequired(), Length(min=1, max=140)])
     submit = SubmitField("Submit Comment")
 
+
+class SaveRecipe(FlaskForm):
+    user_id = HiddenField("user_id")
+    recipe_id = HiddenField("recipe_id")
+    submit = SubmitField("Save Recipe")
+
+
 class DeleteUserFeedback(FlaskForm):
     submit = SubmitField("Delete Comment")
+

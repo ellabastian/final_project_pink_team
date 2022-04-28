@@ -1,10 +1,10 @@
 import os
 import secrets
 from PIL import Image
-from flask import render_template, request, url_for, redirect, flash, get_flashed_messages
+from flask import render_template, request, url_for, redirect, flash, get_flashed_messages, session
 from application import app, db, bcrypt
-from application.forms import IngredientsForm, UserAccountForm, UserLoginForm, UpdateAccountForm, UserFeedback, DeleteUserFeedback
-from application.models import Ingredient, IngredientRecipe, Recipe, Instruction, Difficulty, User, Comment
+from application.forms import IngredientsForm, UserAccountForm, UserLoginForm, UpdateAccountForm, UserFeedback, DeleteUserFeedback, SaveRecipe
+from application.models import Ingredient, IngredientRecipe, Recipe, Instruction, Difficulty, User, Comment, SavedRecipe
 from flask_login import login_user, current_user, logout_user, login_required
 from datetime import datetime
 
@@ -43,7 +43,10 @@ def specific_recipe(recipe_name):
     # return render_template('specific_recipe.html', recipe_name=recipe_name, recipe=recipe, instructions=instructions, form=form)
 
     form = UserFeedback()
+    save_form = SaveRecipe(user_id=current_user.id, recipe_id=recipe.recipe_id)
+  
     if form.validate_on_submit():
+      
         if current_user.is_authenticated:
             comment_query = Comment(comment=form.comment.data, id=current_user.id, recipe=recipe)
             db.session.add(comment_query)
@@ -53,8 +56,19 @@ def specific_recipe(recipe_name):
             return render_template('specific_recipe.html', form=form, comment=form.comment.data, recipe=recipe,
                                    list_of_comments=list_of_comments, current_user=current_user.id, username=username, datetime=datetime.now())
         else:
-            return redirect(url_for('register'))
-    return render_template('specific_recipe.html', recipe_name=recipe_name, recipe=recipe, instructions=instructions, form=form)
+            return redirect(url_for('useraccount'), form=form, save_form=save_form)
+    return render_template('specific_recipe.html', recipe_name=recipe_name, recipe=recipe, form=form, save_form=save_form, user=current_user)
+
+#   NOT SURE WHICH IS RETURN REDIRECT IS CORRECT!!
+#             return redirect(url_for('register'))
+#     return render_template('specific_recipe.html', recipe_name=recipe_name, recipe=recipe, instructions=instructions, form=form)
+  
+@app.route("/save-recipe", methods=["POST"])
+def save_recipe():
+    db.session.add(SavedRecipe(user_id=request.form['user_id'], recipe_id=request.form['recipe_id']))
+    db.session.commit()
+    return redirect(url_for('recipe'))
+            
 
 @app.route("/delete/<int:comment_id>", methods=["GET", "POST", "DELETE"])
 def delete(comment_id):
@@ -133,6 +147,7 @@ def delete(comment_id):
 # flash("Your comment has been posted")
 # # return redirect(url_for('/recipes/<recipe_name>'))
 # return render_template('specific_recipe.html', form1=form1, form2=form2, comment=user_comment, user_id=id, recipe_id=recipe_id )
+
 
 @app.route("/recipes", methods=["GET", "POST"])
 def recipe():
@@ -216,6 +231,15 @@ def save_picture(form_picture):
 @login_required
 def user_account():
     form = UpdateAccountForm()
+
+    user = User.query.filter_by(id=current_user.id).first()
+    saved_ids = (SavedRecipe.query.filter_by(user_id=user.id).all())
+    saved_recipes = []
+    for saved_id in saved_ids:
+        recipe_id = saved_id.recipe_id
+        saved_recipes.extend(Recipe.query.filter_by(recipe_id=recipe_id).all())
+
+
     if form.validate_on_submit():
         if form.picture.data:
             picture_file = save_picture(form.picture.data)
@@ -229,7 +253,7 @@ def user_account():
         form.username.data = current_user.username
         form.email.data = current_user.email
     image_file = url_for('static', filename='profile_pictures/' + current_user.image_file)
-    return render_template('useraccount.html', title='Account', image_file=image_file, form=form)
+    return render_template('useraccount.html', title='Account', image_file=image_file, form=form, user=user, saved_recipes=saved_recipes, saved_ids=saved_ids)
 
 
 @app.route("/logout")
@@ -242,45 +266,13 @@ def logout():
 def contact():
     return render_template('contact.html')
 
-# # PREVIOUS CODE BEFORE CHARLOTTE COMMIT IS COMMENTED BELOW
-# @app.route("/account", methods=["GET", "POST"])
-# def account():
-#     error = ""
-#     form = UserAccountForm()
-#
-#     if request.method == 'POST':
-#         first_name = form.first_name.data
-#         last_name = form.last_name.data
-#         username = form.username.data
-#         email = form.email.data
-#         password = form.password.data
-#
-#         if len(first_name) == 0 or len(last_name) == 0 or len(username) == 0 or len(email) == 0 or len(password) == 0:
-#             error = "Please supply requested contact information"
-#         else:
-#             person = User(first_name=first_name, last_name=last_name, username=username, email=email, password=password)
-#             db.session.add(person)
-#             db.session.commit()
-#             return 'Thank you!'
-#
-#     return render_template('register.html', title="Register", form=form, message=error)
-#
-#
-# @app.route("/login", methods=["GET", "POST"])
-# def login():
-#     error = ""
-#     form = UserLoginForm()
-#
-#     if request.method == 'POST':
-#         email = form.email.data
-#         password = form.password.data
-#
-#         if len(email) == 0 or len(password) == 0:
-#             error = "Please supply requested log in details"
-#         #   password validation needed here!
-#         #   filter user table by password to allow user to log in
-#         else:
-#             # link to user's account page
-#             return 'Access granted!'
-#
-#     return render_template('login.html', title="Register", form=form, message=error)
+
+@app.route("/saved-recipes")
+def saved():
+    user = User.query.filter_by(username="orlane").first()
+    saved_ids = (SavedRecipe.query.filter_by(user_id=user.id).all())
+    saved_recipes = []
+    for saved_id in saved_ids:
+        recipe_id = saved_id.recipe_id
+        saved_recipes.extend(Recipe.query.filter_by(recipe_id=recipe_id).all())
+    return render_template('saved_recipe.html', user=user, saved_recipes=saved_recipes)
