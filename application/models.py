@@ -5,16 +5,16 @@ from flask_login import UserMixin
 class Comment(db.Model):
     # class Comment(UserMixin, db.Model):
     comment_id = db.Column(db.Integer, primary_key=True)
-    comment = db.Column(db.Text, nullable=False)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    recipe_id = db.Column(db.Integer, db.ForeignKey('recipe.recipe_id'), nullable=False)
+    comment = db.Column(db.String(1000), nullable=False)
+    id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
+    recipe_id = db.Column(db.Integer, db.ForeignKey('recipe.recipe_id'))
 
 
 class Rating(db.Model):
     # class Rating(UserMixin, db.Model):
     rating_id = db.Column(db.Integer, primary_key=True)
-    rating = db.Column(db.Text, nullable=False)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    rating = db.Column(db.String(100), nullable=True)
+    id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     recipe_id = db.Column(db.Integer, db.ForeignKey('recipe.recipe_id'), nullable=False)
 
 

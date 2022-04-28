@@ -37,11 +37,19 @@
     <br>
 
 <h2>Please rate or comment on this Recipe!</h2>
+
+<!--<form2 action="" method="post">-->
+<!--        <button style="font-size:24px" type="submit"><i class="fa fa-thumbs-up"></i></button>-->
+<!--        <button style="font-size:24px" type="submit"><i class="fa fa-thumbs-down"></i></button>-->
+<!--</form2>-->
+
 <form action="" method="post">
         {{ form.hidden_tag() }}
-        {{ form.positive_rating.label }} {{ form.positive_rating(class="field") }}
-        {{ form.negative_rating.label }} {{ form.negative_rating(class="field") }}
-        {{ form.comment.label }} {{ form.comment(class="field") }}
+<!--    <h4>{{ form.comment.label }}</h4>-->
+        <p class="form-inline">{{form.recipe_rating}}</p>
+    <br>
+        {{ form.comment(class="Field",cols="60", rows="5") }}
+    <br>
         {{ form.submit(class="btn") }}
         <br>
 </form>
@@ -53,6 +61,19 @@
         <br>
 </form>
 
+
+<h3>Comments:</h3>
+<ul class = "user_comments">
+    {%for comment in list_of_comments%}
+    <div class="card">
+        <div class="card-body">
+            <li><h4><b>{{username}}</b> at {{datetime}}:<br> {{comment.comment}}</h4></li>
+            <a href="#" class="btn btn-primary">Edit</a>
+            <a href="{{url_for('delete', comment_id=comment.comment_id)}}" class="btn btn-danger">Delete</a>
+        </div>
+    </div>
+    {%endfor%}
+</ul>
 
 
 {% endblock %}
