@@ -1,11 +1,12 @@
 import os
 import secrets
 from PIL import Image
-from flask import render_template, request, url_for, redirect, flash
+from flask import render_template, request, url_for, redirect, flash, get_flashed_messages
 from application import app, db, bcrypt
-from application.forms import IngredientsForm, UserAccountForm, UserLoginForm, UpdateAccountForm, UserFeedback
+from application.forms import IngredientsForm, UserAccountForm, UserLoginForm, UpdateAccountForm, UserFeedback, DeleteUserFeedback
 from application.models import Ingredient, IngredientRecipe, Recipe, Instruction, Difficulty, User, Comment
 from flask_login import login_user, current_user, logout_user, login_required
+from datetime import datetime
 
 
 @app.route("/home", methods=["GET", "POST"])
@@ -36,30 +37,102 @@ def home():
 
 @app.route("/recipes/<recipe_name>", methods=["GET", "POST"])
 def specific_recipe(recipe_name):
-
+    # form = UserFeedback()
     recipe = (Recipe.query.filter_by(recipe_name=recipe_name).first())
     instructions = Instruction.query.filter_by(recipe_id=recipe.recipe_id).all()
     # return render_template('specific_recipe.html', recipe_name=recipe_name, recipe=recipe, instructions=instructions, form=form)
 
     form = UserFeedback()
-    if request.method == "POST":
-        # positive_rating = form.positive_rating.data
-        # negative_rating = form.negative_rating.data
-        usercomment = form.comment.data
-
+    if form.validate_on_submit():
         if current_user.is_authenticated:
-            username = User.query.get("username")
-            recipe_id = Recipe.query.get("recipe_id")
-            commentquery = Comment.insert().values({"comment": usercomment}, recipe_id=recipe_id, username=username)
-            return render_template('specific_recipe.html', username=username, comment=usercomment, commentquery=commentquery, form=form)
-
+            comment_query = Comment(comment=form.comment.data, id=current_user.id, recipe=recipe)
+            db.session.add(comment_query)
+            db.session.commit()
+            username = current_user.username
+            list_of_comments = Comment.query.all()
+            return render_template('specific_recipe.html', form=form, comment=form.comment.data, recipe=recipe,
+                                   list_of_comments=list_of_comments, current_user=current_user.id, username=username, datetime=datetime.now())
         else:
-            return redirect(url_for('useraccount'), form=form)
+            return redirect(url_for('register'))
+    return render_template('specific_recipe.html', recipe_name=recipe_name, recipe=recipe, instructions=instructions, form=form)
 
-    return render_template('specific_recipe.html', recipe_name=recipe_name, recipe=recipe, form=form)
+@app.route("/delete/<int:comment_id>", methods=["GET", "POST", "DELETE"])
+def delete(comment_id):
+    comment = Comment.query.get(comment_id)
+    form = DeleteUserFeedback()
 
+    if comment:
+        if form.validate_on_submit():
+            db.session.delete(comment)
+            db.session.commit()
+            flash("Comment deleted")
+            return redirect(url_for('recipe'))
+        return render_template('delete.html', form=form, comment_id=comment_id, comment=comment)
+    else:
+        flash("Comment not found")
+        return redirect(url_for('recipe'))
 
+    # # form = UserFeedback()
+    # # if request.method == "POST":
+    # #     # positive_rating = form.positive_rating.data
+    # #     # negative_rating = form.negative_rating.data
+    # #     usercomment = form.comment.data
+    # #
+    # #     if current_user.is_authenticated:
+    # #         # username = User.query.get("username")
+    # #         # recipe_id = Recipe.query.get("recipe_id")
+    # #         # commentquery = Comment.insert().values({"comment": usercomment}, recipe_id=recipe_id, username=username)
+    # #         comment_query = Comment(comment=usercomment)
+    # #         db.session.add(comment_query)
+    # #         db.session.commit()
+    # #         return render_template('specific_recipe.html', comment=usercomment, comment_query=comment_query, form=form)
+    # #
+    # #     else:
+    # #         return redirect(url_for('user_account'))
+    # # return render_template('specific_recipe.html', recipe_name=recipe_name, recipe=recipe, instructions=instructions, form=form)
+    #
+    # form = UserFeedback()
+    # if request.method == "POST":
+    #     user_comment = form.comment.data
+    #     # comment_query = Comment(comment=user_comment, id=1, recipe_id=2)
+    #     # db.session.add(comment_query)
+    #     # db.session.commit()
+    #     # return render_template('specific_recipe.html', user_comment=user_comment, comment_query=comment_query, id=id,
+    #     #                        recipe_id=recipe_id, form=form)
+    #
+    #     if form.validate_on_submit():
+    #     # if current_user.is_authenticated:
+    #         # username = User.query.get("username")
+    #         # id = User.query.filter_by(username=form2.username.data).first()
+    #         # recipe_id = Recipe.query.filter_by(recipe_name=recipe_name).recipe_id().first()
+    #         # recipe_id = Recipe.query.filter_by(recipe).recipe_id()
+    #         # recipe_id = Recipe.query.get(recipe_name)
+    #         # commentquery = Comment.insert().values({"comment": usercomment}, recipe_id=recipe_id, username=username)
+    #         # commentquery = Comment.update().values(usercomment, recipe_id, username)
+    #         comment_query = Comment(comment=user_comment, id=1)
+    #         db.session.add(comment_query)
+    #         db.session.commit()
+    #         print("Comment", form.comment.data)
+    #         return render_template('specific_recipe.html', comment=comment, user_comment=user_comment, comment_query=comment_query, id=id, form=form)
+    #
+    #     else:
+    #         return redirect(url_for('user_account'), form=form)
+# @login_required
+# def post_comments(recipe_name):
+#     form1 = CommentForm()
+#     form2 = UserAccountForm()
 
+# user_comment = form1.comment.data
+# id = User.query.filter_by(username=form2.username.data).first()
+# recipe_id = Recipe.query.filter_by(recipe_name=recipe_name).recipe_id()
+
+# if form1.validate_on_submit():
+# comment_query = Comment(comment=user_comment, id=id, recipe_id=recipe_id)
+# db.session.add(comment_query)
+# db.session.commit()
+# flash("Your comment has been posted")
+# # return redirect(url_for('/recipes/<recipe_name>'))
+# return render_template('specific_recipe.html', form1=form1, form2=form2, comment=user_comment, user_id=id, recipe_id=recipe_id )
 
 @app.route("/recipes", methods=["GET", "POST"])
 def recipe():
@@ -77,9 +150,11 @@ def about():
 def ZeroWaste():
     return render_template('zero_waste.html')
 
+
 @app.route("/sustainability", methods=["GET"])
 def sustainability():
     return render_template('sustainability.html')
+
 
 @app.route("/food_banks", methods=["GET"])
 def FoodBanks():
@@ -98,7 +173,8 @@ def register():
     form = UserAccountForm()
     if form.validate_on_submit():
         hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
-        user = User(first_name=form.first_name.data, last_name=form.last_name.data, username=form.username.data, email=form.email.data, password=hashed_password)
+        user = User(first_name=form.first_name.data, last_name=form.last_name.data, username=form.username.data,
+                    email=form.email.data, password=hashed_password)
         db.session.add(user)
         db.session.commit()
         flash("Your account has been created. You can log in using your email and password", "success")
@@ -165,7 +241,6 @@ def logout():
 @app.route("/contact", methods=["GET", "POST"])
 def contact():
     return render_template('contact.html')
-
 
 # # PREVIOUS CODE BEFORE CHARLOTTE COMMIT IS COMMENTED BELOW
 # @app.route("/account", methods=["GET", "POST"])
