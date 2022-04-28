@@ -59,6 +59,9 @@ class UpdateAccountForm(FlaskForm):
 class UserFeedback(FlaskForm):
     # positive_rating = RadioField("Thumbs Up")
     # negative_rating = StringField("Thumbs Down")
-    movie_rating = RadioField("Please choose a rating:", choices=[(1, '1 Star'), (2, '2 Star'), (3, '3 Star'), (4, '4 Star'), (5, '5 Star')])
+    recipe_rating = RadioField("Please choose a rating:", choices=[(1, '1 Star'), (2, '2 Star'), (3, '3 Star'), (4, '4 Star'), (5, '5 Star')])
     comment = TextAreaField("Enter your comments here", validators=[DataRequired(), Length(min=1, max=140)])
     submit = SubmitField("Submit Comment")
+
+class DeleteUserFeedback(FlaskForm):
+    submit = SubmitField("Delete Comment")

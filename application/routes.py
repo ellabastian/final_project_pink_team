@@ -1,9 +1,9 @@
 import os
 import secrets
 from PIL import Image
-from flask import render_template, request, url_for, redirect, flash
+from flask import render_template, request, url_for, redirect, flash, get_flashed_messages
 from application import app, db, bcrypt
-from application.forms import IngredientsForm, UserAccountForm, UserLoginForm, UpdateAccountForm, UserFeedback
+from application.forms import IngredientsForm, UserAccountForm, UserLoginForm, UpdateAccountForm, UserFeedback, DeleteUserFeedback
 from application.models import Ingredient, IngredientRecipe, Recipe, Instruction, Difficulty, User, Comment
 from flask_login import login_user, current_user, logout_user, login_required
 from datetime import datetime
@@ -55,6 +55,22 @@ def specific_recipe(recipe_name):
         else:
             return redirect(url_for('register'))
     return render_template('specific_recipe.html', recipe_name=recipe_name, recipe=recipe, instructions=instructions, form=form)
+
+@app.route("/delete/<int:comment_id>", methods=["GET", "POST", "DELETE"])
+def delete(comment_id):
+    comment = Comment.query.get(comment_id)
+    form = DeleteUserFeedback()
+
+    if comment:
+        if form.validate_on_submit():
+            db.session.delete(comment)
+            db.session.commit()
+            flash("Comment deleted")
+            return redirect(url_for('recipe'))
+        return render_template('delete.html', form=form, comment_id=comment_id, comment=comment)
+    else:
+        flash("Comment not found")
+        return redirect(url_for('recipe'))
 
     # # form = UserFeedback()
     # # if request.method == "POST":

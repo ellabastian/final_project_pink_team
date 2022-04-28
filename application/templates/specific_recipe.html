@@ -46,7 +46,7 @@
 <form action="" method="post">
         {{ form.hidden_tag() }}
 <!--    <h4>{{ form.comment.label }}</h4>-->
-        <p class="form-inline">{{form.movie_rating}}</p>
+        <p class="form-inline">{{form.recipe_rating}}</p>
     <br>
         {{ form.comment(class="Field",cols="60", rows="5") }}
     <br>
@@ -61,7 +61,7 @@
         <div class="card-body">
             <li><h4><b>{{username}}</b> at {{datetime}}:<br> {{comment.comment}}</h4></li>
             <a href="#" class="btn btn-primary">Edit</a>
-            <a href="#" class="btn btn-danger">Delete</a>
+            <a href="{{url_for('delete', comment_id=comment.comment_id)}}" class="btn btn-danger">Delete</a>
         </div>
     </div>
     {%endfor%}
