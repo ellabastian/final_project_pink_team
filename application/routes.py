@@ -3,9 +3,10 @@ import secrets
 from PIL import Image
 from flask import render_template, request, url_for, redirect, flash, session
 from application import app, db, bcrypt
-from application.forms import IngredientsForm, UserAccountForm, UserLoginForm, UpdateAccountForm, UserFeedback, SaveRecipe
+from application.forms import IngredientsForm, UserAccountForm, UserLoginForm, UpdateAccountForm, UserFeedback, DeleteUserFeedback, SaveRecipe
 from application.models import Ingredient, IngredientRecipe, Recipe, Instruction, Difficulty, User, Comment, SavedRecipe
 from flask_login import login_user, current_user, logout_user, login_required
+from datetime import datetime
 
 
 @app.route("/home", methods=["GET", "POST"])
@@ -39,27 +40,32 @@ def specific_recipe(recipe_name):
 
     recipe = (Recipe.query.filter_by(recipe_name=recipe_name).first())
     instructions = Instruction.query.filter_by(recipe_id=recipe.recipe_id).all()
-    # return render_template('specific_recipe.html', recipe_name=recipe_name, recipe=recipe, instructions=instructions, form=form)
-
+    list_of_comments = Comment.query.filter_by(recipe_id=recipe.recipe_id).all()
     form = UserFeedback()
     save_form = SaveRecipe(user_id=current_user.id, recipe_id=recipe.recipe_id)
+    list_of_usernames = []
+    for comment in list_of_comments:
+        username = User.query.filter_by(id=comment.user_id).first().username
+        list_of_usernames.append(username)
 
-    if request.method == "POST":
-        # positive_rating = form.positive_rating.data
-        # negative_rating = form.negative_rating.data
-        usercomment = form.comment.data
 
+    if form.validate_on_submit():
 
         if current_user.is_authenticated:
-            username = User.query.get("username")
-            recipe_id = Recipe.query.get("recipe_id")
-            commentquery = Comment.insert().values({"comment": usercomment}, recipe_id=recipe_id, username=username)
-            return render_template('specific_recipe.html', username=username, comment=usercomment, commentquery=commentquery, form=form)
+            comment_query = Comment(comment=form.comment.data, user_id=current_user.id, recipe_id=recipe.recipe_id, time_created=datetime.now())
+            db.session.add(comment_query)
+            db.session.commit()
+
+            return render_template('specific_recipe.html', recipe_name=recipe_name, comment_query=comment_query,
+                                   form=form, list_of_comments=list_of_comments, recipe=recipe,
+                                   list_of_usernames=list_of_usernames, save_form=save_form)
 
         else:
-            return redirect(url_for('useraccount'), form=form, save_form=save_form)
+            return redirect(url_for('register'))
 
-    return render_template('specific_recipe.html', recipe_name=recipe_name, recipe=recipe, form=form, save_form=save_form, user=current_user)
+    return render_template('specific_recipe.html', recipe_name=recipe_name, recipe=recipe, form=form,
+                           save_form=save_form, user=current_user, list_of_comments=list_of_comments,
+                           list_of_usernames=list_of_usernames)
 
 
 @app.route("/save-recipe", methods=["POST"])
@@ -69,6 +75,20 @@ def save_recipe():
     return redirect(url_for('recipe'))
 
 
+@app.route("/delete/<int:comment_id>", methods=["GET", "POST", "DELETE"])
+def delete(comment_id):
+    comment = Comment.query.get(comment_id)
+    form = DeleteUserFeedback()
+
+    if comment:
+        if form.validate_on_submit():
+            db.session.delete(comment)
+            db.session.commit()
+            return redirect(url_for('recipe'))
+        return render_template('delete.html', form=form, comment=comment, comment_id=comment_id)
+    else:
+        flash("Comment not found")
+        return redirect(url_for('recipe'))
 
 
 @app.route("/recipes", methods=["GET", "POST"])

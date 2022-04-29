@@ -37,22 +37,48 @@
     <br>
 
 <h2>Please rate or comment on this Recipe!</h2>
-<form action="" method="post">
+<form action="/recipes/{{ recipe.recipe_name }}" method="post">
         {{ form.hidden_tag() }}
-        {{ form.positive_rating.label }} {{ form.positive_rating(class="field") }}
-        {{ form.negative_rating.label }} {{ form.negative_rating(class="field") }}
-        {{ form.comment.label }} {{ form.comment(class="field") }}
+        {{ form.recipe_rating }}
+        {{ form.comment(class="field", cols="60", rows="5" ) }}
         {{ form.submit(class="btn") }}
         <br>
 </form>
 
+
+
 <h2>Save Recipe!</h2>
 <form action="/save-recipe" method="post">
         {{ save_form.hidden_tag() }}
+        <br>
+        <br>
         {{ save_form.submit(class="btn") }}
         <br>
 </form>
 
+<h3>Comments:</h3>
+<ul class="user_comments">
+
+    {% for username in list_of_usernames %}
+    <div class="card">
+    <div class="card-body">
+            <h4><li>{{ username }}</li></h4>
+    </div>
+    {% endfor %}
+    </div>
+
+    {% for comment in list_of_comments %}
+    <div class="card">
+        <div class="card-body">
+            <h4><li> {{ comment.comment }}</li></h4>
+            <a href="{{url_for('delete', comment_id=comment.comment_id)}}" class="btn btn-danger">Delete</a>
+        </div>
+    </div>
+    {% endfor %}
+
+
+
+</ul>
 
 
 {% endblock %}
