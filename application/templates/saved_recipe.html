@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+{% block body_content %}
+
+        <p>Here you will find your saved recipes...</p>
+
+            <ul>
+                {% for recipe in saved_recipes %}
+                <li>
+                    <h3> {{ recipe.recipe_name }} </h3>
+                        <b>Recipe Difficulty:</b> <p>{{ recipe.difficulty.difficulty_name }}</p>
+                    <br>
+                        <b>Recipe Prep Time:</b> <p>{{ recipe.recipe_prep_time }}</p>
+                    <br>
+                        <b>Recipe Cooking Time:</b> <p>{{ recipe.recipe_cook_time }}</p>
+                    <br>
+                        <b>Recipe Category:</b> <p>{{ recipe.recipe_category }}</p>
+                     <br>
+                        <b >Recipe Description:</b> <p class = "recipe_description">{{ recipe.recipe_description }}</p>
+                    <br>
+                    <a href="/recipes/{{ recipe.recipe_name }}"><b>Full Recipe Here</b></a>
+                    <br>
+                    <br>
+                    </div>
+                    <div class = "recipe_page_images">
+                    <img src="{{ recipe.recipe_img }}" alt = "{{recipe.recipe_name}}">
+                    <br>
+                    <br>
+                </li>
+                {% endfor %}
+            </ul>
+
+{% endblock %}
