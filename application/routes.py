@@ -118,11 +118,6 @@ def FoodBanks():
     return render_template('food_banks.html')
 
 
-@app.route("/blog", methods=["GET", "POST"])
-def blog():
-    return render_template('blog.html')
-
-
 @app.route("/register", methods=["GET", "POST"])
 def register():
     if current_user.is_authenticated:

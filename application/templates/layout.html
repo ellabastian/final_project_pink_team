@@ -23,7 +23,6 @@
     <!--                    <a class="dropdown-item" href="#">Something else here</a>-->
     <!--                </div>-->
     <!--            </div>-->
-    <!--            <a href="{{url_for('blog')}}">Blog</a>-->
     <!--            <a href="{{url_for('user_account')}}">Account</a>-->
     <!--            <a href="{{url_for('logout')}}">Logout</a>-->
 <nav>
@@ -52,9 +51,6 @@
                     <a class="dropdown-item" href="{{url_for('sustainability')}}">Sustainability</a>
                     <a class="dropdown-item" href="{{url_for('FoodBanks')}}">Food Banks</a>
                 </div>
-            </li>
-            <li class="nav-item px-5">
-                <a class="nav-link" href="{{url_for('blog')}}">Blog</a>
             </li>
             <li class="nav-item px-5">
                 <a class="nav-link" href="{{url_for('user_account')}}">Account</a>
@@ -92,9 +88,6 @@
                 </div>
             </li>
             <li class="nav-item px-5">
-                <a class="nav-link" href="{{url_for('blog')}}">Blog</a>
-            </li>
-            <li class="nav-item px-5">
                 <a class="nav-link" href="{{url_for('register')}}">Register/Log In</a>
             </li>
         </ul>
@@ -111,7 +104,7 @@
             <a href="{{url_for('about')}}" class="navbar_link">About</a>
             <a href="{{url_for('recipe')}}" class="navbar_link">Recipes</a>
 
-            <a href="{{url_for('blog')}}" class="navbar_link">Blog</a>
+
             <a href="{{url_for('user_account')}}" class="navbar_link">Account</a>
             <a href="{{url_for('logout')}}" class="navbar_link">Logout</a>
         {% else %}
@@ -119,7 +112,7 @@
             <a href="{{url_for('about')}}" class="navbar_link">About</a>
             <a href="{{url_for('recipe')}}" class="navbar_link">Recipes</a>
             <a href="#" class="navbar_link">Resources</a>
-            <a href="{{url_for('blog')}}" class="navbar_link">Blog</a>
+
             <a href="{{url_for('register')}}" class="navbar_link">Register/Log In</a>
         {% endif %}
     </nav> -->
