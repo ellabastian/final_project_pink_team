@@ -34,7 +34,6 @@ def home():
 
     return render_template('home.html', form=form, message=error)
 
-
 @app.route("/recipes/<recipe_name>", methods=["GET", "POST"])
 def specific_recipe(recipe_name):
     # form = UserFeedback()
@@ -42,6 +41,7 @@ def specific_recipe(recipe_name):
     instructions = Instruction.query.filter_by(recipe_id=recipe.recipe_id).all()
     # return render_template('specific_recipe.html', recipe_name=recipe_name, recipe=recipe, instructions=instructions, form=form)
 
+    list_of_comments = Comment.query.filter_by(recipe=recipe).all()
     form = UserFeedback()
     if form.validate_on_submit():
         if current_user.is_authenticated:
@@ -49,12 +49,13 @@ def specific_recipe(recipe_name):
             db.session.add(comment_query)
             db.session.commit()
             username = current_user.username
-            list_of_comments = Comment.query.all()
+            # list_of_comments = Comment.query.all()
+            list_of_comments = Comment.query.filter_by(recipe=recipe).all()
             return render_template('specific_recipe.html', form=form, comment=form.comment.data, recipe=recipe,
                                    list_of_comments=list_of_comments, current_user=current_user.id, username=username, datetime=datetime.now())
         else:
             return redirect(url_for('register'))
-    return render_template('specific_recipe.html', recipe_name=recipe_name, recipe=recipe, instructions=instructions, form=form)
+    return render_template('specific_recipe.html', recipe_name=recipe_name, recipe=recipe, instructions=instructions, form=form, list_of_comments=list_of_comments)
 
 @app.route("/delete/<int:comment_id>", methods=["GET", "POST", "DELETE"])
 def delete(comment_id):
