@@ -10,6 +10,7 @@ from flask_login import login_user, current_user, logout_user, login_required
 from datetime import datetime
 
 
+# HOMEPAGE
 @app.route("/home", methods=["GET", "POST"])
 @app.route("/", methods=["GET", "POST"])
 def home():
@@ -36,9 +37,9 @@ def home():
     return render_template('home.html', form=form, message=error)
 
 
+# DYNAMIC SPECIFIC RECIPE PAGE
 @app.route("/recipes/<recipe_name>", methods=["GET", "POST"])
 def specific_recipe(recipe_name):
-    # form = UserFeedback()
     recipe = (Recipe.query.filter_by(recipe_name=recipe_name).first())
     instructions = Instruction.query.filter_by(recipe_id=recipe.recipe_id).all()
     list_of_comments = Comment.query.filter_by(recipe_id=recipe.recipe_id).all()
@@ -55,7 +56,6 @@ def specific_recipe(recipe_name):
             comment_query = Comment(comment=form.comment.data, user_id=current_user.id, recipe_id=recipe.recipe_id, time_created=datetime.now())
             db.session.add(comment_query)
             db.session.commit()
-
             return render_template('specific_recipe.html', recipe_name=recipe_name, comment_query=comment_query,
                                    form=form, list_of_comments=list_of_comments, recipe=recipe,
                                    list_of_usernames=list_of_usernames, save_form=save_form)
@@ -68,6 +68,8 @@ def specific_recipe(recipe_name):
                            list_of_usernames=list_of_usernames)
 
 
+
+# INTERNAL PAGE - FORM TO SAVE RECIPE TO USER ACCOUNT
 @app.route("/save-recipe", methods=["POST"])
 def save_recipe():
     db.session.add(SavedRecipe(user_id=request.form['user_id'], recipe_id=request.form['recipe_id']))
@@ -75,6 +77,7 @@ def save_recipe():
     return redirect(url_for('saved'))
             
 
+# INTERNAL PAGE - FORM TO DELETE COMMENT FROM RECIPE PAGE 
 @app.route("/delete/<int:comment_id>", methods=["GET", "POST", "DELETE"])
 def delete(comment_id):
     comment = Comment.query.get(comment_id)
@@ -91,33 +94,39 @@ def delete(comment_id):
         return redirect(url_for('recipe'))
 
 
+# ALL RECIPES PAGE
 @app.route("/recipes", methods=["GET", "POST"])
 def recipe():
     recipes = Recipe.query.all()
     return render_template('recipe.html', recipes=recipes)
 
 
+# ABOUT US PAGE  
 @app.route("/about", methods=["GET"])
 def about():
     url = url_for('home')
     return render_template('about.html', title='about', page_title=url)
 
 
+# ZERO WASTE PAGE  
 @app.route("/zero_waste", methods=["GET"])
 def ZeroWaste():
     return render_template('zero_waste.html')
 
 
+# SUSTAINABILITY PAGE  
 @app.route("/sustainability", methods=["GET"])
 def sustainability():
     return render_template('sustainability.html')
 
 
+# FOOD BANKS PAGE  
 @app.route("/food_banks", methods=["GET"])
 def FoodBanks():
     return render_template('food_banks.html')
 
 
+# REGISTER AN ACCOUNT PAGE  
 @app.route("/register", methods=["GET", "POST"])
 def register():
     if current_user.is_authenticated:
@@ -134,6 +143,7 @@ def register():
     return render_template('register.html', title='Register', form=form)
 
 
+# LOGIN TO ACCOUNT PAGE  
 @app.route("/login", methods=["GET", "POST"])
 def login():
     if current_user.is_authenticated:
@@ -164,6 +174,8 @@ def save_picture(form_picture):
     return picture_fn
 
 
+
+# USER ACCOUNT PAGE  
 @app.route("/useraccount", methods=['GET', 'POST'])
 @login_required
 def user_account():
@@ -195,12 +207,14 @@ def user_account():
                            saved_recipes=saved_recipes, saved_ids=saved_ids, view_recipe_form=view_recipe_form)
 
 
+# INTERNAL PAGE - USER LOGOUT  
 @app.route("/logout")
 def logout():
     logout_user()
     return redirect(url_for('home'))
 
 
+# CONTACT US PAGE  
 @app.route("/contact", methods=["GET", "POST"])
 def contact():
     return render_template('contact.html')
@@ -216,4 +230,9 @@ def saved():
         saved_recipes.extend(Recipe.query.filter_by(recipe_id=recipe_id).all())
     return render_template('saved_recipe.html', user=user, saved_recipes=saved_recipes)
 
+
+
+
+  
+  
 
