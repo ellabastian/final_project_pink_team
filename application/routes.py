@@ -1,9 +1,10 @@
 import os
 import secrets
 from PIL import Image
-from flask import render_template, request, url_for, redirect, flash, session
+from flask import render_template, request, url_for, redirect, flash, get_flashed_messages, session
 from application import app, db, bcrypt
-from application.forms import IngredientsForm, UserAccountForm, UserLoginForm, UpdateAccountForm, UserFeedback, DeleteUserFeedback, SaveRecipe
+from application.forms import IngredientsForm, UserAccountForm, UserLoginForm, UpdateAccountForm, \
+    UserFeedback, DeleteUserFeedback, SaveRecipe, ViewRecipes
 from application.models import Ingredient, IngredientRecipe, Recipe, Instruction, Difficulty, User, Comment, SavedRecipe
 from flask_login import login_user, current_user, logout_user, login_required
 from datetime import datetime
@@ -37,7 +38,7 @@ def home():
 
 @app.route("/recipes/<recipe_name>", methods=["GET", "POST"])
 def specific_recipe(recipe_name):
-
+    # form = UserFeedback()
     recipe = (Recipe.query.filter_by(recipe_name=recipe_name).first())
     instructions = Instruction.query.filter_by(recipe_id=recipe.recipe_id).all()
     list_of_comments = Comment.query.filter_by(recipe_id=recipe.recipe_id).all()
@@ -47,7 +48,6 @@ def specific_recipe(recipe_name):
     for comment in list_of_comments:
         username = User.query.filter_by(id=comment.user_id).first().username
         list_of_usernames.append(username)
-
 
     if form.validate_on_submit():
 
@@ -72,18 +72,18 @@ def specific_recipe(recipe_name):
 def save_recipe():
     db.session.add(SavedRecipe(user_id=request.form['user_id'], recipe_id=request.form['recipe_id']))
     db.session.commit()
-    return redirect(url_for('recipe'))
-
+    return redirect(url_for('saved'))
+            
 
 @app.route("/delete/<int:comment_id>", methods=["GET", "POST", "DELETE"])
 def delete(comment_id):
     comment = Comment.query.get(comment_id)
     form = DeleteUserFeedback()
-
     if comment:
         if form.validate_on_submit():
             db.session.delete(comment)
             db.session.commit()
+            flash("Comment deleted")
             return redirect(url_for('recipe'))
         return render_template('delete.html', form=form, comment=comment, comment_id=comment_id)
     else:
@@ -107,9 +107,11 @@ def about():
 def ZeroWaste():
     return render_template('zero_waste.html')
 
+
 @app.route("/sustainability", methods=["GET"])
 def sustainability():
     return render_template('sustainability.html')
+
 
 @app.route("/food_banks", methods=["GET"])
 def FoodBanks():
@@ -128,7 +130,8 @@ def register():
     form = UserAccountForm()
     if form.validate_on_submit():
         hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
-        user = User(first_name=form.first_name.data, last_name=form.last_name.data, username=form.username.data, email=form.email.data, password=hashed_password)
+        user = User(first_name=form.first_name.data, last_name=form.last_name.data, username=form.username.data,
+                    email=form.email.data, password=hashed_password)
         db.session.add(user)
         db.session.commit()
         flash("Your account has been created. You can log in using your email and password", "success")
@@ -170,6 +173,7 @@ def save_picture(form_picture):
 @login_required
 def user_account():
     form = UpdateAccountForm()
+    view_recipe_form = ViewRecipes()
 
     user = User.query.filter_by(id=current_user.id).first()
     saved_ids = (SavedRecipe.query.filter_by(user_id=user.id).all())
@@ -192,7 +196,8 @@ def user_account():
         form.username.data = current_user.username
         form.email.data = current_user.email
     image_file = url_for('static', filename='profile_pictures/' + current_user.image_file)
-    return render_template('useraccount.html', title='Account', image_file=image_file, form=form, user=user, saved_recipes=saved_recipes, saved_ids=saved_ids)
+    return render_template('useraccount.html', title='Account', image_file=image_file, form=form, user=user,
+                           saved_recipes=saved_recipes, saved_ids=saved_ids, view_recipe_form=view_recipe_form)
 
 
 @app.route("/logout")
@@ -206,13 +211,14 @@ def contact():
     return render_template('contact.html')
 
 
-@app.route("/saved-recipes")
+@app.route("/saved-recipes", methods=["GET", "POST"])
 def saved():
-    user = User.query.filter_by(username="orlane").first()
+    user = User.query.filter_by(username=current_user.username).first()
     saved_ids = (SavedRecipe.query.filter_by(user_id=user.id).all())
     saved_recipes = []
     for saved_id in saved_ids:
         recipe_id = saved_id.recipe_id
         saved_recipes.extend(Recipe.query.filter_by(recipe_id=recipe_id).all())
     return render_template('saved_recipe.html', user=user, saved_recipes=saved_recipes)
+
 

@@ -2,8 +2,8 @@ from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed
 from flask_login import current_user
 from wtforms import StringField, SubmitField, PasswordField, BooleanField, TextAreaField, HiddenField, RadioField
-from wtforms.validators import DataRequired, Length, Email, ValidationError
-from application.models import User
+from wtforms.validators import DataRequired, Length, Email, ValidationError, InputRequired
+from application.models import User, Comment, Rating
 
 
 class IngredientsForm(FlaskForm):
@@ -71,3 +71,7 @@ class SaveRecipe(FlaskForm):
     user_id = HiddenField("user_id")
     recipe_id = HiddenField("recipe_id")
     submit = SubmitField("Save Recipe")
+
+
+class ViewRecipes(FlaskForm):
+    submit = SubmitField("View Recipes")
