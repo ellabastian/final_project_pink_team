@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed
 from flask_login import current_user
-from wtforms import StringField, SubmitField, PasswordField, BooleanField, TextAreaField, RadioField, HiddenField
+from wtforms import StringField, SubmitField, PasswordField, BooleanField, TextAreaField, HiddenField, RadioField
 from wtforms.validators import DataRequired, Length, Email, ValidationError, InputRequired
 from application.models import User, Comment, Rating
 
@@ -56,12 +56,15 @@ class UpdateAccountForm(FlaskForm):
                 raise ValidationError("That email is taken by another user. Please use a different one.")
 
 
-class UserFeedback(FlaskForm):  
-    # positive_rating = RadioField("Thumbs Up")
-    # negative_rating = StringField("Thumbs Down")
-    recipe_rating = RadioField("Please choose a rating:", choices=[(1, '1 Star'), (2, '2 Star'), (3, '3 Star'), (4, '4 Star'), (5, '5 Star')])
+class UserFeedback(FlaskForm):
+    recipe_rating = RadioField("Please choose a rating", choices=[(1, '1 Star'), (2, '2 Star'), (3, '3 Star'),
+                                                                  (4, '4 Star'), (5, '5 Star')])
     comment = TextAreaField("Enter your comments here", validators=[DataRequired(), Length(min=1, max=140)])
     submit = SubmitField("Submit Comment")
+
+
+class DeleteUserFeedback(FlaskForm):
+    submit = SubmitField("Delete Comment")
 
 
 class SaveRecipe(FlaskForm):
@@ -70,6 +73,5 @@ class SaveRecipe(FlaskForm):
     submit = SubmitField("Save Recipe")
 
 
-class DeleteUserFeedback(FlaskForm):
-    submit = SubmitField("Delete Comment")
-
+class ViewRecipes(FlaskForm):
+    submit = SubmitField("View Recipes")
