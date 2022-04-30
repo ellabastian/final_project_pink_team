@@ -9,6 +9,7 @@ from application.models import Ingredient, IngredientRecipe, Recipe, Instruction
     Comment, SavedRecipe, Rating
 from flask_login import login_user, current_user, logout_user, login_required
 from datetime import datetime
+from sqlalchemy.sql import func
 
 
 # HOMEPAGE
@@ -36,6 +37,24 @@ def home():
             return render_template('recipe.html', ingredient_id=ingredient_id, recipes=recipes)
 
     return render_template('home.html', form=form, message=error)
+
+
+# ALL RECIPES PAGE
+@app.route("/recipes", methods=["GET", "POST"])
+def recipe():
+    recipes = Recipe.query.all()
+    recipe_id_list = []
+    rating_list = Rating.query.all()
+    average_list = []
+    average = object()
+    for rating in rating_list:
+        recipe_id = Rating.query.filter_by(rating_id=rating.rating_id).first().recipe_id
+        recipe_id_list.append(recipe_id)
+        average = Rating.query.with_entities(func.avg(Rating.rating))\
+            .filter_by(recipe_id=recipe_id).first()
+        average_list.append(average[0])
+
+    return render_template('recipe.html', recipes=recipes, recipe_id_list=recipe_id_list, rating_list=rating_list, average=average, average_list=average_list)
 
 
 # DYNAMIC SPECIFIC RECIPE PAGE
@@ -95,13 +114,6 @@ def delete(comment_id):
     else:
         flash("Comment not found")
         return redirect(url_for('recipe'))
-
-
-# ALL RECIPES PAGE
-@app.route("/recipes", methods=["GET", "POST"])
-def recipe():
-    recipes = Recipe.query.all()
-    return render_template('recipe.html', recipes=recipes)
 
 
 # ABOUT US PAGE  
