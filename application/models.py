@@ -12,7 +12,7 @@ class Comment(UserMixin, db.Model):
 
 class Rating(UserMixin, db.Model):
     rating_id = db.Column(db.Integer, primary_key=True)
-    rating = db.Column(db.String(100), nullable=True)
+    rating = db.Column(db.Integer, nullable=True)
     id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     recipe_id = db.Column(db.Integer, db.ForeignKey('recipe.recipe_id'), nullable=False)
 

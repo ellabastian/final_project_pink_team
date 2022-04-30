@@ -5,7 +5,8 @@ from flask import render_template, request, url_for, redirect, flash, get_flashe
 from application import app, db, bcrypt
 from application.forms import IngredientsForm, UserAccountForm, UserLoginForm, UpdateAccountForm, \
     UserFeedback, DeleteUserFeedback, SaveRecipe, ViewRecipes
-from application.models import Ingredient, IngredientRecipe, Recipe, Instruction, Difficulty, User, Comment, SavedRecipe
+from application.models import Ingredient, IngredientRecipe, Recipe, Instruction, Difficulty, User, \
+    Comment, SavedRecipe, Rating
 from flask_login import login_user, current_user, logout_user, login_required
 from datetime import datetime
 
@@ -67,9 +68,11 @@ def save_recipe():
 
 @app.route("/user_feedback", methods=["POST"])
 def user_feedback():
+        rating_query = Rating(rating=request.form['recipe_rating'], id=request.form['user_id'], recipe_id=request.form['recipe_id'])
         comment_query = Comment(comment=request.form['comment'], user_id=request.form['user_id'], recipe_id=request.form['recipe_id'],
                                 time_created=datetime.now())
         db.session.add(comment_query)
+        db.session.add(rating_query)
         db.session.commit()
         recipe_name = Recipe.query.filter_by(recipe_id=request.form['recipe_id']).first().recipe_name
         return redirect(url_for('specific_recipe', recipe_name=recipe_name))

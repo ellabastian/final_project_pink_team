@@ -7,7 +7,10 @@
     <li>
 
             <div class = "recipe_info">
-            <h3> {{ recipe.recipe_name }} </h3>
+            <a href ="/recipes/{{ recipe.recipe_name }}">
+                <h3> {{ recipe.recipe_name }}</h3>
+            </a>
+                <br>
                 <b>Recipe Difficulty:</b> <p>{{ recipe.difficulty.difficulty_name }}</p>
             <br>
                 <b>Recipe Prep Time:</b> <p>{{ recipe.recipe_prep_time }}</p>
@@ -18,7 +21,7 @@
              <br>
                 <b >Recipe Description:</b> <p class = "recipe_description">{{ recipe.recipe_description }}</p>
             <br>
-            <a href="/recipes/{{ recipe.recipe_name }}"><b>Full Recipe Here</b></a>
+                <a href="/recipes/{{ recipe.recipe_name }}"><b>Full Recipe Here</b></a>
             <br>
             <br>
             </div>

@@ -346,8 +346,8 @@ db.session.add(comment1)
 db.session.add(comment2)
 db.session.add(comment3)
 
-rating1 = Rating(rating="Good", id=1, recipe_id=1)
-rating2 = Rating(rating="Bad", id=1, recipe_id=2)
+rating1 = Rating(rating=1, id=1, recipe_id=1)
+rating2 = Rating(rating=2, id=1, recipe_id=2)
 
 db.session.add(rating1)
 db.session.add(rating2)
