@@ -10,3 +10,4 @@ flask_login
 flask_bcrypt
 Pillow
 datetime
+email-validator
