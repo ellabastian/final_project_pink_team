@@ -43,25 +43,12 @@ def specific_recipe(recipe_name):
     recipe = (Recipe.query.filter_by(recipe_name=recipe_name).first())
     instructions = Instruction.query.filter_by(recipe_id=recipe.recipe_id).all()
     list_of_comments = Comment.query.filter_by(recipe_id=recipe.recipe_id).all()
-    form = UserFeedback()
+    form = UserFeedback(user_id=current_user.id, recipe_id=recipe.recipe_id)
     save_form = SaveRecipe(user_id=current_user.id, recipe_id=recipe.recipe_id)
     list_of_usernames = []
     for comment in list_of_comments:
         username = User.query.filter_by(id=comment.user_id).first().username
         list_of_usernames.append(username)
-
-    if form.validate_on_submit():
-
-        if current_user.is_authenticated:
-            comment_query = Comment(comment=form.comment.data, user_id=current_user.id, recipe_id=recipe.recipe_id, time_created=datetime.now())
-            db.session.add(comment_query)
-            db.session.commit()
-            return render_template('specific_recipe.html', recipe_name=recipe_name, comment_query=comment_query,
-                                   form=form, list_of_comments=list_of_comments, recipe=recipe,
-                                   list_of_usernames=list_of_usernames, save_form=save_form, instructions=instructions)
-
-        else:
-            return redirect(url_for('register'))
 
     return render_template('specific_recipe.html', recipe_name=recipe_name, recipe=recipe, form=form,
                            save_form=save_form, user=current_user, list_of_comments=list_of_comments,
@@ -70,12 +57,22 @@ def specific_recipe(recipe_name):
 
 
 # INTERNAL PAGE - FORM TO SAVE RECIPE TO USER ACCOUNT
-@app.route("/save-recipe", methods=["POST"])
+@app.route("/save_recipe", methods=["POST"])
 def save_recipe():
     db.session.add(SavedRecipe(user_id=request.form['user_id'], recipe_id=request.form['recipe_id']))
     db.session.commit()
     return redirect(url_for('saved'))
-            
+
+
+@app.route("/user_feedback", methods=["POST"])
+def user_feedback():
+        comment_query = Comment(comment=request.form['comment'], user_id=request.form['user_id'], recipe_id=request.form['recipe_id'],
+                                time_created=datetime.now())
+        db.session.add(comment_query)
+        db.session.commit()
+        recipe_name = Recipe.query.filter_by(recipe_id=request.form['recipe_id']).first().recipe_name
+        return redirect(url_for('specific_recipe', recipe_name=recipe_name))
+
 
 # INTERNAL PAGE - FORM TO DELETE COMMENT FROM RECIPE PAGE 
 @app.route("/delete/<int:comment_id>", methods=["GET", "POST", "DELETE"])
@@ -153,6 +150,7 @@ def login():
         user = User.query.filter_by(email=form.email.data).first()
         if user and bcrypt.check_password_hash(user.password, form.password.data):
             login_user(user, remember=form.remember.data)
+            print(request)
             next_page = request.args.get('next')
             return redirect(next_page) if next_page else redirect(url_for('user_account'))
         else:

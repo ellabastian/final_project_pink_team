@@ -1,23 +1,5 @@
 {% extends "layout.html" %}
 {% block body_content %}
-<<<<<<< HEAD
-<div class="container-fluid">
-    <form action="{{url_for('delete', comment_id=comment_id)}}" method="post">
-        {{ form.hidden_tag() }}
-        <p>Are you sure you want to delete the following comment?</p>
-        <div class="row">
-            <div class="col">
-                <h3>{{ comment.comment }}</h3>
-            </div>
-        </div>
-        <div class="col">
-            {{ form.submit(class="btn btn-danger") }}
-            <a href="{{url_for('recipe')}}" class="btn btn-primary">Cancel</a>
-        </div>
-    </form>
-</div>
-
-=======
 
 <div class ="container-fluid">
     <form action="{{url_for('delete', comment_id=comment_id)}}" method="post">
@@ -41,7 +23,4 @@
       {% endfor %}
     </body>
 
-
-
->>>>>>> b87fe90b830c1acc7c541a0ca6eb818bb6b72214
 {% endblock %}
