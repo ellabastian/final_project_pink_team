@@ -12,7 +12,7 @@ class Comment(UserMixin, db.Model):
 
 class Rating(UserMixin, db.Model):
     rating_id = db.Column(db.Integer, primary_key=True)
-    rating = db.Column(db.String(100), nullable=True)
+    rating = db.Column(db.Integer, nullable=True)
     id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     recipe_id = db.Column(db.Integer, db.ForeignKey('recipe.recipe_id'), nullable=False)
 
@@ -32,6 +32,7 @@ class Recipe(db.Model):
     recipe_cook_time = db.Column(db.String(50), nullable=False)
     recipe_category = db.Column(db.String(50), nullable=False)
     recipe_description = db.Column(db.String(500), nullable=False)
+    # recipe_rating = db.Column(db.Integer, nullable=True)
     instructions = db.relationship('Instruction', backref='recipe')
     ingredient_recipes = db.relationship('IngredientRecipe', backref='recipe')
     comments = db.relationship('Comment', backref='recipe')
