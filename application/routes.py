@@ -49,7 +49,8 @@ def specific_recipe(recipe_name):
     for comment in list_of_comments:
         username = User.query.filter_by(id=comment.user_id).first().username
         list_of_usernames.append(username)
-
+    if form.validate_on_submit():
+        flash("Comment submitted")
     return render_template('specific_recipe.html', recipe_name=recipe_name, recipe=recipe, form=form,
                            save_form=save_form, user=current_user, list_of_comments=list_of_comments,
                            list_of_usernames=list_of_usernames, instructions=instructions)
@@ -78,14 +79,16 @@ def user_feedback():
 @app.route("/delete/<int:comment_id>", methods=["GET", "POST", "DELETE"])
 def delete(comment_id):
     comment = Comment.query.get(comment_id)
+    get_recipe_id = Comment.query.filter_by(comment_id=comment_id).first().recipe_id
+    recipe_name = Recipe.query.filter_by(recipe_id=get_recipe_id).first().recipe_name
     form = DeleteUserFeedback()
     if comment:
         if form.validate_on_submit():
             db.session.delete(comment)
             db.session.commit()
             flash("Comment deleted")
-            return redirect(url_for('recipe'))
-        return render_template('delete.html', form=form, comment=comment, comment_id=comment_id)
+            return redirect(url_for('specific_recipe', recipe_name=recipe_name))
+        return render_template('delete.html', form=form, comment=comment, comment_id=comment_id, recipe_name=recipe_name)
     else:
         flash("Comment not found")
         return redirect(url_for('recipe'))
