@@ -5,3 +5,4 @@ __pycache__/
 *.py[cod]
 __pycache__
 application/__pycache__
+.idea
