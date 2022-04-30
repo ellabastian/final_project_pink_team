@@ -1,7 +1,10 @@
 {% extends "layout.html" %}
 {% block body_content %}
 
-<h1>Register for an account here</h1>
+<h2>Already have an account?</h2>
+<button><a class="login_button" href="{{url_for('login')}}">Log In</a></button>
+
+<h1>Or, register for an account here</h1>
 
     <form action="" method="post">
             {{ form.hidden_tag() }}
@@ -18,8 +21,5 @@
             {{ form.submit(class="btn") }}
         {{ message }}
     </form>
-
-<h2>Already have an account?</h2>
-<button><a class="login_button" href="{{url_for('login')}}">Log In</a></button>
 
 {% endblock %}

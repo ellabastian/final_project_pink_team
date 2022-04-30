@@ -37,7 +37,7 @@
     <br>
 
 <h2>Please rate or comment on this Recipe!</h2>
-<form action="/recipes/{{ recipe.recipe_name }}" method="post">
+<form action="/user_feedback" method="post">
         {{ form.hidden_tag() }}
         {{ form.recipe_rating }}
         {{ form.comment(class="field", cols="60", rows="5" ) }}
@@ -47,7 +47,7 @@
 
 
 <h2>Save Recipe!</h2>
-<form action="/save-recipe" method="post">
+<form action="/save_recipe" method="post">
         {{ save_form.hidden_tag() }}
         <br>
         <br>
@@ -75,7 +75,6 @@
     </div>
     {% endfor %}
 </ul>
-
 
 
 {% endblock %}

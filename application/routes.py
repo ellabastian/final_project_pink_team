@@ -5,9 +5,11 @@ from flask import render_template, request, url_for, redirect, flash, get_flashe
 from application import app, db, bcrypt
 from application.forms import IngredientsForm, UserAccountForm, UserLoginForm, UpdateAccountForm, \
     UserFeedback, DeleteUserFeedback, SaveRecipe, ViewRecipes
-from application.models import Ingredient, IngredientRecipe, Recipe, Instruction, Difficulty, User, Comment, SavedRecipe
+from application.models import Ingredient, IngredientRecipe, Recipe, Instruction, Difficulty, User, \
+    Comment, SavedRecipe, Rating
 from flask_login import login_user, current_user, logout_user, login_required
 from datetime import datetime
+from sqlalchemy.sql import func
 
 
 # HOMEPAGE
@@ -37,32 +39,38 @@ def home():
     return render_template('home.html', form=form, message=error)
 
 
+# ALL RECIPES PAGE
+@app.route("/recipes", methods=["GET", "POST"])
+def recipe():
+    recipes = Recipe.query.all()
+    recipe_id_list = []
+    rating_list = Rating.query.all()
+    average_list = []
+    average = object()
+    for rating in rating_list:
+        recipe_id = Rating.query.filter_by(rating_id=rating.rating_id).first().recipe_id
+        recipe_id_list.append(recipe_id)
+        average = Rating.query.with_entities(func.avg(Rating.rating))\
+            .filter_by(recipe_id=recipe_id).first()
+        average_list.append(average[0])
+
+    return render_template('recipe.html', recipes=recipes, recipe_id_list=recipe_id_list, rating_list=rating_list, average=average, average_list=average_list)
+
+
 # DYNAMIC SPECIFIC RECIPE PAGE
 @app.route("/recipes/<recipe_name>", methods=["GET", "POST"])
 def specific_recipe(recipe_name):
     recipe = (Recipe.query.filter_by(recipe_name=recipe_name).first())
     instructions = Instruction.query.filter_by(recipe_id=recipe.recipe_id).all()
     list_of_comments = Comment.query.filter_by(recipe_id=recipe.recipe_id).all()
-    form = UserFeedback()
+    form = UserFeedback(user_id=current_user.id, recipe_id=recipe.recipe_id)
     save_form = SaveRecipe(user_id=current_user.id, recipe_id=recipe.recipe_id)
     list_of_usernames = []
     for comment in list_of_comments:
         username = User.query.filter_by(id=comment.user_id).first().username
         list_of_usernames.append(username)
-
     if form.validate_on_submit():
-
-        if current_user.is_authenticated:
-            comment_query = Comment(comment=form.comment.data, user_id=current_user.id, recipe_id=recipe.recipe_id, time_created=datetime.now())
-            db.session.add(comment_query)
-            db.session.commit()
-            return render_template('specific_recipe.html', recipe_name=recipe_name, comment_query=comment_query,
-                                   form=form, list_of_comments=list_of_comments, recipe=recipe,
-                                   list_of_usernames=list_of_usernames, save_form=save_form, instructions=instructions)
-
-        else:
-            return redirect(url_for('register'))
-
+        flash("Comment submitted")
     return render_template('specific_recipe.html', recipe_name=recipe_name, recipe=recipe, form=form,
                            save_form=save_form, user=current_user, list_of_comments=list_of_comments,
                            list_of_usernames=list_of_usernames, instructions=instructions)
@@ -70,35 +78,42 @@ def specific_recipe(recipe_name):
 
 
 # INTERNAL PAGE - FORM TO SAVE RECIPE TO USER ACCOUNT
-@app.route("/save-recipe", methods=["POST"])
+@app.route("/save_recipe", methods=["POST"])
 def save_recipe():
     db.session.add(SavedRecipe(user_id=request.form['user_id'], recipe_id=request.form['recipe_id']))
     db.session.commit()
     return redirect(url_for('saved'))
-            
+
+
+@app.route("/user_feedback", methods=["POST"])
+def user_feedback():
+        rating_query = Rating(rating=request.form['recipe_rating'], id=request.form['user_id'], recipe_id=request.form['recipe_id'])
+        comment_query = Comment(comment=request.form['comment'], user_id=request.form['user_id'], recipe_id=request.form['recipe_id'],
+                                time_created=datetime.now())
+        db.session.add(comment_query)
+        db.session.add(rating_query)
+        db.session.commit()
+        recipe_name = Recipe.query.filter_by(recipe_id=request.form['recipe_id']).first().recipe_name
+        return redirect(url_for('specific_recipe', recipe_name=recipe_name))
+
 
 # INTERNAL PAGE - FORM TO DELETE COMMENT FROM RECIPE PAGE 
 @app.route("/delete/<int:comment_id>", methods=["GET", "POST", "DELETE"])
 def delete(comment_id):
     comment = Comment.query.get(comment_id)
+    get_recipe_id = Comment.query.filter_by(comment_id=comment_id).first().recipe_id
+    recipe_name = Recipe.query.filter_by(recipe_id=get_recipe_id).first().recipe_name
     form = DeleteUserFeedback()
     if comment:
         if form.validate_on_submit():
             db.session.delete(comment)
             db.session.commit()
             flash("Comment deleted")
-            return redirect(url_for('recipe'))
-        return render_template('delete.html', form=form, comment=comment, comment_id=comment_id)
+            return redirect(url_for('specific_recipe', recipe_name=recipe_name))
+        return render_template('delete.html', form=form, comment=comment, comment_id=comment_id, recipe_name=recipe_name)
     else:
         flash("Comment not found")
         return redirect(url_for('recipe'))
-
-
-# ALL RECIPES PAGE
-@app.route("/recipes", methods=["GET", "POST"])
-def recipe():
-    recipes = Recipe.query.all()
-    return render_template('recipe.html', recipes=recipes)
 
 
 # ABOUT US PAGE  
@@ -153,6 +168,7 @@ def login():
         user = User.query.filter_by(email=form.email.data).first()
         if user and bcrypt.check_password_hash(user.password, form.password.data):
             login_user(user, remember=form.remember.data)
+            print(request)
             next_page = request.args.get('next')
             return redirect(next_page) if next_page else redirect(url_for('user_account'))
         else:
