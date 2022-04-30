@@ -49,21 +49,23 @@ def specific_recipe(recipe_name):
     for comment in list_of_comments:
         username = User.query.filter_by(id=comment.user_id).first().username
         list_of_usernames.append(username)
+
     if form.validate_on_submit():
 
         if current_user.is_authenticated:
             comment_query = Comment(comment=form.comment.data, user_id=current_user.id, recipe_id=recipe.recipe_id, time_created=datetime.now())
             db.session.add(comment_query)
             db.session.commit()
-            return render_template('specific_recipe.html', recipe_name=recipe_name, instructions=instructions, comment_query=comment_query,
+            return render_template('specific_recipe.html', recipe_name=recipe_name, comment_query=comment_query,
                                    form=form, list_of_comments=list_of_comments, recipe=recipe,
                                    list_of_usernames=list_of_usernames, save_form=save_form)
 
         else:
             return redirect(url_for('register'))
 
-    return render_template('specific_recipe.html', recipe_name=recipe_name, recipe=recipe, instructions=instructions, form=form,
-                          list_of_comments=list_of_comments, save_form=save_form, list_of_usernames=list_of_usernames)
+    return render_template('specific_recipe.html', recipe_name=recipe_name, recipe=recipe, form=form,
+                           save_form=save_form, user=current_user, list_of_comments=list_of_comments,
+                           list_of_usernames=list_of_usernames)
 
 
 

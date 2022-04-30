@@ -336,11 +336,15 @@ db.session.add(person2)
 
 
 # Inserting values into the Comment/Rating tables
+
+
 comment1 = Comment(comment="I really like this recipe. Delicious!", user_id=1, recipe_id=1, time_created=datetime.now())
 comment2 = Comment(comment="I didn't enjoy this recipe. Won't be making it again.", user_id=1, recipe_id=2, time_created=datetime.now())
+comment3 = Comment(comment="I enjoy this recipe. Won't be making it again.", id=1, recipe_id=3, time_created=datetime.now())
 
 db.session.add(comment1)
 db.session.add(comment2)
+db.session.add(comment3)
 
 rating1 = Rating(rating="Good", id=1, recipe_id=1)
 rating2 = Rating(rating="Bad", id=1, recipe_id=2)
