@@ -58,14 +58,14 @@ def specific_recipe(recipe_name):
             db.session.commit()
             return render_template('specific_recipe.html', recipe_name=recipe_name, comment_query=comment_query,
                                    form=form, list_of_comments=list_of_comments, recipe=recipe,
-                                   list_of_usernames=list_of_usernames, save_form=save_form)
+                                   list_of_usernames=list_of_usernames, save_form=save_form, instructions=instructions)
 
         else:
             return redirect(url_for('register'))
 
     return render_template('specific_recipe.html', recipe_name=recipe_name, recipe=recipe, form=form,
                            save_form=save_form, user=current_user, list_of_comments=list_of_comments,
-                           list_of_usernames=list_of_usernames)
+                           list_of_usernames=list_of_usernames, instructions=instructions)
 
 
 

@@ -69,7 +69,7 @@
     {% for comment in list_of_comments %}
     <div class="card">
         <div class="card-body">
-            <h4><li> {{ comment.comment }}</li></h4>
+            <h4><li> @ {{ comment.time_created }} {{ comment.comment }}</li></h4>
             <a href="{{url_for('delete', comment_id=comment.comment_id)}}" class="btn btn-danger">Delete</a>
         </div>
     </div>
