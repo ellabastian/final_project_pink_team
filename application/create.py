@@ -337,14 +337,10 @@ db.session.add(person2)
 
 # Inserting values into the Comment/Rating tables
 
-<<<<<<< HEAD
+
 comment1 = Comment(comment="I really like this recipe. Delicious!", user_id=1, recipe_id=1, time_created=datetime.now())
 comment2 = Comment(comment="I didn't enjoy this recipe. Won't be making it again.", user_id=1, recipe_id=2, time_created=datetime.now())
-=======
-comment1 = Comment(comment="I really like this recipe. Delicious!", id=1, recipe_id=1)
-comment2 = Comment(comment="I didn't enjoy this recipe. Won't be making it again.", id=1, recipe_id=2)
-comment3 = Comment(comment="I enjoy this recipe. Won't be making it again.", id=1, recipe_id=3)
->>>>>>> b87fe90b830c1acc7c541a0ca6eb818bb6b72214
+comment3 = Comment(comment="I enjoy this recipe. Won't be making it again.", id=1, recipe_id=3, time_created=datetime.now())
 
 db.session.add(comment1)
 db.session.add(comment2)
