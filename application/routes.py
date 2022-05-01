@@ -43,18 +43,7 @@ def home():
 @app.route("/recipes", methods=["GET", "POST"])
 def recipe():
     recipes = Recipe.query.all()
-    recipe_id_list = []
-    rating_list = Rating.query.all()
-    average_list = []
-    average = object()
-    for rating in rating_list:
-        recipe_id = Rating.query.filter_by(rating_id=rating.rating_id).first().recipe_id
-        recipe_id_list.append(recipe_id)
-        average = Rating.query.with_entities(func.avg(Rating.rating))\
-            .filter_by(recipe_id=recipe_id).first()
-        average_list.append(average[0])
-
-    return render_template('recipe.html', recipes=recipes, recipe_id_list=recipe_id_list, rating_list=rating_list, average=average, average_list=average_list)
+    return render_template('recipe.html', recipes=recipes)
 
 
 # DYNAMIC SPECIFIC RECIPE PAGE
@@ -88,14 +77,18 @@ def save_recipe():
 
 @app.route("/user_feedback", methods=["POST"])
 def user_feedback():
-        rating_query = Rating(rating=request.form['recipe_rating'], id=request.form['user_id'], recipe_id=request.form['recipe_id'])
-        comment_query = Comment(comment=request.form['comment'], user_id=request.form['user_id'], recipe_id=request.form['recipe_id'],
-                                time_created=datetime.now())
-        db.session.add(comment_query)
-        db.session.add(rating_query)
-        db.session.commit()
-        recipe_name = Recipe.query.filter_by(recipe_id=request.form['recipe_id']).first().recipe_name
-        return redirect(url_for('specific_recipe', recipe_name=recipe_name))
+    rating_query = Rating(rating=request.form['recipe_rating'], id=request.form['user_id'],
+                          recipe_id=request.form['recipe_id'])
+    comment_query = Comment(comment=request.form['comment'], user_id=request.form['user_id'],
+                          recipe_id=request.form['recipe_id'], time_created=datetime.now())
+    db.session.add(comment_query)
+    db.session.add(rating_query)
+    average = Rating.query.with_entities(func.avg(Rating.rating)) \
+            .filter_by(recipe_id=request.form['recipe_id']).first()
+    Recipe.query.filter_by(recipe_id=request.form['recipe_id']).update({"recipe_rating":average[0]})
+    db.session.commit()
+    recipe_name = Recipe.query.filter_by(recipe_id=request.form['recipe_id']).first().recipe_name
+    return redirect(url_for('specific_recipe', recipe_name=recipe_name))
 
 
 # INTERNAL PAGE - FORM TO DELETE COMMENT FROM RECIPE PAGE 

@@ -1,47 +1,32 @@
 {% extends "layout.html" %}
 {% block body_content %}
 
-<div class = "recipe_box">
-<ul>
-    {{average_list}}
-    {{average}}
     {% for recipe in recipes %}
-    <li>
 
-            <div class = "recipe_info">
-            <a href ="/recipes/{{ recipe.recipe_name }}">
-                <h3> {{ recipe.recipe_name }}</h3>
-            </a>
-                <br>
-                <b>Recipe Difficulty:</b> <p>{{ recipe.difficulty.difficulty_name }}</p>
-            <br>
-                <b>Recipe Prep Time:</b> <p>{{ recipe.recipe_prep_time }}</p>
-            <br>
-                <b>Recipe Cooking Time:</b> <p>{{ recipe.recipe_cook_time }}</p>
-            <br>
-                <b>Recipe Category:</b> <p>{{ recipe.recipe_category }}</p>
-             <br>
-                <b >Recipe Description:</b> <p class = "recipe_description">{{ recipe.recipe_description }}</p>
-            <br>
-                <a href="/recipes/{{ recipe.recipe_name }}"><b>Full Recipe Here</b></a>
-            <br>
-            <br>
-            </div>
-            <div class = "recipe_page_images">
-            <img src="{{ recipe.recipe_img }}" alt = "{{recipe.recipe_name}}">
-            <br>
-            <br>
-            </div>
-<!--        </div>-->
-    </li>
+    <div class = "recipe_box">
+        <div class="recipe_table_row">
+          <div class="col-sm"><a class="recipe_name" href ="/recipes/{{ recipe.recipe_name }}"> {{ recipe.recipe_name }} </a></div>
+        </div>
+        <div class="recipe_table_row">
+          <div class="col-sm"><p class="recipe_name"> Rating: {{ recipe.recipe_rating }} star(s) out of 5 </p></div>
+        </div>
+        <div class="recipe_table_row">
+          <div class="col-sm"><p class = "recipe_description">{{ recipe.recipe_description }}</p></div>
+        </div>
+        <div class="recipe_table_row">
+          <div><img class="recipe_page_images" src="{{ recipe.recipe_img }}" alt = "{{recipe.recipe_name}}"></div>
+        </div>
+        <div class="recipe_table_row">
+          <div class="col-sm"><b>Recipe Difficulty:</b> <p>{{ recipe.difficulty.difficulty_name }}</p></div>
+          <div class="col-sm"><b>Recipe Prep Time:</b> <p>{{ recipe.recipe_prep_time }}</p></div>
+          <div class="col-sm"><b>Recipe Cooking Time:</b> <p>{{ recipe.recipe_cook_time }}</p></div>
+          <div class="col-sm"><b>Recipe Category:</b> <p>{{ recipe.recipe_category }}</p></div>
+        </div>
+        <div class="recipe_table_row">
+          <div class="col-sm"><a class="full_recipe_link" href="/recipes/{{ recipe.recipe_name }}">Full Recipe Here</a></div>
+        </div>
+    </div>
+
     {% endfor %}
-
-</ul>
-</div>
-
-
-<br>
-
-
 
 {% endblock %}
