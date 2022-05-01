@@ -15,11 +15,17 @@ db.session.add_all(difficulty_list)
 
 # Inserting values into the Recipe table
 # recipe_template = Recipe(recipe_name="", recipe_img="", recipe_difficulty=, recipe_prep_time="", recipe_cook_time="", recipe_category="", recipe_description="")
-breakfast_burrito = Recipe(recipe_name="Breakfast Burrito", recipe_img="https://images.immediate.co.uk/production/volatile/sites/30/2020/08/breakfast-burrito-b086548.jpg?quality=90&webp=true&resize=300,272", recipe_difficulty=1, recipe_prep_time="5 minutes", recipe_cook_time="10 minutes", recipe_category="Breakfast", recipe_description="Make a nutritious cocoon for breakfast ingredients with a wholemeal wrap. We’ve included protein-rich eggs and avocado to add good fats to this burrito.")
-courgette_lasagne = Recipe(recipe_name="Courgette Lasagne", recipe_img="https://images.immediate.co.uk/production/volatile/sites/30/2022/03/Creamy-courgette-lasagne-e63aa0c.jpg?quality=90&webp=true&resize=300,272", recipe_difficulty=1, recipe_prep_time="10 minutes", recipe_cook_time="20 minutes", recipe_category="Lunch", recipe_description="Serve this quick, creamy courgette & ricotta lasagne for a last-minute dinner party to impress vegetarian friends. It's a great way to use courgettes when they're in season.")
-chilli_con_carne = Recipe(recipe_name="Chilli Con Carne", recipe_img="http://www.errenskitchen.com/wp-content/uploads/2017/02/Chilli-Con-Carne2.jpg", recipe_difficulty=2, recipe_prep_time="10 minutes", recipe_cook_time="1 hour", recipe_category="Dinner", recipe_description="Make classic chilli con carne tonight for spicy comfort food, or try different options with beans, veggies or turkey mince. Serve with tortillas.")
-orange_almond_vegan_cake = Recipe(recipe_name="Orange Almond Vegan Cake", recipe_img="https://i.pinimg.com/originals/50/18/f9/5018f9d32382b19a54fbc3d20ac19076.jpg", recipe_difficulty=1, recipe_prep_time="20 minutes", recipe_cook_time="1 hour", recipe_category="Dessert", recipe_description="Make this no fuss vegan cake. Perfect for any day and for sharing with the people you love and hate.")
-vegan_apple_tarts = Recipe(recipe_name="Vegan Apple Tarts", recipe_img="https://www.jusrol.co.uk/wp-content/uploads/2018/08/168_Image_Hero-Image_2018_7_6_19_38_17.jpg", recipe_difficulty=1, recipe_prep_time="15 minutes", recipe_cook_time="30 minutes", recipe_category="Breakfast", recipe_description="It is said that an apple a day keeps the doctor away, and this recipe will have you eating several apples every day, hopefully your doctor won't mind!")
+breakfast_burrito = Recipe(recipe_name="Breakfast Burrito",
+                           recipe_img="https://images.immediate.co.uk/production/volatile/sites/30/2020/08/breakfast-burrito-b086548.jpg?quality=90&webp=true&resize=300,272",
+                           recipe_difficulty=1, recipe_prep_time="5 minutes", recipe_cook_time="10 minutes", recipe_category="Breakfast",
+                           recipe_description="Make a nutritious cocoon for breakfast ingredients with a wholemeal wrap. We’ve included protein-rich eggs and avocado to add good fats to this burrito.", recipe_rating=1)
+courgette_lasagne = Recipe(recipe_name="Courgette Lasagne",
+                           recipe_img="https://images.immediate.co.uk/production/volatile/sites/30/2022/03/Creamy-courgette-lasagne-e63aa0c.jpg?quality=90&webp=true&resize=300,272",
+                           recipe_difficulty=1, recipe_prep_time="10 minutes", recipe_cook_time="20 minutes", recipe_category="Lunch",
+                           recipe_description="Serve this quick, creamy courgette & ricotta lasagne for a last-minute dinner party to impress vegetarian friends. It's a great way to use courgettes when they're in season.", recipe_rating=1)
+chilli_con_carne = Recipe(recipe_name="Chilli Con Carne", recipe_img="http://www.errenskitchen.com/wp-content/uploads/2017/02/Chilli-Con-Carne2.jpg", recipe_difficulty=2, recipe_prep_time="10 minutes", recipe_cook_time="1 hour", recipe_category="Dinner", recipe_description="Make classic chilli con carne tonight for spicy comfort food, or try different options with beans, veggies or turkey mince. Serve with tortillas.", recipe_rating=3)
+orange_almond_vegan_cake = Recipe(recipe_name="Orange Almond Vegan Cake", recipe_img="https://i.pinimg.com/originals/50/18/f9/5018f9d32382b19a54fbc3d20ac19076.jpg", recipe_difficulty=1, recipe_prep_time="20 minutes", recipe_cook_time="1 hour", recipe_category="Dessert", recipe_description="Make this no fuss vegan cake. Perfect for any day and for sharing with the people you love and hate.", recipe_rating=4)
+vegan_apple_tarts = Recipe(recipe_name="Vegan Apple Tarts", recipe_img="https://www.jusrol.co.uk/wp-content/uploads/2018/08/168_Image_Hero-Image_2018_7_6_19_38_17.jpg", recipe_difficulty=1, recipe_prep_time="15 minutes", recipe_cook_time="30 minutes", recipe_category="Breakfast", recipe_description="It is said that an apple a day keeps the doctor away, and this recipe will have you eating several apples every day, hopefully your doctor won't mind!", recipe_rating=5)
 prawn_tikka_masala = Recipe(recipe_name="Prawn Tikka Masala", recipe_img="https://images.immediate.co.uk/production/volatile/sites/30/2020/08/prawn-tikka-masala-a4a86f9.jpg?quality=90&webp=true&resize=300,272", recipe_difficulty=1, recipe_prep_time="10 minutes", recipe_cook_time="30 minutes", recipe_category="Dinner", recipe_description="Forget a takeaway and tuck into a midweek meal that will please the whole family with our easy, low calorie prawn tikka masala. Serve with naan!")
 jerk_chicken_with_rice_and_peas = Recipe(recipe_name="Jerk Chicken with Rice and Peas", recipe_img="https://images.immediate.co.uk/production/volatile/sites/30/2020/08/recipe-image-legacy-id-1047528_11-62a849b.jpg?quality=90&webp=true&resize=300,272", recipe_difficulty=2, recipe_prep_time="25 minutes", recipe_cook_time="40 minutes", recipe_category="Dinner", recipe_description="Jerk refers to a style of cooking in which the main ingredient—which most often is chicken but may also be beef, pork, goat, boar, seafood, or vegetables—is coated in spices and slow-cooked over a fire or grill traditionally composed of green pimento wood positioned over burning coals.")
 
@@ -347,10 +353,17 @@ db.session.add(comment2)
 db.session.add(comment3)
 
 rating1 = Rating(rating=1, id=1, recipe_id=1)
-rating2 = Rating(rating=2, id=1, recipe_id=2)
+rating2 = Rating(rating=1, id=2, recipe_id=2)
+rating3 = Rating(rating=3, id=1, recipe_id=3)
+rating4 = Rating(rating=4, id=1, recipe_id=4)
+rating5 = Rating(rating=5, id=1, recipe_id=5)
 
 db.session.add(rating1)
 db.session.add(rating2)
+db.session.add(rating3)
+db.session.add(rating4)
+db.session.add(rating5)
+
 
 
 # Inserting values into the Saved table

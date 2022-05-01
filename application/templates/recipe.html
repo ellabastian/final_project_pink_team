@@ -1,13 +1,14 @@
 {% extends "layout.html" %}
 {% block body_content %}
 
-    {{average_list}}
-    {{average}}
     {% for recipe in recipes %}
 
     <div class = "recipe_box">
         <div class="recipe_table_row">
           <div class="col-sm"><a class="recipe_name" href ="/recipes/{{ recipe.recipe_name }}"> {{ recipe.recipe_name }} </a></div>
+        </div>
+        <div class="recipe_table_row">
+          <div class="col-sm"><p class="recipe_name"> Rating: {{ recipe.recipe_rating }} star(s) out of 5 </p></div>
         </div>
         <div class="recipe_table_row">
           <div class="col-sm"><p class = "recipe_description">{{ recipe.recipe_description }}</p></div>

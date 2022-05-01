@@ -32,7 +32,7 @@ class Recipe(db.Model):
     recipe_cook_time = db.Column(db.String(50), nullable=False)
     recipe_category = db.Column(db.String(50), nullable=False)
     recipe_description = db.Column(db.String(500), nullable=False)
-    # recipe_rating = db.Column(db.Integer, nullable=True)
+    recipe_rating = db.Column(db.Integer, nullable=True)
     instructions = db.relationship('Instruction', backref='recipe')
     ingredient_recipes = db.relationship('IngredientRecipe', backref='recipe')
     comments = db.relationship('Comment', backref='recipe')
