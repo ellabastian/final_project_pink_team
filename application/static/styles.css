@@ -26,6 +26,7 @@ nav {
     background-color: #B6CFB7;
     font-size: 24px;
 }
+
 input {
     padding: 5px;
     width: 25%;
@@ -82,15 +83,13 @@ fieldset.form-group {
     border-radius: 50%;
 }
 */
+
 media.account-img {
     border-radius: 4px;
     border: 1px;
     padding: 5px;
     width:10px;
 }
-
-
-
 
 .footer_link {
    color: #114B5F;
@@ -108,19 +107,34 @@ media.account-img {
   opacity: 0.50;
 }*/
 
-/*.carousel-item {
-  border: 10px solid black;
-  border-radius: 5px;
-  height: 300px;
-  width: 300px;
-  opacity: 0.50;
+
+/* CAROUSEL */
+.carousel .carousel-item {
+  height: 400px;
 }
 
-.d-block w-100 {
+#carousel {
+    padding:50px 0px;
+}
+
+.carousel-item img {
+    position: absolute;
     object-fit: cover;
-}*/
+    top: 0;
+    left: 0;
+    min-height: 400px;
+    width: 200px;
+}
 
-
+/* NOT SURE WHY BUT BOTH BELOW & ABOVE STYLES ARE BEING APPLIED TO THE CAROUSEL BUT LEAVING IT IN AS IT'S WORKING! */
+img {
+  position: relative;
+  border: 1px solid #795C5F;
+  border-radius: 5px;
+  height: 200px;
+  width: 200px;
+  object-fit: cover;
+}
 
 .#email, #password, #remember, .login_button, button {
     font-family: 'Josefin Slab', serif;
@@ -128,34 +142,6 @@ media.account-img {
     color: #795C5F;
     margin: 10px;
 }
-
-/* .btn, .field{
-    font-family: 'Josefin Slab', serif;
-    padding: 5px 15px;
-    color: #795C5F;
-    margin: 5px;
-    border: 1px solid #795C5F;
-} */
-/*
-fieldset, .form-group {
-    border: 0;
-}
-*/
-
-/*label {
-    display: inline-block;
-    width: 250px;
-    text-align: right;
-}*/
-
-/*.images {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 2px;
-  padding-top: 20px;
-}*/
 
 
 .container {
@@ -168,6 +154,7 @@ fieldset, .form-group {
     ". . ."
     ". . .";
 }
+
 /*
 .image { grid-area: image; }
 .text-and-link { grid-area: text-and-link;
@@ -177,50 +164,49 @@ fieldset, .form-group {
 .grow1 { flex-grow: 1; }
 */
 
-img {
+
+/* RECIPES PAGE */
+.recipe_box {
+   border: solid #7A7F80 2px;
+   border-radius: 10px;
+   height: auto;
+   width: 80%;
+   padding: 20px;
+   margin: auto;
+   margin-top: 20px;
+}
+
+.recipe_name {
+    font-size: 40px;
+    font-weight: bold;
+    color: #7A7F80;
+}
+
+.recipe_name:link, .recipe_name:visited, .recipe_name:hover {
+    color: #7A7F80;
+}
+
+.full_recipe_link:link, .full_recipe_link:visited, .full_recipe_link:hover {
+    color: #04724D;
+    font-size: 20px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.recipe_table_row {
+    justify-content: center;
+    padding: 10px;
+
+}
+.recipe_table_row img {
   position: relative;
-  border: 1px solid #795C5F;
+  border: solid #7A7F80 1px;
   border-radius: 5px;
-  height: 200px;
-  width: 200px;
+  height: 300px;
+  width: auto;
   object-fit: cover;
 }
 
-.recipe_box {
-   display: flex;
-  justify-content: center;
-}
-
-.recipe_info {
-    float: left
-    /** height: 500px;
-    width: 200px; **/
-    padding: 100px
-    /** inline-size: 150px **/
-    overflow-wrap: break-word;
-    word-wrap: break-word;
-    hyphens: auto;
-     align: center
-}
-
-.recipe_page_images {
-    height: 500px;
-    width: 200px;
-    float: right;
-    padding: 50px;
-    margin: 2px;
-    border: 2px;
-    padding-top: 100px;
-    justify-content: center
-}
-
-.recipe_description {
-    height: 150px;
-    margin: 0 auto;
-    max-width: 300px;
-    border: solid 2px #ccc;
-    padding: 12px;
-}
 . dropdown show {
 background-color: #795C5F
 }
@@ -229,12 +215,42 @@ background-color: #795C5F
 background-color: #795C5F
 }
 
-li {
-  display: flex
+/* CONTACT */
+
+.about-us {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  font-size: 15px;
+}
+@media screen and (max-width: 1320px) {
+  .about-us {
+    flex-direction: column;
+  }
+}
+.about-me {
+  position: relative;
+  display: flex;
+  border: solid #7A7F80 2px;
+  border-radius: 10px;
+  height: 400px;
+  width: 400px;
+  text-align: center;
+  padding: 30px;
+  margin: 20px;
+}
+
+/* FOOTER */
+
+.footer_link:link, .footer_link:visited, .footer_link:hover {
+    color: #7A7F80;
+    font-size: 30px;
 }
 
 .fa-solid fa-bowl-food{
-color = #795C5F
+    color: #795C5F;
 }
 
 .fa {
@@ -279,7 +295,7 @@ color: white;
 color: white;
 background: #c4302b;
 
-footer {
+.footer {
    display: flex;
    flex-direction: column;
    align-items: flex-start;
