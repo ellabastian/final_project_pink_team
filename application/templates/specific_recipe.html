@@ -3,6 +3,7 @@
     <h2>Here is the recipe</h2>
     <h2> {{ recipe_name }} </h2>
     <br>
+    <p><b> This recipe has an average rating of: {{recipe.recipe_rating}} star(s) out of 5</b></p>
     <b>Recipe Description:</b> {{ recipe.recipe_description }}
     <br>
     <br>
@@ -41,6 +42,8 @@
         {{ form.hidden_tag() }}
         {{ form.recipe_rating }}
         {{ form.comment(class="field", cols="60", rows="5" ) }}
+        <br>
+        <br>
         {{ form.submit(class="btn") }}
         <br>
 </form>
@@ -49,12 +52,11 @@
 <h2>Save Recipe!</h2>
 <form action="/save_recipe" method="post">
         {{ save_form.hidden_tag() }}
-        <br>
-        <br>
         {{ save_form.submit(class="btn") }}
         <br>
 </form>
-
+<br>
+<br>
 <h3>Comments:</h3>
 <ul class="user_comments">
 
