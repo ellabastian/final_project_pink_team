@@ -1,10 +1,10 @@
 {% extends "layout.html" %}
 {% block body_content %}
 
-<h2>Already have an account?</h2>
-<button><a class="login_button" href="{{url_for('login')}}">Log In</a></button>
+<h3>Already have an account?</h3>
+<a class="btn" href="{{url_for('login')}}">Log In</a>
 
-<h1>Or, register for an account here</h1>
+<h2>Or, register for an account here</h2>
 
     <form action="" method="post">
             {{ form.hidden_tag() }}
@@ -17,6 +17,7 @@
             {{ form.email.label }} {{ form.email(class="field") }}
             <br>
             {{ form.password.label }} {{ form.password(class="field") }}
+            <br>
             <br>
             {{ form.submit(class="btn") }}
         {{ message }}

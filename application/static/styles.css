@@ -15,7 +15,7 @@ h1, h2, h3, h4 {
 
 body {
     font-family: 'Raleway', sans-serif;
-    background-color: ##FFFFFB;
+    background-color: #FFFFFB;
     color: #7A7F80;
     text-align: center;
 }
@@ -26,6 +26,71 @@ nav {
     background-color: #B6CFB7;
     font-size: 24px;
 }
+input {
+    padding: 5px;
+    width: 25%;
+    margin: 10px 5px;
+    border-radius: 5px;
+    color: #7f9080;
+    border-color: #7f9080;
+}
+
+label {
+    display: inline-block;
+    margin: 5px;
+    width: 300px;
+    text-align:center;
+}
+
+.btn {
+    font-family: 'Raleway', sans-serif;
+    padding: 5px 15px;
+    background-color: #FFFFFF;
+    color: #333333;
+    font-weight:600;
+    border: 1px solid #b9bbc0;
+    border-radius:15px;
+    width:200px;
+    margin:5px;
+}
+
+ .btn:hover {
+  background-color: #cfb6ce;
+  color: #FFFFFF;
+  border: 1px solid #111;
+  box-shadow:0 10px 16px 0 rgba(0,0,0,0.3);
+  transition-duration: .4s box-shadow;
+}
+
+fieldset.form-group {
+    padding: 50px 0;
+    width: 30%;
+    border: 1px;
+    margin: auto;
+    border-radius: 5px;
+    color: #7f9080;
+    border-color: #7f9080;
+    border-bottom: none;
+}
+
+/* media.rounded-circle account-img {
+    margin-left:auto;
+    margin-right:auto;
+    width:50%;
+    border: 1px;
+    padding: 5px;
+    border-radius: 50%;
+}
+*/
+media.account-img {
+    border-radius: 4px;
+    border: 1px;
+    padding: 5px;
+    width:10px;
+}
+
+
+
 
 .footer_link {
    color: #114B5F;
@@ -64,17 +129,18 @@ nav {
     margin: 10px;
 }
 
-.btn, .field{
+/* .btn, .field{
     font-family: 'Josefin Slab', serif;
     padding: 5px 15px;
     color: #795C5F;
     margin: 5px;
     border: 1px solid #795C5F;
-}
-
+} */
+/*
 fieldset, .form-group {
     border: 0;
 }
+*/
 
 /*label {
     display: inline-block;
@@ -102,12 +168,14 @@ fieldset, .form-group {
     ". . ."
     ". . .";
 }
+/*
 .image { grid-area: image; }
 .text-and-link { grid-area: text-and-link;
    height: 200px;
   width: 700px;}
 
 .grow1 { flex-grow: 1; }
+*/
 
 img {
   position: relative;

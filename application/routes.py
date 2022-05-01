@@ -71,6 +71,7 @@ def specific_recipe(recipe_name):
         list_of_usernames.append(username)
     if form.validate_on_submit():
         flash("Comment submitted")
+
     return render_template('specific_recipe.html', recipe_name=recipe_name, recipe=recipe, form=form,
                            save_form=save_form, user=current_user, list_of_comments=list_of_comments,
                            list_of_usernames=list_of_usernames, instructions=instructions)
