@@ -13,18 +13,6 @@
 </head>
 <body>
 
-    <!--            <a href="{{url_for('home')}}"><i class="fa-solid fa-bowl-food"></i> Home</a>-->
-    <!--            <a href="{{url_for('about')}}">About</a>-->
-    <!--            <a href="{{url_for('recipe')}}">Recipes</a>-->
-<!--                <a href="{{url_for('sustainability')}}">Resources</a>&ndash;&gt;-->
-    <!--                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">-->
-    <!--                    <a class="dropdown-item" href="#">Action</a>-->
-    <!--                    <a class="dropdown-item" href="#">Another action</a>-->
-    <!--                    <a class="dropdown-item" href="#">Something else here</a>-->
-    <!--                </div>-->
-    <!--            </div>-->
-    <!--            <a href="{{url_for('user_account')}}">Account</a>-->
-    <!--            <a href="{{url_for('logout')}}">Logout</a>-->
 <nav>
     {% if current_user.is_authenticated %}
 <nav class="navbar navbar-expand-lg navbar-dark">
@@ -53,6 +41,7 @@
                 </div>
             </li>
             <li class="nav-item px-5">
+                <img class="images_navbar" src="#">
                 <a class="nav-link" href="{{url_for('user_account')}}">Account</a>
             </li>
             <li class="nav-item px-5">
@@ -96,27 +85,17 @@
 {% endif %}
 </nav>
 
+<!--    {% if current_user.is_authenticated %}-->
     <h1 class="main_heading">Empty Fridge Full Plate <i class="fa-solid fa-bowl-food"></i></h1>
+<!--    <h1>Welcome {{ current_user.username }}!!</h1>-->
 
-<!--     <nav>
-        {% if current_user.is_authenticated %}
-            <a href="{{url_for('home')}}" class="navbar_link"><i class="fa-solid fa-bowl-food"></i> Home</a>
-            <a href="{{url_for('about')}}" class="navbar_link">About</a>
-            <a href="{{url_for('recipe')}}" class="navbar_link">Recipes</a>
+<!--    {% else %}-->
+<!--    <h1 class="main_heading">Empty Fridge Full Plate <i class="fa-solid fa-bowl-food"></i></h1>-->
+<!--    {% endif %}-->
 
 
-            <a href="{{url_for('user_account')}}" class="navbar_link">Account</a>
-            <a href="{{url_for('logout')}}" class="navbar_link">Logout</a>
-        {% else %}
-            <a href="{{url_for('home')}}" class="navbar_link"><i class="fa-solid fa-bowl-food"></i> Home</a>
-            <a href="{{url_for('about')}}" class="navbar_link">About</a>
-            <a href="{{url_for('recipe')}}" class="navbar_link">Recipes</a>
-            <a href="#" class="navbar_link">Resources</a>
 
-            <a href="{{url_for('register')}}" class="navbar_link">Register/Log In</a>
-        {% endif %}
-    </nav> -->
-<!--    <h1>Empty Fridge Full Plate <i class="fa-solid fa-bowl-food"></i> </h1>-->
+
 
     {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}

@@ -11,3 +11,4 @@ flask_bcrypt
 Pillow
 datetime
 email-validator
+email_validator
