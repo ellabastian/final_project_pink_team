@@ -40,8 +40,10 @@
                     <a class="dropdown-item" href="{{url_for('FoodBanks')}}">Food Banks</a>
                 </div>
             </li>
-            <li class="nav-item px-5">
-                <img class="images_navbar" src="#">
+            <li>
+                <img class="images_navbar" src=" {{ image_file }} ">
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" href="{{url_for('user_account')}}">Account</a>
             </li>
             <li class="nav-item px-5">
