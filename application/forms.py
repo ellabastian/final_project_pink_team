@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed
 from flask_login import current_user
-from wtforms import StringField, SubmitField, PasswordField, BooleanField, TextAreaField, HiddenField, RadioField
+from wtforms import StringField, SubmitField, PasswordField, BooleanField, TextAreaField, HiddenField, RadioField, widgets
 from wtforms.validators import DataRequired, Length, Email, ValidationError
 from application.models import User, Comment, Rating
 
@@ -60,7 +60,7 @@ class UserFeedback(FlaskForm):
     user_id = HiddenField("user_id")
     recipe_id = HiddenField("recipe_id")
     recipe_rating = RadioField("Please choose a rating", choices=[(1, '1 Star'),(2, '2 Star'), (3, '3 Star'),
-                                                                  (4, '4 Star'), (5, '5 Star')])
+                                                                  (4, '4 Star'), (5, '5 Star')]
     comment = TextAreaField("Enter your comments here", validators=[DataRequired(), Length(min=1, max=140)])
     submit = SubmitField("Submit Comment")
 
