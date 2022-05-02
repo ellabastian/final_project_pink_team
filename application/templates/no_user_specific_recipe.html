@@ -1,0 +1,56 @@
+{% extends "layout.html" %}
+{% block body_content %}
+    <h2>Here is the recipe</h2>
+    <h2> {{ recipe_name }} </h2>
+    <br>
+    <p><b> This recipe has an average rating of: {{recipe.recipe_rating}} star(s) out of 5</b></p>
+    <b>Recipe Description:</b> {{ recipe.recipe_description }}
+    <br>
+    <br>
+    <b>Recipe Difficulty:</b> {{ recipe.difficulty.difficulty_name }}
+    <br>
+    <br>
+    <b>Recipe Prep Time:</b> {{ recipe.recipe_prep_time }}
+    <br>
+    <br>
+    <b>Recipe Cooking Time:</b> {{ recipe.recipe_cook_time }}
+    <br>
+    <br>
+    <b>Recipe Category:</b> {{ recipe.recipe_category }}
+    <br>
+    <br>
+    <ol>
+        {% for instruction in instructions %}
+        <li>
+            {{ instruction.instruction_number }} {{ instruction.instruction_description }}
+            <br>
+            <br>
+        </li>
+        {% endfor %}
+   </ol>
+    <br>
+    <br>
+   <img class="recipe_page_images" src="{{ recipe.recipe_img }}" alt = "{{recipe.recipe_name}}">
+
+    <br>
+    <br>
+
+<h3>Comments:</h3>
+
+{% for comment in comments %}
+<div class="container">
+  <div class="row">
+    <div class="col-sm">
+      {{ comment[2].username }}
+    </div>
+    <div class="col-sm">
+      {{ comment[1].comment }}
+    </div>
+    <div class="col-sm">
+      {{ comment[1].time_created }}
+    </div>
+  </div>
+</div>
+{% endfor %}
+
+{% endblock %}
