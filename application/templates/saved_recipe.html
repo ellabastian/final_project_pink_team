@@ -10,8 +10,8 @@
                         <div class="recipe_table_row">
                             <div class="col-sm"><a class="recipe_name" href ="/recipes/{{ recipe.recipe_name }}"> {{ recipe.recipe_name }} </a></div>
                         </div>
-                        <div class = "saved_page_images">
-                            <img src="{{ recipe.recipe_img }}" alt = "{{recipe.recipe_name}}">
+                        <div class="recipe_table_row">
+                            <img class = "saved_recipe_page_images" src="{{ recipe.recipe_img }}" alt = "{{recipe.recipe_name}}">
                         </div>
                         <div class="recipe_table_row">
                             <div class="col-sm"><p class = "recipe_description">{{ recipe.recipe_description }}</p></div>
