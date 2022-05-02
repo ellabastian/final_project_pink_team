@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+{% block body_content %}
+    <h3 class="font-weight-bold">Reduce your waste and make tasty meals</h3>
+    <h3>Enter an ingredient to find recipes:</h3>
+    <form action="" method="post">
+            {{ form.hidden_tag() }}
+<!--            {{ form.ingredients.label }} -->
+            {{ form.ingredients(class="field") }}
+        <br>
+            {{ form.submit(class="btn") }}
+        <br>
+        {{ message }}
+    </form>
+
+<!--<div class="images">-->
+<!--    <img src="{{url_for('static', filename='images/french_toast.jpg')}}" alt="French Toast">-->
+<!--    <img src="{{url_for('static', filename='images/tacos.jpg')}}" alt="Tacos">-->
+<!--    <img src="{{url_for('static', filename='images/kebabs.jpg')}}" alt="Kebabs">-->
+<!--    <img src="{{url_for('static', filename='images/cake.jpg')}}" alt="Cake">-->
+<!--    <img src="{{url_for('static', filename='images/salad.jpg')}}" alt="Salad">-->
+<!--    <img src="{{url_for('static', filename='images/meatballs.jpg')}}" alt="Meatballs">-->
+<!--</div>-->
+
+<div id="carousel" class="carousel slide" data-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img class="d-block w-100" src="{{url_for('static', filename='images/salad.jpg')}}" alt="First slide">
+    </div>
+    <div class="carousel-item">
+      <img class="d-block w-100" src="{{url_for('static', filename='images/soup1.jpeg')}}" alt="Second slide">
+    </div>
+    <div class="carousel-item">
+      <img class="d-block w-100" src="{{url_for('static', filename='images/avocado1.jpeg')}}" alt="Third slide">
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
+<!--d-block w-100 h-auto-->

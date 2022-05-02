@@ -41,7 +41,7 @@ def home():
         return render_template('home.html', form=form, message=error, image_file=image_file)
 
     else:
-        return render_template('home.html', form=form, message=error)
+        return render_template('no_user_home.html', form=form, message=error)
 
 
 # ALL RECIPES PAGE
@@ -51,7 +51,6 @@ def recipe():
     if current_user.is_authenticated:
         image_file = url_for('static', filename='profile_pictures/' + current_user.image_file)
         return render_template('recipe.html', recipes=recipes, image_file=image_file)
-
     else:
         return render_template('recipe.html', recipes=recipes)
 
@@ -61,20 +60,18 @@ def recipe():
 def specific_recipe(recipe_name):
     recipe = (Recipe.query.filter_by(recipe_name=recipe_name).first())
     instructions = Instruction.query.filter_by(recipe_id=recipe.recipe_id).all()
-    form = UserFeedback(user_id=current_user.id, recipe_id=recipe.recipe_id)
-    save_form = SaveRecipe(user_id=current_user.id, recipe_id=recipe.recipe_id)
-    comments = db.session.query(Recipe, Comment, User).filter(Recipe.recipe_id == Comment.recipe_id).filter(Comment.user_id == User.id).filter(Recipe.recipe_id == recipe.recipe_id).all()
-    if form.validate_on_submit():
-        flash("Comment submitted")
-
+    comments = db.session.query(Recipe, Comment, User).filter(Recipe.recipe_id == Comment.recipe_id).\
+        filter(Comment.user_id == User.id).filter(Recipe.recipe_id == recipe.recipe_id).all()
     if current_user.is_authenticated:
+        save_form = SaveRecipe(user_id=current_user.id, recipe_id=recipe.recipe_id)
         image_file = url_for('static', filename='profile_pictures/' + current_user.image_file)
+        form = UserFeedback(user_id=current_user.id, recipe_id=recipe.recipe_id)
         return render_template('specific_recipe.html', recipe_name=recipe_name, recipe=recipe, form=form,
-                           save_form=save_form, user=current_user, instructions=instructions , image_file=image_file, comments=comments)
-
+                           save_form=save_form, user=current_user, instructions=instructions , image_file=image_file,
+                               comments=comments)
     else:
-       return render_template('specific_recipe.html', recipe_name=recipe_name, recipe=recipe, form=form,
-                           save_form=save_form, user=current_user, instructions=instructions, comments=comments)
+       return render_template('no_user_specific_recipe.html', recipe_name=recipe_name, recipe=recipe, user=current_user,
+                              instructions=instructions, comments=comments)
 
 
 
@@ -83,6 +80,7 @@ def specific_recipe(recipe_name):
 def save_recipe():
     db.session.add(SavedRecipe(user_id=request.form['user_id'], recipe_id=request.form['recipe_id']))
     db.session.commit()
+    flash("Recipe saved!")
     return redirect(url_for('saved'))
 
 
@@ -99,6 +97,7 @@ def user_feedback():
     Recipe.query.filter_by(recipe_id=request.form['recipe_id']).update({"recipe_rating":average[0]})
     db.session.commit()
     recipe_name = Recipe.query.filter_by(recipe_id=request.form['recipe_id']).first().recipe_name
+    flash("Comment submitted!")
     return redirect(url_for('specific_recipe', recipe_name=recipe_name))
 
 
@@ -116,7 +115,8 @@ def delete(comment_id):
             db.session.commit()
             flash("Comment deleted")
             return redirect(url_for('specific_recipe', recipe_name=recipe_name))
-        return render_template('delete.html', form=form, comment=comment, comment_id=comment_id, recipe_name=recipe_name, image_file=image_file)
+        return render_template('delete.html', form=form, comment=comment, comment_id=comment_id,
+                               recipe_name=recipe_name, image_file=image_file)
     else:
         flash("Comment not found")
         return redirect(url_for('recipe'))
@@ -125,12 +125,11 @@ def delete(comment_id):
 # ABOUT US PAGE  
 @app.route("/about", methods=["GET"])
 def about():
-    url = url_for('home')
     if current_user.is_authenticated:
         image_file = url_for('static', filename='profile_pictures/' + current_user.image_file)
-        return render_template('about.html', title='about', page_title=url, image_file=image_file)
+        return render_template('about.html', image_file=image_file)
     else:
-        return render_template('about.html', title='about', page_title=url)
+        return render_template('about.html')
 
 
 # ZERO WASTE PAGE  
@@ -164,20 +163,24 @@ def FoodBanks():
 
 
 # REGISTER AN ACCOUNT PAGE  
-@app.route("/register", methods=["GET", "POST"])
+@app.route("/register", methods=["GET"])
 def register():
     if current_user.is_authenticated:
         return redirect(url_for('home'))
     form = UserAccountForm()
-    if form.validate_on_submit():
-        hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
-        user = User(first_name=form.first_name.data, last_name=form.last_name.data, username=form.username.data,
-                    email=form.email.data, password=hashed_password)
-        db.session.add(user)
-        db.session.commit()
-        flash("Your account has been created. You can log in using your email and password", "success")
-        return redirect(url_for('login'))
     return render_template('register.html', title='Register', form=form)
+
+
+# REGISTER AN ACCOUNT PAGE
+@app.route("/register/new-account", methods=["POST"])
+def register_new_account():
+    hashed_password = bcrypt.generate_password_hash(request.form['password']).decode('utf-8')
+    user = User(first_name=request.form['first_name'], last_name=request.form['last_name'],
+                username=request.form['username'], email=request.form['email'], password=hashed_password)
+    db.session.add(user)
+    db.session.commit()
+    flash("Success! Your account has been created. You can log in using your email and password!")
+    return redirect(url_for('login'))
 
 
 # LOGIN TO ACCOUNT PAGE  
@@ -190,13 +193,11 @@ def login():
         user = User.query.filter_by(email=form.email.data).first()
         if user and bcrypt.check_password_hash(user.password, form.password.data):
             login_user(user, remember=form.remember.data)
-            print(request)
             next_page = request.args.get('next')
             return redirect(next_page) if next_page else redirect(url_for('user_account'))
         else:
             flash('Login unsuccessful. Please check email and password')
     return render_template('login.html', title='Login', form=form)
-
 
 def save_picture(form_picture):
     random_hex = secrets.token_hex(8)
@@ -212,22 +213,18 @@ def save_picture(form_picture):
     return picture_fn
 
 
-
 # USER ACCOUNT PAGE  
 @app.route("/useraccount", methods=['GET', 'POST'])
 @login_required
 def user_account():
     form = UpdateAccountForm()
     view_recipe_form = ViewRecipes()
-
     user = User.query.filter_by(id=current_user.id).first()
     saved_ids = (SavedRecipe.query.filter_by(user_id=user.id).all())
     saved_recipes = []
     for saved_id in saved_ids:
         recipe_id = saved_id.recipe_id
         saved_recipes.extend(Recipe.query.filter_by(recipe_id=recipe_id).all())
-
-
     if form.validate_on_submit():
         if form.picture.data:
             picture_file = save_picture(form.picture.data)
@@ -275,10 +272,4 @@ def saved():
         return render_template('saved_recipe.html', user=user, saved_recipes=saved_recipes, image_file=image_file)
     else:
         return render_template('saved_recipe.html', user=user, saved_recipes=saved_recipes)
-
-
-
-
-  
-  
 
