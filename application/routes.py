@@ -3,10 +3,8 @@ import secrets
 from PIL import Image
 from flask import render_template, request, url_for, redirect, flash, get_flashed_messages, session
 from application import app, db, bcrypt
-from application.forms import IngredientsForm, UserAccountForm, UserLoginForm, UpdateAccountForm, \
-    UserFeedback, DeleteUserFeedback, SaveRecipe, ViewRecipes
-from application.models import Ingredient, IngredientRecipe, Recipe, Instruction, Difficulty, User, \
-    Comment, SavedRecipe, Rating
+from application.forms import IngredientsForm, UserAccountForm, UserLoginForm, UpdateAccountForm, UserFeedback, DeleteUserFeedback, SaveRecipe, ViewRecipes
+from application.models import Ingredient, IngredientRecipe, Recipe, Instruction, Difficulty, User, Comment, SavedRecipe, Rating
 from flask_login import login_user, current_user, logout_user, login_required
 from datetime import datetime
 from sqlalchemy.sql import func
