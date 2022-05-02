@@ -61,26 +61,20 @@ def recipe():
 def specific_recipe(recipe_name):
     recipe = (Recipe.query.filter_by(recipe_name=recipe_name).first())
     instructions = Instruction.query.filter_by(recipe_id=recipe.recipe_id).all()
-    list_of_comments = Comment.query.filter_by(recipe_id=recipe.recipe_id).all()
     form = UserFeedback(user_id=current_user.id, recipe_id=recipe.recipe_id)
     save_form = SaveRecipe(user_id=current_user.id, recipe_id=recipe.recipe_id)
-    list_of_usernames = []
-    for comment in list_of_comments:
-        username = User.query.filter_by(id=comment.user_id).first().username
-        list_of_usernames.append(username)
+    comments = db.session.query(Recipe, Comment, User).filter(Recipe.recipe_id == Comment.recipe_id).filter(Comment.user_id == User.id).filter(Recipe.recipe_id == recipe.recipe_id).all()
     if form.validate_on_submit():
         flash("Comment submitted")
 
     if current_user.is_authenticated:
         image_file = url_for('static', filename='profile_pictures/' + current_user.image_file)
         return render_template('specific_recipe.html', recipe_name=recipe_name, recipe=recipe, form=form,
-                           save_form=save_form, user=current_user, list_of_comments=list_of_comments,
-                           list_of_usernames=list_of_usernames, instructions=instructions , image_file=image_file)
+                           save_form=save_form, user=current_user, instructions=instructions , image_file=image_file, comments=comments)
 
     else:
        return render_template('specific_recipe.html', recipe_name=recipe_name, recipe=recipe, form=form,
-                           save_form=save_form, user=current_user, list_of_comments=list_of_comments,
-                           list_of_usernames=list_of_usernames, instructions=instructions)
+                           save_form=save_form, user=current_user, instructions=instructions, comments=comments)
 
 
 
