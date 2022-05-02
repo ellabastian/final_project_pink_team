@@ -9,8 +9,13 @@ h1, h2, h3, h4 {
 }
 
 .main_heading {
+    padding-top: 60px;
     font-size: 50px;
     font-weight: bold;
+}
+
+.homepage_icon {
+    font-size: 150px;
 }
 
 body {
@@ -351,6 +356,10 @@ background: #c4302b;
    background-color: #91C7B1;
 }
 
-. star_buttons {
+.star_buttons {
   input.radio {width: auto;}
 }
+
+/* SPECIFIC RECIPES/COMMENTS */
+
+

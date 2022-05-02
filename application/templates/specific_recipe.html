@@ -1,83 +1,126 @@
 {% extends "layout.html" %}
 {% block body_content %}
-    <h2>Here is the recipe</h2>
-    <h2> {{ recipe_name }} </h2>
-    <br>
-    <p><b> This recipe has an average rating of: {{recipe.recipe_rating}} star(s) out of 5</b></p>
-    <b>Recipe Description:</b> {{ recipe.recipe_description }}
-    <br>
-    <br>
-    <br>
-    <br>
-    <b>Recipe Difficulty:</b> {{ recipe.difficulty.difficulty_name }}
-    <br>
-    <br>
-    <b>Recipe Prep Time:</b> {{ recipe.recipe_prep_time }}
-    <br>
-    <br>
-    <b>Recipe Cooking Time:</b> {{ recipe.recipe_cook_time }}
-    <br>
-    <br>
-    <b>Recipe Category:</b> {{ recipe.recipe_category }}
-    <br>
-    <br>
-    <ol>
-        {% for instruction in instructions %}
-        <li>
-            {{ instruction.instruction_number }} {{ instruction.instruction_description }}
-            <br>
-            <br>
-        </li>
-        {% endfor %}
-   </ol>
-    <br>
-    <br>
-   <img class="recipe_page_images" src="{{ recipe.recipe_img }}" alt = "{{recipe.recipe_name}}">
 
-    <br>
-    <br>
-
-<h2>Please rate or comment on this Recipe!</h2>
-<form action="/user_feedback" method="post">
-        {{ form.hidden_tag() }}
-        {{ form.recipe_rating }}
-        {{ form.comment(class="field", cols="60", rows="5" ) }}
-        <br>
-        <br>
-        {{ form.submit(class="btn") }}
-        <br>
-</form>
-
-<br>
-
-<h2>Save Recipe!</h2>
-<form action="/save_recipe" method="post">
-        {{ save_form.hidden_tag() }}
-        {{ save_form.submit(class="btn") }}
-        <br>
-</form>
-<br>
-<br>
-
-<h3>Comments:</h3>
-
-{% for comment in comments %}
-<div class="container">
-  <div class="row">
-    <div class="col-sm">
-      {{ comment[2].username }}
+<div class = "recipe_box">
+    <div class="recipe_table_row">
+      <div class="col-sm"><a class="recipe_name" href ="/recipes/{{ recipe.recipe_name }}"> {{ recipe.recipe_name }} </a></div>
     </div>
-    <div class="col-sm">
-      {{ comment[1].comment }}
+    <div class="recipe_table_row">
+      <div class="col-sm"><h4>This recipe has an average rating of {{recipe.recipe_rating}} star(s) out of 5</h4></div>
     </div>
-    <div class="col-sm">
-      {{ comment[1].time_created }}
+    <div class="recipe_table_row">
+      <div class="col-sm"><p class = "recipe_description">{{ recipe.recipe_description }}</p></div>
     </div>
-    <div class="col-sm">
-      <a href="{{url_for('delete', comment_id=comment[1].comment_id)}}" class="btn btn-danger">Delete</a>
+    <div class="recipe_table_row">
+      <div><img class="recipe_page_images" src="{{ recipe.recipe_img }}" alt = "{{recipe.recipe_name}}"></div>
     </div>
-  </div>
+    <div class="recipe_table_row">
+      <div class="col-sm"><b>Recipe Difficulty:</b> <p>{{ recipe.difficulty.difficulty_name }}</p></div>
+      <div class="col-sm"><b>Recipe Prep Time:</b> <p>{{ recipe.recipe_prep_time }}</p></div>
+      <div class="col-sm"><b>Recipe Cooking Time:</b> <p>{{ recipe.recipe_cook_time }}</p></div>
+      <div class="col-sm"><b>Recipe Category:</b> <p>{{ recipe.recipe_category }}</p></div>
+    </div>
+    <div class="recipe_table_row">
+        <div class="col-sm">
+            <ol class="text-left">
+                {% for instruction in instructions %}
+                <li>
+                    {{ instruction.instruction_description }}
+                </li>
+                <br>
+                {% endfor %}
+            </ol>
+        </div>
+    </div>
+    <div class="recipe_table_row">
+        <div class="col-sm">
+            <form action="/save_recipe" method="post">
+            {{ save_form.hidden_tag() }}
+            {{ save_form.submit(class="btn") }}
+            </form>
+        </div>
+    </div>
 </div>
-{% endfor %}
+
+<div class ="recipe_box">
+    <div class="recipe_table_row">
+            <div class="col-sm"><h2>Please rate and comment on this Recipe!</h2>
+                <form class="recipe_rating_form" action="/user_feedback" method="post">
+                    {{ form.hidden_tag() }}
+                    {{ form.recipe_rating }}
+                    {{ form.comment(class="field", cols="60", rows="5" ) }}
+                    <br>
+                    <br>
+                    {{ form.submit(class="btn") }}
+                    <br>
+                    <br>
+                    <br>
+                </form>
+            </div>
+    </div>
+    {% for comment in comments %}
+    <div class="comments_box">
+      <div class="recipe_table_row">
+        <div class="col" style="background-color: rgb(4, 114, 77, 0.2)">
+          {{ comment[2].username }}
+        </div>
+        <div class="col" style="background-color: rgb(4, 114, 77, 0.2)">
+          {{ comment[1].comment }}
+        </div>
+        <div class="col" style="background-color: rgb(4, 114, 77, 0.2)">
+          {{ comment[1].time_created }}
+        </div>
+        <div class="col" style="background-color: rgb(4, 114, 77, 0.2)">
+          <a href="{{url_for('delete', comment_id=comment[1].comment_id)}}" class="btn btn-danger">Delete</a>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+</div>
+
+
+
+
+
+
+
+
+
+<!--    <h2> {{ recipe_name }} </h2>-->
+<!--    <br>-->
+<!--    <p><b> This recipe has an average rating of: {{recipe.recipe_rating}} star(s) out of 5</b></p>-->
+<!--    <b>Recipe Description:</b> {{ recipe.recipe_description }}-->
+<!--    <br>-->
+<!--    <br>-->
+<!--    <br>-->
+<!--    <br>-->
+<!--    <b>Recipe Difficulty:</b> {{ recipe.difficulty.difficulty_name }}-->
+<!--    <br>-->
+<!--    <br>-->
+<!--    <b>Recipe Prep Time:</b> {{ recipe.recipe_prep_time }}-->
+<!--    <br>-->
+<!--    <br>-->
+<!--    <b>Recipe Cooking Time:</b> {{ recipe.recipe_cook_time }}-->
+<!--    <br>-->
+<!--    <br>-->
+<!--    <b>Recipe Category:</b> {{ recipe.recipe_category }}-->
+<!--    <br>-->
+<!--    <br>-->
+<!--    <ol>-->
+<!--        {% for instruction in instructions %}-->
+<!--        <li>-->
+<!--            {{ instruction.instruction_number }} {{ instruction.instruction_description }}-->
+<!--            <br>-->
+<!--            <br>-->
+<!--        </li>-->
+<!--        {% endfor %}-->
+<!--   </ol>-->
+<!--    <br>-->
+<!--    <br>-->
+<!--   <img class="recipe_page_images" src="{{ recipe.recipe_img }}" alt = "{{recipe.recipe_name}}">-->
+
+<!--    <br>-->
+<!--    <br>-->
+
 
 {% endblock %}
