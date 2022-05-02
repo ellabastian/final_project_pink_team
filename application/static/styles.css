@@ -80,28 +80,21 @@ fieldset.form-group {
     border-bottom: none;
 }
 
-
-
 .footer_link {
    color: #114B5F;
- }
+}
 
 .navbar_link {
    color: #DEDBD2;
-  }
+}
 
 .navbar_link:link, .navbar_link:visited, .footer_link:link, .footer_link:visited {
   text-decoration: none;
 }
 
-/*.navbar_link:hover, .footer_link:hover {
-  opacity: 0.50;
-}*/
-
-
 /* CAROUSEL */
 .carousel .carousel-item {
-  height: 400px;
+  height: 600px;
 }
 
 #carousel {
@@ -109,26 +102,10 @@ fieldset.form-group {
 }
 
 .carousel-item img {
-    position: absolute;
-    object-fit: cover;
-    top: 0;
-    left: 0;
-    height: 400px;
+    height: 600px;
     width: 200px;
-    border: 1px solid #795C5F;
-    border-radius: 5px;
-
+    object-fit: cover;
 }
-
-/* NOT SURE WHY BUT BOTH BELOW & ABOVE STYLES ARE BEING APPLIED TO THE CAROUSEL BUT LEAVING IT IN AS IT'S WORKING! */
-/*img {
-  position: relative;
-  border: 1px solid #795C5F;
-  border-radius: 5px;
-  height: 200px;
-  width: 200px;
-  object-fit: cover;
-} */
 
 .#email, #password, #remember, .login_button, button {
     font-family: 'Josefin Slab', serif;
@@ -158,7 +135,6 @@ fieldset.form-group {
 .grow1 { flex-grow: 1; }
 */
 
-
 .images_about_page {
   height: 200px;
   width: 200px;
@@ -182,7 +158,6 @@ fieldset.form-group {
   border-radius: 5px;
   object-fit: cover;
 }
-
 
 .images_navbar {
   height: 50px;
@@ -222,17 +197,11 @@ fieldset.form-group {
 .recipe_table_row {
     justify-content: center;
     padding: 10px;
-
 }
 
-/*.recipe_table_row img {
-  position: relative;
-  border: solid #7A7F80 1px;
-  border-radius: 5px;
-  height: 300px;
-  width: auto;
-  object-fit: cover;
-} */
+ul#recipe_rating {
+    list-style-type: none;
+}
 
 .saved_recipe_box {
    border: solid #7A7F80 2px;
@@ -241,9 +210,10 @@ fieldset.form-group {
    width: 80%;
    padding: 20px;
    margin: auto;
-   margin-top: 20px;}
+   margin-top: 20px;
+}
 
-.recipe_page_images {
+.recipe_page_images, .saved_recipe_page_images {
   position: relative;
   border: solid #7A7F80 1px;
   border-radius: 5px;
@@ -252,16 +222,7 @@ fieldset.form-group {
   object-fit: cover;
 }
 
-saved_recipe_box.saved_page_images {
-  position: relative;
-  border: solid #7A7F80 1px;
-  height: 150px;
-  width: 150px;
-  object-fit: cover
-  border-radius: 25px;
-}
-
-. dropdown show {
+.dropdown show {
 background-color: #795C5F
 }
 
@@ -284,6 +245,7 @@ background-color: #795C5F
     flex-direction: column;
   }
 }
+
 .about-me {
   position: relative;
   display: flex;
@@ -297,7 +259,6 @@ background-color: #795C5F
 }
 
 /* FOOTER */
-
 .footer_link:link, .footer_link:visited, .footer_link:hover {
     color: #7A7F80;
     font-size: 30px;
@@ -314,7 +275,6 @@ background-color: #795C5F
   text-align: center;
   text-decoration: none;
 }
-
 
 .fa:hover {
   opacity: 0.7;
@@ -348,23 +308,19 @@ color: white;
 .fa-youtube {
 color: white;
 background: #c4302b;
+}
 
 .footer {
    display: flex;
    flex-direction: column;
-   align-items: flex-start;
    position: relative;
    padding: 20px;
    bottom: 0;
    width: 100%;
-   height: 20px;   /* Height of the footer */
-   background-color: #91C7B1;
+   height: auto;
+   background-color: rgb(4, 114, 77, 0.1);
 }
 
-.star_buttons {
+/*.star_buttons {
   input.radio {width: auto;}
-}
-
-/* SPECIFIC RECIPES/COMMENTS */
-
-
+}*/
