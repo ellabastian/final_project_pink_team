@@ -58,26 +58,26 @@
 </form>
 <br>
 <br>
+
 <h3>Comments:</h3>
-<ul class="user_comments">
 
-    {% for username in list_of_usernames %}
-    <div class="card">
-    <div class="card-body">
-            <h4><li>{{ username }}</li></h4>
+{% for comment in comments %}
+<div class="container">
+  <div class="row">
+    <div class="col-sm">
+      {{ comment[2].username }}
     </div>
-    {% endfor %}
+    <div class="col-sm">
+      {{ comment[1].comment }}
     </div>
-
-    {% for comment in list_of_comments %}
-    <div class="card">
-        <div class="card-body">
-            <h4><li> @ {{ comment.time_created }} {{ comment.comment }}</li></h4>
-            <a href="{{url_for('delete', comment_id=comment.comment_id)}}" class="btn btn-danger">Delete</a>
-        </div>
+    <div class="col-sm">
+      {{ comment[1].time_created }}
     </div>
-    {% endfor %}
-</ul>
-
+    <div class="col-sm">
+      <a href="{{url_for('delete', comment_id=comment[1].comment_id)}}" class="btn btn-danger">Delete</a>
+    </div>
+  </div>
+</div>
+{% endfor %}
 
 {% endblock %}
