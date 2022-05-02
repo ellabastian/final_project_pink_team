@@ -168,6 +168,11 @@ fieldset.form-group {
   object-fit: cover;
 }
 
+.media {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
 
 .images_account_page {
   height: 200px;
