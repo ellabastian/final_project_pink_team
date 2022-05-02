@@ -222,6 +222,15 @@ fieldset.form-group {
   object-fit: cover;
 } */
 
+.saved_recipe_box {
+   border: solid #7A7F80 2px;
+   border-radius: 10px;
+   height: auto;
+   width: 80%;
+   padding: 20px;
+   margin: auto;
+   margin-top: 20px;}
+
 .recipe_page_images {
   position: relative;
   border: solid #7A7F80 1px;
@@ -229,6 +238,15 @@ fieldset.form-group {
   height: 300px;
   width: 300px;
   object-fit: cover;
+}
+
+saved_recipe_box.saved_page_images {
+  position: relative;
+  border: solid #7A7F80 1px;
+  height: 150px;
+  width: 150px;
+  object-fit: cover
+  border-radius: 25px;
 }
 
 . dropdown show {
