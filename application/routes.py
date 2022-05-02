@@ -36,14 +36,24 @@ def home():
                 recipes.extend(Recipe.query.filter_by(recipe_id=recipe_id).all())
             return render_template('recipe.html', ingredient_id=ingredient_id, recipes=recipes)
 
-    return render_template('home.html', form=form, message=error)
+    if current_user.is_authenticated:
+        image_file = url_for('static', filename='profile_pictures/' + current_user.image_file)
+        return render_template('home.html', form=form, message=error, image_file=image_file)
+
+    else:
+        return render_template('home.html', form=form, message=error)
 
 
 # ALL RECIPES PAGE
 @app.route("/recipes", methods=["GET", "POST"])
 def recipe():
     recipes = Recipe.query.all()
-    return render_template('recipe.html', recipes=recipes)
+    if current_user.is_authenticated:
+        image_file = url_for('static', filename='profile_pictures/' + current_user.image_file)
+        return render_template('recipe.html', recipes=recipes, image_file=image_file)
+
+    else:
+        return render_template('recipe.html', recipes=recipes)
 
 
 # DYNAMIC SPECIFIC RECIPE PAGE
@@ -61,7 +71,14 @@ def specific_recipe(recipe_name):
     if form.validate_on_submit():
         flash("Comment submitted")
 
-    return render_template('specific_recipe.html', recipe_name=recipe_name, recipe=recipe, form=form,
+    if current_user.is_authenticated:
+        image_file = url_for('static', filename='profile_pictures/' + current_user.image_file)
+        return render_template('specific_recipe.html', recipe_name=recipe_name, recipe=recipe, form=form,
+                           save_form=save_form, user=current_user, list_of_comments=list_of_comments,
+                           list_of_usernames=list_of_usernames, instructions=instructions , image_file=image_file)
+
+    else:
+       return render_template('specific_recipe.html', recipe_name=recipe_name, recipe=recipe, form=form,
                            save_form=save_form, user=current_user, list_of_comments=list_of_comments,
                            list_of_usernames=list_of_usernames, instructions=instructions)
 
@@ -97,6 +114,7 @@ def delete(comment_id):
     comment = Comment.query.get(comment_id)
     get_recipe_id = Comment.query.filter_by(comment_id=comment_id).first().recipe_id
     recipe_name = Recipe.query.filter_by(recipe_id=get_recipe_id).first().recipe_name
+    image_file = url_for('static', filename='profile_pictures/' + current_user.image_file)
     form = DeleteUserFeedback()
     if comment:
         if form.validate_on_submit():
@@ -104,7 +122,7 @@ def delete(comment_id):
             db.session.commit()
             flash("Comment deleted")
             return redirect(url_for('specific_recipe', recipe_name=recipe_name))
-        return render_template('delete.html', form=form, comment=comment, comment_id=comment_id, recipe_name=recipe_name)
+        return render_template('delete.html', form=form, comment=comment, comment_id=comment_id, recipe_name=recipe_name, image_file=image_file)
     else:
         flash("Comment not found")
         return redirect(url_for('recipe'))
@@ -114,25 +132,41 @@ def delete(comment_id):
 @app.route("/about", methods=["GET"])
 def about():
     url = url_for('home')
-    return render_template('about.html', title='about', page_title=url)
+    if current_user.is_authenticated:
+        image_file = url_for('static', filename='profile_pictures/' + current_user.image_file)
+        return render_template('about.html', title='about', page_title=url, image_file=image_file)
+    else:
+        return render_template('about.html', title='about', page_title=url)
 
 
 # ZERO WASTE PAGE  
 @app.route("/zero_waste", methods=["GET"])
 def ZeroWaste():
-    return render_template('zero_waste.html')
+    if current_user.is_authenticated:
+        image_file = url_for('static', filename='profile_pictures/' + current_user.image_file)
+        return render_template('zero_waste.html', image_file=image_file)
+    else:
+        return render_template('zero_waste.html')
 
 
 # SUSTAINABILITY PAGE  
 @app.route("/sustainability", methods=["GET"])
 def sustainability():
-    return render_template('sustainability.html')
+    if current_user.is_authenticated:
+        image_file = url_for('static', filename='profile_pictures/' + current_user.image_file)
+        return render_template('sustainability.html', image_file=image_file)
+    else:
+        return render_template('sustainability.html')
 
 
 # FOOD BANKS PAGE  
 @app.route("/food_banks", methods=["GET"])
 def FoodBanks():
-    return render_template('food_banks.html')
+    if current_user.is_authenticated:
+        image_file = url_for('static', filename='profile_pictures/' + current_user.image_file)
+        return render_template('food_banks.html', image_file=image_file)
+    else:
+        return render_template('food_banks.html')
 
 
 # REGISTER AN ACCOUNT PAGE  
@@ -227,7 +261,11 @@ def logout():
 # CONTACT US PAGE  
 @app.route("/contact", methods=["GET", "POST"])
 def contact():
-    return render_template('contact.html')
+    if current_user.is_authenticated:
+        image_file = url_for('static', filename='profile_pictures/' + current_user.image_file)
+        return render_template('contact.html', image_file=image_file)
+    else:
+        return render_template('contact.html')
 
 
 @app.route("/saved-recipes", methods=["GET", "POST"])
@@ -238,7 +276,11 @@ def saved():
     for saved_id in saved_ids:
         recipe_id = saved_id.recipe_id
         saved_recipes.extend(Recipe.query.filter_by(recipe_id=recipe_id).all())
-    return render_template('saved_recipe.html', user=user, saved_recipes=saved_recipes)
+    if current_user.is_authenticated:
+        image_file = url_for('static', filename='profile_pictures/' + current_user.image_file)
+        return render_template('saved_recipe.html', user=user, saved_recipes=saved_recipes, image_file=image_file)
+    else:
+        return render_template('saved_recipe.html', user=user, saved_recipes=saved_recipes)
 
 
 
