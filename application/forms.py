@@ -14,8 +14,8 @@ class IngredientsForm(FlaskForm):
 class UserAccountForm(FlaskForm):
     first_name = StringField("First Name", validators=[DataRequired()])
     last_name = StringField("Last Name", validators=[DataRequired()])
-    username = StringField("Create a Username for your account", validators=[DataRequired(), Length(min=4, max=10)])
-    email = StringField("Enter your e-mail address", validators=[DataRequired(), Email()])
+    username = StringField("Create a Username for your account", validators=[DataRequired(message="Please enter a username"), Length(min=4, max=10)])
+    email = StringField("Enter your e-mail address", validators=[DataRequired(), Email(message="Check the format of your email address")])
     password = PasswordField("Create a Password for your account", validators=[DataRequired()])
     submit = SubmitField("Register")
 

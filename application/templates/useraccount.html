@@ -10,9 +10,9 @@
         </div>
       <form method="POST" action="" enctype="multipart/form-data">
             {{ form.hidden_tag() }}
-            <fieldset class="form-group">
+            <fieldset class="user-account-form">
                 <legend class="border-bottom mb-4">Account Info</legend>
-                <div class="form-group">
+                <div class="user-account-form">
                     {{ form.username.label(class="form-control-label") }}
 
                     {% if form.username.errors %}
@@ -26,7 +26,7 @@
                         {{ form.username(class="form-control form-control-lg") }}
                     {% endif %}
                 </div>
-                <div class="form-group">
+                <div class="user-account-form">
                     {{ form.email.label(class="form-control-label") }}
                     {% if form.email.errors %}
                         {{ form.email(class="form-control form-control-lg is-invalid") }}
@@ -39,7 +39,7 @@
                         {{ form.email(class="form-control form-control-lg") }}
                     {% endif %}
                 </div>
-                <div class="form-group">
+                <div class="user-account-form">
                     {{ form.picture.label() }}
                     {{ form.picture(class="form-control-file") }}
                     {% if form.picture.errors %}
@@ -49,7 +49,7 @@
                     {% endif %}
                 </div>
             </fieldset>
-            <div class="form-group">
+            <div class="user-account-form">
                 {{ form.submit(class="btn btn-outline-info") }}
             </div>
         </form>

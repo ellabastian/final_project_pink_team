@@ -334,19 +334,21 @@ db.session.add_all(ingredients_in_recipe_list)
 
 
 # Inserting values into the User table
-person1 = User(first_name='Jane', last_name='Smith', username='JSmith1977', email='jane1977@gmail.com', password='1234abcd')
+person1 = User(first_name='Jane', last_name='Smith', username='JSmith1977', email='jane1977@email.com', password='1234abcd')
 person2 = User(first_name='Kanye', username='Westicles', email='kwest@gmail.com', password='abcd9876')
+person3 = User(first_name='Mary', last_name='Berry', username='maryberry35', email='mberry@email.com', password='5678abcd')
 
 db.session.add(person1)
 db.session.add(person2)
+db.session.add(person3)
 
 
 # Inserting values into the Comment/Rating tables
 
 
-comment1 = Comment(comment="I really like this recipe. Delicious!", user_id=1, recipe_id=1, time_created=datetime.now())
-comment2 = Comment(comment="I didn't enjoy this recipe. Won't be making it again.", user_id=1, recipe_id=2, time_created=datetime.now())
-comment3 = Comment(comment="I enjoy this recipe. Won't be making it again.", user_id=1, recipe_id=3, time_created=datetime.now())
+comment1 = Comment(comment="I could’ve come up with a much better recipe than this to be honest. Glad I used up the red pepper I had in my fridge though x", user_id=3, recipe_id=1, time_created=datetime.now())
+comment2 = Comment(comment="The most important thing is that a cake is moist. A delicious recipe", user_id=3, recipe_id=4, time_created=datetime.now())
+comment3 = Comment(comment="I enjoy this recipe. Won't be making it again.", user_id=3, recipe_id=3, time_created=datetime.now())
 
 db.session.add(comment1)
 db.session.add(comment2)
