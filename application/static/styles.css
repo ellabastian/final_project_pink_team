@@ -26,7 +26,7 @@ nav {
     background-color: #B6CFB7;
     font-size: 24px;
 }
-
+/* Size of user input boxes */
 input {
     padding: 5px;
     width: 25%;
@@ -36,6 +36,7 @@ input {
     border-color: #7f9080;
 }
 
+/* Alignment of user registration */
 label {
     display: inline-block;
     margin: 5px;
@@ -74,22 +75,7 @@ fieldset.form-group {
     border-bottom: none;
 }
 
-/* media.rounded-circle account-img {
-    margin-left:auto;
-    margin-right:auto;
-    width:50%;
-    border: 1px;
-    padding: 5px;
-    border-radius: 50%;
-}
-*/
 
-media.account-img {
-    border-radius: 4px;
-    border: 1px;
-    padding: 5px;
-    width:10px;
-}
 
 .footer_link {
    color: #114B5F;
@@ -122,19 +108,22 @@ media.account-img {
     object-fit: cover;
     top: 0;
     left: 0;
-    min-height: 400px;
+    height: 400px;
     width: 200px;
+    border: 1px solid #795C5F;
+    border-radius: 5px;
+
 }
 
 /* NOT SURE WHY BUT BOTH BELOW & ABOVE STYLES ARE BEING APPLIED TO THE CAROUSEL BUT LEAVING IT IN AS IT'S WORKING! */
-img {
+/*img {
   position: relative;
   border: 1px solid #795C5F;
   border-radius: 5px;
   height: 200px;
   width: 200px;
   object-fit: cover;
-}
+} */
 
 .#email, #password, #remember, .login_button, button {
     font-family: 'Josefin Slab', serif;
@@ -164,21 +153,31 @@ img {
 .grow1 { flex-grow: 1; }
 */
 
-.images_about_account {
+.images_about_page {
   height: 200px;
   width: 200px;
-   position: relative;
+  position: relative;
   border: 1px solid #795C5F;
   border-radius: 5px;
   object-fit: cover;
 }
 
-.image_navbar {
-height: 50px
-width: 50px
-   position: relative;
+
+.images_account_page {
+  height: 200px;
+  width: 200px;
+  position: relative;
   border: 1px solid #795C5F;
-  border-radius: 5px;}
+  border-radius: 5px;
+  object-fit: cover;
+}
+
+
+.images_navbar {
+  height: 50px;
+  width: 50px;
+  position: relative;
+  border-radius: 50%;}
 
 /* RECIPES PAGE */
 .recipe_box {
@@ -213,13 +212,41 @@ width: 50px
     padding: 10px;
 
 }
-.recipe_table_row img {
+
+/*.recipe_table_row img {
   position: relative;
   border: solid #7A7F80 1px;
   border-radius: 5px;
   height: 300px;
   width: auto;
   object-fit: cover;
+} */
+
+.saved_recipe_box {
+   border: solid #7A7F80 2px;
+   border-radius: 10px;
+   height: auto;
+   width: 80%;
+   padding: 20px;
+   margin: auto;
+   margin-top: 20px;}
+
+.recipe_page_images {
+  position: relative;
+  border: solid #7A7F80 1px;
+  border-radius: 5px;
+  height: 300px;
+  width: 300px;
+  object-fit: cover;
+}
+
+saved_recipe_box.saved_page_images {
+  position: relative;
+  border: solid #7A7F80 1px;
+  height: 150px;
+  width: 150px;
+  object-fit: cover
+  border-radius: 25px;
 }
 
 . dropdown show {
