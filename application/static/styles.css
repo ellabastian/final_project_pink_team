@@ -63,8 +63,8 @@ label {
 }
 
  .btn:hover {
-  background-color: #ffa0dc;
-  color: #FFFFFF;
+  background-color: #ffd3da;
+  color: #7A7F80;
   border: 1px solid #111;
   box-shadow:0 10px 16px 0 rgba(0,0,0,0.3);
   transition-duration: .4s box-shadow;
@@ -95,6 +95,10 @@ label {
     border: 2px solid;
     border-color: #7A7F80;
     border-radius: 5px;
+}
+
+.error_message {
+    color: red;
 }
 
 /* login */

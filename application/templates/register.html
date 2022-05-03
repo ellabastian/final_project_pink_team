@@ -22,7 +22,7 @@
                              {{ form.username(class="register-form register-form-lg is-invalid") }}
                              <div class="invalid feedback">
                                  {% for error in form.username.errors %}
-                                 <span>{{ error }}</span>
+                                 <span class="error_message">{{ error }}</span>
                                  {% endfor %}
                              </div>
                          {% else %}
@@ -36,7 +36,7 @@
                              {{ form.email(class="register-form register-form-lg is-invalid") }}
                              <div class="invalid feedback">
                                  {% for error in form.email.errors %}
-                                 <span>{{ error }}</span>
+                                 <span class="error_message">{{ error }}</span>
                                  {% endfor %}
                              </div>
                          {% else %}
