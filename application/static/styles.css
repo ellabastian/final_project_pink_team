@@ -220,6 +220,7 @@ label {
     font-size: 20px;
     text-align: center;
     font-weight: bold;
+    text-decoration: none;
 }
 
 .recipe_table_row {
