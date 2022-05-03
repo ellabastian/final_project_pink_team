@@ -1,4 +1,22 @@
 {% extends "layout.html" %}
 {% block body_content %}
- <h2>Information about sustainability</h2>
+
+<div class = "recipe_box">
+<h2 class="font-weight-bold">What is Sustainability?</h2>
+
+
+ <iframe width="560" height="315" src="https://www.youtube.com/embed/zx04Kl8y4dE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></iframe>
+<br>
+<h4>Food Sustainability</h4>
+<p>The UN defines food sustainability as “the idea that something (e.g., agriculture, fishing or even preparation of food) is done in a way that is not wasteful of our natural resources and can be continued into the future without being detrimental to our environment or health.”
+<br>
+</p>
+<h4>How does this help?</h4>
+    <p>“Food sustainability is a matter for both present and future generations around the globe. It is a window into whether society will provide for itself now, but also its future later[…] Taking only what the Earth can provide and not tinkering with its limits is why food sustainability matters on any level. Accomplishing this ensures that the Earth will provide now and later for all future generations. Additionally, food sustainability is healthier for humans and the Earth.”</p>
+<br>
+    <p>You can find out more on Food Sustainability by checking <a href = "https://www.medicalnewstoday.com/articles/sustainable-gastronomy-can-food-abundance-be-sustainable#What-key-factors-should-we-consider?">here</a></p>
+
+<h4>Empty Fridge Full Plate</h4>
+<p>We encourage you to eat all the food that you've bought. <br>But we do understand that sometimes this isn't possible. Instead of throwing away food, please consider donating it to your latest <a href="{{url_for('FoodBanks')}}">Food Bank.</a></p>
+</div>
 {% endblock %}
