@@ -1,21 +1,22 @@
 {% extends "layout.html" %}
 {% block body_content %}
 
-<a class="recipe_name" href ="/contact">About Us</a>
-<br>
-<br>
-<p class="about_page_text">Welcome to Empty Fridge Full Plate. Our aim is to help people reduce their food waste. <br> If you have some food items in your kitchen that need using up, find recipes <a class="here_links" href="{{url_for('recipe')}}">here</a>. <br> Rate the recipes you try and store your favourites. <br> Use our website to find food banks, refill shops and other resources near you and online. <br> Read our tips on how to reduce food waste.</p>
-<h4>Join our community here:</h4>
-<a class="btn" href="{{url_for('register')}}">Sign up</a>
-<br>
-<br>
-<div class="images">
-    <img class="images_about_page" src="{{url_for('static', filename='images/salad1.jpeg')}}" alt="Salad">
-    <img class="images_about_page" src="{{url_for('static', filename='images/pasta1.jpeg')}}" alt="Pasta">
-    <img class="images_about_page" src="{{url_for('static', filename='images/soup1.jpeg')}}" alt="Soup">
-    <img class="images_about_page" src="{{url_for('static', filename='images/avocado1.jpeg')}}" alt="Avocado">
+<div class = "recipe_box">
+    <a class="recipe_name" href ="/contact">About Us</a>
+    <br>
+    <br>
+    <p class="about_page_text">Welcome to Empty Fridge Full Plate. Our aim is to help people reduce their food waste. <br> If you have some food items in your kitchen that need using up, find recipes <a class="here_links" href="{{url_for('recipe')}}">here</a>. <br> Rate the recipes you try and store your favourites. <br> Use our website to find food banks, refill shops and other resources near you and online. <br> Read our tips on how to reduce food waste.</p>
+    <h4>Join our community here:</h4>
+    <a class="btn" href="{{url_for('register')}}">Sign up</a>
+    <br>
+    <br>
+    <div class="images">
+        <img class="images_about_page" src="{{url_for('static', filename='images/salad1.jpeg')}}" alt="Salad">
+        <img class="images_about_page" src="{{url_for('static', filename='images/pasta1.jpeg')}}" alt="Pasta">
+        <img class="images_about_page" src="{{url_for('static', filename='images/soup1.jpeg')}}" alt="Soup">
+        <img class="images_about_page" src="{{url_for('static', filename='images/avocado1.jpeg')}}" alt="Avocado">
+    </div>
+    <br>
 </div>
-
-
 
 {% endblock %}
