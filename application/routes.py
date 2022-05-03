@@ -159,26 +159,20 @@ def FoodBanks():
     else:
         return render_template('food_banks.html')
 
-
-# REGISTER AN ACCOUNT PAGE  
-@app.route("/register", methods=["GET"])
+@app.route("/register", methods=["GET", "POST"])
 def register():
     if current_user.is_authenticated:
         return redirect(url_for('home'))
     form = UserAccountForm()
+    if form.validate_on_submit():
+        hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
+        user = User(first_name=form.first_name.data, last_name=form.last_name.data, username=form.username.data,
+                    email=form.email.data, password=hashed_password)
+        db.session.add(user)
+        db.session.commit()
+        flash("Your account has been created. You can log in using your email and password", "success")
+        return redirect(url_for('login'))
     return render_template('register.html', title='Register', form=form)
-
-
-# REGISTER AN ACCOUNT PAGE
-@app.route("/register/new-account", methods=["POST"])
-def register_new_account():
-    hashed_password = bcrypt.generate_password_hash(request.form['password']).decode('utf-8')
-    user = User(first_name=request.form['first_name'], last_name=request.form['last_name'],
-                username=request.form['username'], email=request.form['email'], password=hashed_password)
-    db.session.add(user)
-    db.session.commit()
-    flash("Success! Your account has been created. You can log in using your email and password!")
-    return redirect(url_for('login'))
 
 
 # LOGIN TO ACCOUNT PAGE  
