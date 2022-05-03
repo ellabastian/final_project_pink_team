@@ -163,6 +163,11 @@ label {
 .grow1 { flex-grow: 1; }
 */
 
+.about_page_text {
+    font-size: 25px;
+    line-height: 1.6;
+}
+
 .images_about_page {
   height: 200px;
   width: 200px;
@@ -348,6 +353,14 @@ background: #c4302b;
    width: 100%;
    height: auto;
    background-color: rgb(4, 114, 77, 0.1);
+}
+
+.here_links {
+    color: #7A7F80;
+}
+
+.here_links:hover {
+    color: #04724D;
 }
 
 /*.star_buttons {
