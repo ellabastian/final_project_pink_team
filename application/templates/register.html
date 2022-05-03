@@ -8,17 +8,45 @@
 
     <form action="/register/new-account" method="post">
             {{ form.hidden_tag() }}
-            {{ form.first_name.label }} {{ form.first_name(class="field") }}
-            <br>
-            {{ form.last_name.label }} {{ form.last_name(class="field") }}
-            <br>
-            {{ form.username.label }} {{ form.username(class="field") }}
-            <br>
-            {{ form.email.label }} {{ form.email(class="field") }}
-            <br>
-            {{ form.password.label }} {{ form.password(class="field") }}
-            <br>
-            <br>
+            <fieldset class="register-form-class">
+                     <div class="form-group">
+                     {{ form.first_name.label }} {{ form.first_name(class="register-form") }}
+                     </div>
+                     <div class="form-group">
+                     {{ form.last_name.label }} {{ form.last_name(class="register-form") }}
+                     </div>
+                     <div class="form-group">
+                         {{ form.username.label(class="register-form-label") }}
+
+                         {% if form.username.errors %}
+                             {{ form.username(class="register-form register-form-lg is-invalid") }}
+                             <div class="invalid feedback">
+                                 {% for error in form.username.errors %}
+                                 <span>{{ error }}</span>
+                                 {% endfor %}
+                             </div>
+                         {% else %}
+                             {{ form.username(class="register-form register-form-lg") }}
+                         {% endif %}
+                     </div>
+                     <div class="form-group">
+                         {{ form.email.label(class="register-form-label") }}
+
+                         {% if form.email.errors %}
+                             {{ form.email(class="register-form register-form-lg is-invalid") }}
+                             <div class="invalid feedback">
+                                 {% for error in form.email.errors %}
+                                 <span>{{ error }}</span>
+                                 {% endfor %}
+                             </div>
+                         {% else %}
+                             {{ form.email(class="register-form register-form-lg") }}
+                         {% endif %}
+                     </div>
+                     {{ form.password.label(class="register-form-label") }} {{ form.password(class="register-form") }}
+                     <br>
+                     <br>
+             </fieldset>
             {{ form.submit(class="btn") }}
         {{ message }}
     </form>

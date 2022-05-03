@@ -36,12 +36,13 @@ input {
     padding: 5px;
     width: 25%;
     margin: 10px 5px;
-    border-radius: 5px;
-    color: #7f9080;
-    border-color: #7f9080;
+    color: #333333;
+    border: 5px #ffffff;
+    border-radius: 4px;
+    outline: none;
 }
 
-/* Alignment of user registration */
+/* Alignment of input labels */
 label {
     display: inline-block;
     margin: 5px;
@@ -69,15 +70,42 @@ label {
   transition-duration: .4s box-shadow;
 }
 
-fieldset.form-group {
-    padding: 50px 0;
-    width: 30%;
-    border: 1px;
-    margin: auto;
+/* register */
+.register-form {
+    padding: 5px;
+    text-align: center;
+    width: 20%;
+    margin: 4px;
+    border: 2px solid;
+    border-color: #7A7F80;
     border-radius: 5px;
-    color: #7f9080;
-    border-color: #7f9080;
-    border-bottom: none;
+}
+
+/* login */
+.form-group-two {
+    text-align: center;
+    width: 50%;
+    margin: auto;
+    border-color: #7A7F80;
+    border-radius: 5px;
+}
+
+/* update account details */
+ .user-account-form {
+     text-align:center;
+     padding: 5px;
+     width: 44%;
+     margin: auto;
+ }
+
+.user-account-label {
+    text-align: center;
+    margin: auto;
+    width: 44%;
+}
+
+.field {
+    border: 2px solid #7A7F80;
 }
 
 .footer_link {

@@ -336,10 +336,11 @@ db.session.add_all(ingredients_in_recipe_list)
 # Inserting values into the User table
 person1 = User(first_name='Jane', last_name='Smith', username='JSmith1977', email='jane1977@gmail.com', password='1234abcd')
 person2 = User(first_name='Kanye', username='Westicles', email='kwest@gmail.com', password='abcd9876')
+person3 = User(first_name='Mary', last_name='Berry', username='maryberry3', email='mberry@outlook.com', password='5678abcd')
 
 db.session.add(person1)
 db.session.add(person2)
-
+db.session.add(person3)
 
 # Inserting values into the Comment/Rating tables
 
@@ -347,16 +348,20 @@ db.session.add(person2)
 comment1 = Comment(comment="I really like this recipe. Delicious!", user_id=1, recipe_id=1, time_created=datetime.now())
 comment2 = Comment(comment="I didn't enjoy this recipe. Won't be making it again.", user_id=1, recipe_id=2, time_created=datetime.now())
 comment3 = Comment(comment="I enjoy this recipe. Won't be making it again.", user_id=1, recipe_id=3, time_created=datetime.now())
+comment4 = Comment(comment="I could've come up with a much better recipe than this to be honest. Glad I used up the red pepper I had in the fridge though. X", user_id=3, recipe_id=1, time_created=datetime.now())
+comment5 = Comment(comment="The most important thing is that a cake is moist. A delicious recipe.", user_id=3, recipe_id=4,time_created=datetime.now())
 
 db.session.add(comment1)
 db.session.add(comment2)
 db.session.add(comment3)
+db.session.add(comment4)
 
 rating1 = Rating(rating=1, id=1, recipe_id=1)
 rating2 = Rating(rating=1, id=2, recipe_id=2)
 rating3 = Rating(rating=3, id=1, recipe_id=3)
 rating4 = Rating(rating=4, id=1, recipe_id=4)
 rating5 = Rating(rating=5, id=1, recipe_id=5)
+rating6 = Rating(rating=4, id=3, recipe_id=4)
 
 db.session.add(rating1)
 db.session.add(rating2)
